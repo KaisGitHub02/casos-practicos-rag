@@ -46,6 +46,10 @@
 .px__dots button.past { background: #6b7aa3; }
 .px__dots button.on { background: #f7cf5a; }
 .px__text { margin-top: 6px; min-height: 2.9em; font-size: 16.5px; line-height: 1.45; color: #fff; text-wrap: pretty; }
+.px__timer { flex: 1; max-width: 160px; height: 3px; background: #36446a; overflow: hidden; }
+.px__timer i { display: block; height: 100%; background: #f7cf5a; transform-origin: 0 50%; transform: scaleX(0); }
+.px__panel.is-seen:not([aria-selected="true"]) { color: #6fdc9f; border-color: #2e6b52; }
+.px__stage:focus-visible { outline: 2px solid #f7cf5a; outline-offset: 2px; }
 .px__ctrl { flex: none; display: flex; align-items: center; gap: 6px; }
 .px__ctrl .icon-btn { color: #fff; border-color: #36446a; }
 .px__ctrl .icon-btn:hover { background: #222d4b; }
@@ -70,6 +74,10 @@
 .reader__idea { padding: 12px 16px; background: var(--tint-blue); border-left: 4px solid var(--blue); font-size: 17.5px; }
 .reader__terms div { display: grid; grid-template-columns: 200px 1fr; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .reader__terms dt { font-weight: 700; }
+.reader__src { list-style: none !important; padding-left: 0 !important; }
+.reader__src li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.reader__src a { font-weight: 700; color: var(--blue-ink); }
+.reader__src span { display: block; margin-top: 2px; font-size: 14.5px; color: var(--ink-2); }
 
 /* ───────── Caso: pestañas, notas, documentos ───────── */
 .rag-pane { position: absolute; inset: 0; display: flex; flex-direction: column; }

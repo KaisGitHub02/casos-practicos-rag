@@ -140,14 +140,14 @@
         <span class="px__title"><span class="px__kicker"></span><b class="px__name"></b></span>
         <span class="px__panels" role="tablist" aria-label="Viñetas">${panels.map((p, i) => `<button type="button" class="px__panel" role="tab" data-panel="${i}" title="${esc(p.title)}">${i + 1}</button>`).join('')}</span>
       </div>
-      <div class="px__stage">
+      <div class="px__stage" tabindex="0" aria-label="Viñeta. Con el foco aquí, las flechas avanzan los pasos y Esc vuelve a las diapositivas.">
         <canvas width="1440" height="810" role="img" aria-label="Viñeta animada en pixel art. La narración de cada paso aparece debajo."></canvas>
         <button type="button" class="px__hit px__hit--prev" data-act="prev" aria-label="Paso anterior"></button>
         <button type="button" class="px__hit px__hit--next" data-act="next" aria-label="Paso siguiente"></button>
       </div>
       <div class="px__foot">
         <div class="px__narr">
-          <p class="px__meta"><span class="px__count"></span><span class="px__dots"></span></p>
+          <p class="px__meta"><span class="px__count"></span><span class="px__dots"></span><span class="px__timer" hidden><i></i></span></p>
           <p class="px__text" aria-live="polite"></p>
         </div>
         <div class="px__ctrl">
@@ -160,7 +160,8 @@
 
     const cv = $('canvas', host);
     const ctx = cv.getContext('2d');
-    const st = { panel: 0, step: 0, t0: performance.now(), playing: false, nextAt: 0, visible: false };
+    const st = { panel: 0, step: 0, t0: performance.now(), playing: false, nextAt: 0, visible: false, seen: new Set() };
+    const timer = $('.px__timer', host), timerBar = $('.px__timer i', host);
     const steps = () => panels[st.panel].steps || [''];
 
     function ui() {
@@ -171,8 +172,10 @@
       $('.px__count', host).textContent = `Paso ${st.step + 1} de ${s.length}`;
       $('.px__text', host).textContent = s[st.step];
       $('.px__dots', host).innerHTML = s.map((_, i) => `<button type="button" class="${i === st.step ? 'on' : i < st.step ? 'past' : ''}" data-step="${i}" aria-label="Ir al paso ${i + 1}"></button>`).join('');
-      $$('.px__panel', host).forEach((b, i) => { b.setAttribute('aria-selected', String(i === st.panel)); });
+      if (st.step === s.length - 1) st.seen.add(st.panel);
+      $$('.px__panel', host).forEach((b, i) => { b.setAttribute('aria-selected', String(i === st.panel)); b.classList.toggle('is-seen', st.seen.has(i)); });
       $('.px__play', host).innerHTML = st.playing ? `${icon('pause')}Pausa` : `${icon('play')}Reproducir`;
+      timer.hidden = !st.playing;
     }
     function set(panel, step) {
       st.panel = Math.max(0, Math.min(panels.length - 1, panel));
@@ -193,6 +196,7 @@
     function frame(now) {
       if (st.visible && !document.hidden) {
         if (st.playing && now >= st.nextAt) next();
+        if (st.playing) { const total = stepMs(steps()[st.step], 1); timerBar.style.transform = `scaleX(${Math.min(1, Math.max(0, 1 - (st.nextAt - now) / total)).toFixed(3)})`; }
         PL.renderPanel(ctx, panels[st.panel], st.step, Math.min(1, (now - st.t0) / 750), now / 1000);
       }
       requestAnimationFrame(frame);
@@ -206,6 +210,16 @@
       if (t.dataset.act === 'next') next();
       if (t.dataset.act === 'prev') prev();
       if (t.dataset.act === 'play') { st.playing = !st.playing; st.nextAt = performance.now() + stepMs(steps()[st.step], 1); ui(); }
+    });
+
+    /* Con el foco en el visor, las flechas avanzan los pasos (no las diapositivas) */
+    host.addEventListener('keydown', (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      const onBtn = e.target.tagName === 'BUTTON';
+      if (e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); next(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); prev(); }
+      else if ((e.key === ' ' || e.key === 'Enter') && !onBtn) { e.preventDefault(); e.stopPropagation(); st.playing = !st.playing; st.nextAt = performance.now() + stepMs(steps()[st.step], 1); ui(); }
+      else if (e.key === 'Escape') { e.stopPropagation(); document.activeElement.blur(); }
     });
 
     const io = new IntersectionObserver((list) => {
@@ -257,7 +271,8 @@
         + c.explain.map(md).join('')
         + list('Ejemplos', c.examples, (xs) => `<ul class="reader__ex">${xs.map((e) => `<li><b>${mdi(e[0])}</b> ${mdi(e[1])}</li>`).join('')}</ul>`)
         + list('Errores frecuentes', c.mistakes, (xs) => `<ul>${xs.map((m) => `<li>${mdi(m)}</li>`).join('')}</ul>`)
-        + list('Vocabulario', c.terms, (xs) => `<dl class="reader__terms">${xs.map((t) => `<div><dt>${mdi(t[0])}</dt><dd>${mdi(t[1])}</dd></div>`).join('')}</dl>`);
+        + list('Vocabulario', c.terms, (xs) => `<dl class="reader__terms">${xs.map((t) => `<div><dt>${mdi(t[0])}</dt><dd>${mdi(t[1])}</dd></div>`).join('')}</dl>`)
+        + list('Para profundizar', (PL.sources || {})[c.id], (xs) => `<ul class="reader__src">${xs.map((x) => `<li><a href="${esc(x[1])}" target="_blank" rel="noopener">${esc(x[0])}</a>${x[2] ? `<span>${mdi(x[2])}</span>` : ''}</li>`).join('')}</ul>`);
       /* Sin internet no hay Mermaid: se enseña el diagrama como texto */
       $$('.mermaid', body).forEach((m) => { const pre = document.createElement('pre'); pre.textContent = m.textContent; m.replaceWith(pre); });
       box.hidden = false;

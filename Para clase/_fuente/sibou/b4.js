@@ -22,6 +22,19 @@
   function vec(x, y, seed, w = 60, h = 14, col = P.teal) {
     for (let i = 0; i < 10; i++) { const v = rnd(seed * 13 + i); rect(x + i * (w / 10), y + h - v * h, w / 10 - 1, v * h, col); }
   }
+  /* paquete que recorre una ruta en bucle; t en segundos (D.T) */
+  function packet(pts, period, col = P.yellow, phase = 0, size = 4) {
+    const segs = []; let total = 0;
+    for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); segs.push(d); total += d; }
+    let left = (((D.T + phase) % period) / period) * total;
+    for (let i = 0; i < segs.length; i++) {
+      if (left <= segs[i]) { const f = left / segs[i]; const x = lerp(pts[i][0], pts[i + 1][0], f), y = lerp(pts[i][1], pts[i + 1][1], f); rect(x - size / 2 - 1, y - size / 2 - 1, size + 2, size + 2, P.ink); rect(x - size / 2, y - size / 2, size, size, col); return; }
+      left -= segs[i];
+    }
+  }
+  /* posición intermedia entre dos puntos según el avance p (0-1), con suavizado */
+  const mix = (a, b, p) => [lerp(a[0], b[0], ease(clamp(p))), lerp(a[1], b[1], ease(clamp(p)))];
+
   /* bloque de texto con barra de color a la izquierda (instrucciones, fragmentos, pregunta) */
   function slab(x, y, w, h, label, col, lines) {
     box(x, y, w, h, { fill: P.gray2, shadow: false });
@@ -235,6 +248,41 @@
             chip('«el gato duerme en el sofá»', 312, 156, { fill: P.yellow, size: 7.5 });
             arrow(390, 94, 310, 160, { color: P.yellow, dash: true });
           });
+        }
+      },
+      {
+        title: 'Cómo aprende el mapa',
+        caption: 'Entrenamiento por contraste: los pares que van juntos se acercan y los que no, se alejan.',
+        steps: [
+          'Al principio, el modelo coloca las frases al azar: el mapa todavía no significa nada.',
+          'Le enseñamos millones de pares que van juntos: una pregunta y su respuesta, una palabra y su traducción.',
+          'Con cada par, acerca un poco las dos frases y aleja las que no tienen nada que ver.',
+          'Después de millones de ejemplos, lo parecido queda cerca. Ese es el mapa que usa la búsqueda.'
+        ],
+        draw(g) {
+          card(14, 14, 452, 214, 'ESPACIO DE SIGNIFICADO', P.purple);
+          const pts = [
+            ['¿Cuándo me devolvéis el dinero?', [70, 196], [250, 66], P.mint],
+            ['Reembolso en 14 días', [380, 206], [282, 96], P.mint],
+            ['contrato', [380, 60], [110, 160], P.sky],
+            ['contract', [60, 92], [150, 188], P.sky],
+            ['gato', [250, 200], [74, 62], P.orange],
+            ['felino', [190, 56], [112, 90], P.orange]
+          ];
+          const p = g.step < 2 ? 0 : g.step === 2 ? g.at(2) * 0.55 : 0.55 + g.at(3) * 0.45;
+          const pos = pts.map(q => mix(q[1], q[2], p));
+          if (g.from(1) && !g.from(3)) [[0, 1], [2, 3], [4, 5]].forEach(([i, j]) => line(pos[i][0], pos[i][1], pos[j][0], pos[j][1], pts[i][3], 1, true));
+          if (g.on(2)) {
+            line(pos[0][0], pos[0][1], pos[4][0], pos[4][1], P.red, 1, true);
+            const m = [(pos[0][0] + pos[4][0]) / 2, (pos[0][1] + pos[4][1]) / 2];
+            chip('se aleja', m[0], m[1] - 20, { align: 'center', fill: P.red, size: 7 });
+            line(30, 210, 54, 210, P.mint, 1, true); txt('los pares se acercan', 60, 205, { size: 8, color: P.mint });
+            line(200, 210, 224, 210, P.red, 1, true); txt('lo que no tiene relación se aleja', 230, 205, { size: 8, color: P.red });
+          }
+          pts.forEach((q, i) => { dot(pos[i][0], pos[i][1], q[3], 4); txt(q[0], pos[i][0] + 8, pos[i][1] - 4, { size: 7.5, color: q[3], maxW: 150, fit: true }); });
+          if (g.on(0)) qmark(420, 44, P.light, 2);
+          if (g.from(1) && !g.from(3)) chip('pares de ejemplo × 1.000.000', 456, 40, { align: 'right', fill: P.yellow, size: 7.5 });
+          show(g.at(3), () => { [[240, 52, 206, 58], [100, 146, 112, 56], [64, 48, 112, 56]].forEach(f => frame(f[0], f[1], f[2], f[3], P.white, 1)); banner('Lo parecido queda cerca porque así lo aprendió', { y: 236 }); });
         }
       },
       {
@@ -797,6 +845,40 @@
         }
       },
       {
+        title: 'Perdida en el medio',
+        caption: 'Muchos modelos aprovechan mejor lo que está al principio y al final de un contexto largo.',
+        steps: [
+          'Metemos veinte fragmentos en el prompt, uno detrás de otro.',
+          'La curva muestra cuánto aprovecha el modelo cada posición: mucho al principio y al final, poco en medio.',
+          'Si la excepción que importa cae en la posición 10, es fácil que la respuesta la ignore.',
+          'Solución: menos fragmentos, bien ordenados y lo más relevante arriba. Para eso sirve reordenar.'
+        ],
+        draw(g) {
+          const x0 = 40, x1 = 440, n = 20, w = (x1 - x0) / n;
+          const u = i => { const t = i / (n - 1); return 0.22 + 0.78 * Math.pow(2 * t - 1, 2); };
+          const key = g.from(3) ? 0 : 9;
+          txt('posición en el prompt →', 240, 186, { size: 8, color: P.light, align: 'center' });
+          for (let i = 0; i < n; i++) {
+            const isKey = g.from(2) && i === key;
+            show(clamp(g.at(0) * 2.2 - i / n), () => {
+              rect(x0 + i * w + 2, 160, w - 4, 18, isKey ? P.orange : P.gray3);
+              txt(String(i + 1), x0 + i * w + w / 2, 165, { size: 6.5, color: P.ink, align: 'center' });
+            }, 0);
+          }
+          show(g.at(1), () => {
+            const m = n * 5;
+            for (let i = 0; i < m; i++) { const t = i / (m - 1); if (t > g.at(1) * 1.05) break; const x = x0 + w / 2 + t * (x1 - x0 - w), y = 150 - u(t * (n - 1)) * 110; rect(x - 1, y - 1, 3, 3, P.mint); }
+            txt('cuánto se aprovecha', 46, 30, { size: 8, color: P.mint });
+          }, 0);
+          show(g.at(2), () => {
+            const x = x0 + key * w + w / 2, y = 150 - u(key) * 110;
+            line(x, 158, x, y + 4, P.orange, 2, true);
+            chip(g.from(3) ? 'excepción arriba: se usa' : 'excepción en el medio: se pierde', clamp(x, 110, 370), y - 26, { align: 'center', fill: g.from(3) ? P.mint : P.orange, size: 8 });
+          }, 0);
+          show(g.at(3), () => banner('Menos fragmentos y lo importante primero', { y: 236 }));
+        }
+      },
+      {
         title: 'Instrucciones de anclaje',
         caption: 'La misma pregunta, sin instrucciones de anclaje y con ellas, cuando las fuentes no tienen la respuesta.',
         steps: [
@@ -904,22 +986,46 @@
       },
       {
         title: 'Lo que resuelve RAG',
-        caption: 'Cuatro ventajas de responder a partir de fuentes recuperadas.',
+        caption: 'Cuatro ventajas de responder a partir de fuentes recuperadas, cada una en acción.',
         steps: [
-          'Responde sobre documentación propia sin reentrenar el modelo.',
-          'Permite trabajar con información nueva o actualizada: basta con actualizar las fuentes.',
-          'Aporta trazabilidad si las citas se conservan y se pueden abrir.',
-          'Reduce la necesidad de que el modelo complete huecos con conocimiento general.'
+          'Documentación propia sin reentrenar: los documentos entran en el índice; el modelo no se toca.',
+          'Información nueva: se cambia la versión 2025 por la 2026 en el índice y la siguiente respuesta ya la usa.',
+          'Trazabilidad: cada afirmación lleva un número que abre el fragmento exacto.',
+          'Menos huecos: donde antes el modelo rellenaba con algo plausible, ahora hay un fragmento o un «no consta».'
         ],
         draw(g) {
-          const items = [['folder', 'Documentación propia', 'sin reentrenar el modelo'], ['calendar', 'Información nueva', 'actualizando las fuentes'], ['link', 'Trazabilidad', 'citas que se pueden abrir'], ['shield', 'Menos huecos', 'menos relleno con conocimiento general']];
-          items.forEach((it, i) => show(g.at(i), () => {
-            const x = 14 + (i % 2) * 232, y = 16 + Math.floor(i / 2) * 112;
-            card(x, y, 220, 100, 'VENTAJA ' + (i + 1), P.mint, { active: g.on(i) });
-            icon(it[0], x + 14, y + 36, 3, it[0] === 'shield' ? P.mint : undefined);
-            txt(it[1], x + 62, y + 38, { size: 11, weight: 700, maxW: 150 });
-            txt(it[2], x + 62, y + 58, { size: 8.5, color: P.light, maxW: 150 });
-          }));
+          const C = [[14, 16], [246, 16], [14, 128], [246, 128]];
+          const T = ['SIN REENTRENAR', 'INFORMACIÓN NUEVA', 'TRAZABILIDAD', 'MENOS HUECOS'];
+          C.forEach((c, i) => show(g.at(i), () => card(c[0], c[1], 220, 104, T[i], P.mint, { active: g.on(i) })));
+          show(g.at(0), () => {
+            const [x, y] = C[0];
+            icon('doc', x + 16, y + 40, 2); icon('doc', x + 16, y + 66, 2);
+            packet([[x + 46, y + 56], [x + 108, y + 56]], 1.4, P.yellow);
+            icon('db', x + 112, y + 42, 3);
+            icon('gear', x + 178, y + 46, 2); line(x + 172, y + 44, x + 206, y + 78, P.red, 2); txt('el modelo no cambia', x + 110, y + 86, { size: 7.5, color: P.light, align: 'center' });
+          });
+          show(g.at(1), () => {
+            const [x, y] = C[1], sw = g.at(1) > 0.6;
+            chip('política 2025', x + 14, y + 36, { fill: sw ? P.gray3 : P.orange, size: 8, strike: sw ? P.red : null });
+            chip('política 2026', x + 14, y + 62, { fill: P.mint, size: 8, a: 1 });
+            arrow(x + 120, y + 70, x + 150, y + 70, { color: P.mint, p: g.at(1) });
+            icon('db', x + 156, y + 48, 3);
+            txt('basta con actualizar el índice', x + 110, y + 88, { size: 7.5, color: P.light, align: 'center' });
+          });
+          show(g.at(2), () => {
+            const [x, y] = C[2];
+            box(x + 12, y + 30, 110, 40, { fill: P.white, shadow: false }); txt('El reembolso es del 70 %', x + 18, y + 36, { size: 7.5, color: P.ink, font: 'sans', maxW: 80 });
+            chip('1', x + 102, y + 34, { fill: P.yellow, size: 7, w: 14, h: 13, pad: 2 }); glow(x + 102, y + 34, 14, 13, P.yellow);
+            arrow(x + 124, y + 42, x + 146, y + 42, { color: P.yellow });
+            paper(x + 148, y + 26, 62, 66, { title: '§2' }); rect(x + 152, y + 48, 54, 14, 'rgba(247,207,90,.6)'); txt('15-30 d: 70 %', x + 179, y + 51, { size: 6.5, color: P.ink, align: 'center', font: 'sans' }); bars(x + 154, y + 70, 48, 2, { seed: 5, color: P.light });
+          });
+          show(g.at(3), () => {
+            const [x, y] = C[3];
+            txt('antes', x + 56, y + 28, { size: 7.5, color: P.red, align: 'center' }); txt('ahora', x + 166, y + 28, { size: 7.5, color: P.mint, align: 'center' });
+            box(x + 14, y + 42, 84, 34, { fill: P.gray2, shadow: false }); qmark(x + 46, y + 48, P.red, 2);
+            box(x + 122, y + 42, 84, 34, { fill: P.gray2, shadow: false }); chip('[2] §7', x + 164, y + 50, { align: 'center', fill: P.mint, size: 7.5 });
+            txt('o «no consta»', x + 164, y + 82, { size: 7.5, color: P.light, align: 'center' });
+          });
         }
       },
       {
@@ -985,6 +1091,39 @@
           ];
           table(14, 18, [134, 106, 106, 106], [head].concat(rows), { rh: 38, size: 8.5, rowAlpha: j => j === 0 ? 1 : g.at(j - 1) });
           show(g.at(4), () => banner('Por defecto, RAG; para el estilo, ajuste fino; se pueden combinar', { y: 222 }));
+        }
+      },
+      {
+        title: 'Una pregunta, de principio a fin',
+        caption: 'El recorrido completo de una pregunta real, pieza a pieza, con lo que pasa dentro de cada una.',
+        steps: [
+          'Llega la pregunta: «Cancelo con 20 días un viaje del 10 de agosto. ¿Cuánto me devolvéis?».',
+          'Búsqueda híbrida: palabras clave y significado devuelven 20 candidatos.',
+          'Filtros: fuera la política de 2024 (derogada) y la exportación del CRM (sin permiso).',
+          'Reordenación: la tabla del §2 y la excepción de temporada alta (§7) suben a los primeros puestos.',
+          'Prompt aumentado: instrucciones de anclaje, [1] §2, [2] §7 y la pregunta.',
+          'Respuesta: «El 50 % [1][2]». Y la persona abre las dos citas antes de contestar al cliente.'
+        ],
+        draw(g) {
+          const nodes = flow([{ t: 'PREGUNTA', icon: 'question' }, { t: 'BUSCAR', icon: 'search' }, { t: 'FILTRAR', icon: 'lock' }, { t: 'REORDENAR', icon: 'star' }, { t: 'PROMPT', icon: 'list' }, { t: 'RESPUESTA', icon: 'chat' }], 14, 14, 452, { bw: 66, bh: 54, active: g.step, size: 7 });
+          if (g.step > 0) { const a = nodes[g.step - 1], b = nodes[g.step]; const m = mix([a.cx, a.cy + 30], [b.cx, b.cy + 30], g.at(g.step)); rect(m[0] - 4, m[1] - 4, 8, 8, P.ink); rect(m[0] - 3, m[1] - 3, 6, 6, P.yellow); }
+          const panel = (fn) => { box(14, 86, 452, 142, { fill: P.gray2, shadow: false }); fn(); };
+          if (g.on(0)) panel(() => { person(30, 116, { shirt: P.teal, still: true }); bubble(70, 106, 380, 50, { text: '«Cancelo con 20 días un viaje del 10 de agosto. ¿Cuánto me devolvéis?»', tx: 62, ty: 132, size: 9, font: 'sans' }); txt('pregunta autónoma: no hace falta reescribirla', 240, 180, { size: 8, color: P.light, align: 'center' }); });
+          if (g.on(1)) panel(() => { for (let i = 0; i < 20; i++) { const x = 30 + (i % 10) * 43, y = 104 + Math.floor(i / 10) * 40; show(clamp(g.at(1) * 3 - i / 10), () => { box(x, y, 36, 30, { fill: P.paper, shadow: false }); bars(x + 5, y + 7, 26, 3, { seed: i + 1, gap: 6, color: P.navy }); }, 0); } txt('20 candidatos · palabras clave + significado', 240, 196, { size: 8.5, color: P.light, align: 'center' }); });
+          if (g.on(2)) panel(() => { [['Política v3 §2', 0], ['Política v3 §7', 0], ['Política 2024 §2', 1], ['CRM · reclamaciones', 2], ['Manual §5', 0]].forEach((r, i) => { const y = 96 + i * 24, out = r[1] && g.at(2) > 0.5; chip(r[0], 30, y, { fill: out ? P.gray3 : P.paper, size: 8, w: 170, strike: out ? P.red : null }); if (r[1] === 1) chip('derogada', 214, y, { fill: P.orange, size: 7.5, icon: 'calendar' }); if (r[1] === 2) chip('sin permiso', 214, y, { fill: P.pink, size: 7.5, icon: 'lock' }); }); });
+          if (g.on(3)) panel(() => { [['Política v3 §2 · tabla', 0.91, 2], ['Política v3 §7 · temporada alta', 0.88, 4], ['Manual §3 · cancelaciones', 0.62, 1], ['FAQ (no indexada)', 0, -1]].slice(0, 3).forEach((r, i) => { const y = 100 + i * 34, from = 100 + r[2] * 22, yy = lerp(from, y, ease(g.at(3))); badge(i + 1, 30, yy + 4, i < 2 ? P.mint : P.gray3); txt(r[0], 52, yy + 4, { size: 9, color: i < 2 ? P.white : P.light }); txt(String(r[1]).replace('.', ','), 330, yy + 4, { size: 8.5, color: P.mint }); }); });
+          if (g.on(4)) panel(() => { slab(24, 94, 432, 34, 'INSTRUCCIONES', P.yellow, ['Solo con las fuentes · cita [n] · si no consta, dilo']); slab(24, 132, 432, 46, 'FUENTES', P.teal, ['[1] Política v3.0 §2: 15-30 días → 70 %', '[2] Política v3.0 §7: 15/7-31/8 → 50 %']); slab(24, 182, 432, 34, 'PREGUNTA', P.sky, ['20 días · salida 10 de agosto']); });
+          if (g.on(5)) panel(() => {
+            robot(26, 104, { s: 2, color: P.purple });
+            bubble(70, 98, 172, 44, { text: 'El 50 %: es temporada alta [1][2].', tx: 64, ty: 120, size: 9, font: 'sans' });
+            [['[1] §2 · tabla', '15-30 días → 70 %'], ['[2] §7 · temporada alta', '15/7-31/8 → 50 %']].forEach((c, i) => {
+              const x = 262 + i * 102;
+              show(clamp(g.at(5) * 2 - i * 0.5), () => { paper(x, 94, 96, 80, { title: c[0], size: 6.5 }); bars(x + 6, 112, 80, 2, { seed: i + 3, color: P.light }); rect(x + 4, 128, 88, 18, 'rgba(247,207,90,.65)'); txt(c[1], x + 8, 132, { size: 7.5, color: P.ink, font: 'sans' }); bars(x + 6, 152, 80, 2, { seed: i + 7, color: P.light }); }, 0);
+            });
+            arrow(244, 120, 258, 130, { color: P.yellow });
+            person(190, 160, { shirt: P.teal, still: true });
+            show(late(g.at(5)), () => { icon('check', 262, 186, 2); icon('check', 364, 186, 2); txt('antes de contestar, la persona abre y comprueba las dos citas', 240, 212, { size: 8, color: P.mint, align: 'center' }); }, 0);
+          });
         }
       }
     ],
@@ -1081,6 +1220,34 @@
           show(g.at(2), () => { line(B[0] + 72, B[1], C[0] - 72, C[1], g.on(2) ? P.yellow : P.mint, 3); chip('fidelidad', 240, 206, { align: 'center', fill: P.mint, size: 8 }); }, 0);
           show(g.at(3), () => { line(A[0] + 40, A[1] + 22, C[0] - 20, C[1] - 24, g.on(3) ? P.yellow : P.mint, 3); chip('relevancia de la respuesta', 364, 104, { align: 'center', fill: P.mint, size: 7.5 }); }, 0);
           show(g.at(4), () => banner('Las tres a la vez, o la respuesta no es fiable', { y: 236 }));
+        }
+      },
+      {
+        title: 'Recall@k: ¿llegó el fragmento correcto?',
+        caption: 'Para cada pregunta de prueba se mira si el fragmento que la responde está entre los k recuperados.',
+        steps: [
+          'Cada fila es una pregunta de prueba; cada casilla, uno de los k = 4 fragmentos recuperados, del más al menos parecido.',
+          'En amarillo, el fragmento que de verdad responde. En 6 de las 8 preguntas está entre los cuatro primeros.',
+          'Recall@4 = 6 / 8 = 75 %. En las otras dos, el modelo ni siquiera recibió la evidencia: no puede acertar.',
+          'Con k = 8 también aparecen, pero entra el doble de ruido. Suele ser mejor arreglar el troceado o reordenar.'
+        ],
+        draw(g) {
+          const hit = [1, 0, 2, -1, 0, 3, -1, 1], late = [-1, -1, -1, 5, -1, -1, 6, -1];
+          const k = g.from(3) ? 8 : 4;
+          txt('PREGUNTA', 18, 12, { size: 7.5, color: P.light });
+          txt('FRAGMENTOS RECUPERADOS · K = ' + k, 84, 12, { size: 7.5, color: P.light });
+          hit.forEach((h, r) => show(clamp(g.at(0) * 2 - r / 8), () => {
+            const y = 28 + r * 25;
+            txt('P' + (r + 1), 24, y + 3, { size: 9, color: P.white });
+            for (let c = 0; c < k; c++) {
+              const isHit = g.from(1) && (c === h || (k === 8 && c === late[r]));
+              rect(84 + c * 30, y, 26, 18, isHit ? P.yellow : (c >= 4 ? P.gray2 : P.gray3));
+              if (c >= 4) frame(84 + c * 30, y, 26, 18, P.red, 1);
+            }
+            if (g.from(1)) { const ok = h >= 0 || (k === 8 && late[r] >= 0); icon(ok ? 'check' : 'cross', 84 + k * 30 + 4, y + 2, 1); }
+          }, 0));
+          show(g.at(2), () => { card(370, 30, 96, 76, 'RECALL@4', P.purple, { size: 8 }); txt('75 %', 418, 56, { size: 17, color: P.yellow, align: 'center', weight: 700 }); txt('6 de 8', 418, 84, { size: 8, color: P.light, align: 'center' }); }, 0);
+          show(g.at(3), () => { card(370, 116, 96, 62, 'RECALL@8', P.red, { size: 8 }); txt('100 %', 418, 140, { size: 14, color: P.yellow, align: 'center', weight: 700 }); txt('con el doble de ruido', 418, 160, { size: 7, color: P.light, align: 'center' }); chip('+ ruido', 266, 226, { align: 'center', fill: P.red, size: 8 }); banner('Mide si llega la evidencia antes de culpar al modelo', { y: 244, h: 20 }); }, 0);
         }
       },
       {
@@ -1220,7 +1387,7 @@
       },
       {
         title: 'Seis formas de que una cita falle',
-        caption: 'Errores de cita habituales: todos pasan inadvertidos si no se abre la fuente.',
+        caption: 'Lo que afirma la respuesta (A) frente a lo que dice la cita (C). Todas pasan inadvertidas si no se abre la fuente.',
         steps: [
           'Decorativa: comparte palabras, no afirma lo mismo. Recortada: le falta el «salvo…» de la línea siguiente.',
           'Desactualizada: respalda la frase, pero la fuente está derogada. Mal atribuida: el dato existe, pero en otra fuente.',
@@ -1229,15 +1396,19 @@
         ],
         draw(g) {
           const F = [
-            ['DECORATIVA', 'mismas palabras, otra idea', P.red], ['RECORTADA', 'falta el «salvo…»', P.orange],
-            ['DESACTUALIZADA', 'fuente derogada', P.yellow], ['MAL ATRIBUIDA', 'está en otra fuente', P.pink],
-            ['FUSIONADA', '[1] + [2] ≠ lo afirmado', P.purple], ['INFERENCIA', 'deducido, no escrito', P.sky]
+            ['DECORATIVA', P.red, '«La revisión es obligatoria»', '«Revisar mejora la calidad»'],
+            ['RECORTADA', P.orange, '«Siempre puedes teletrabajar»', '«…dos días, salvo en el cierre»'],
+            ['DESACTUALIZADA', P.yellow, '«Devolvemos en 30 días»', '«30 días» · versión de 2023'],
+            ['MAL ATRIBUIDA', P.pink, '«Plazo: 14 días [1]»', '[1] no lo dice; está en [3]'],
+            ['FUSIONADA', P.purple, '«Cuesta 45 € y cubre FM»', '[1] 45 € (2027) · [2] FM'],
+            ['INFERENCIA', P.sky, '«Vale para todas las tarifas»', 'la fuente no lo dice']
           ];
           F.forEach((f, i) => show(g.at(Math.floor(i / 2)), () => {
-            const x = 14 + (i % 2) * 230, y = 12 + Math.floor(i / 2) * 72;
-            card(x, y, 220, 62, f[0], f[2], { active: g.on(Math.floor(i / 2)) });
-            icon('link', x + 12, y + 32, 2, f[2]);
-            txt(f[1], x + 44, y + 36, { size: 9, maxW: 168, font: 'sans' });
+            const x = 14 + (i % 2) * 230, y = 10 + Math.floor(i / 2) * 74;
+            card(x, y, 220, 66, f[0], f[1], { active: g.on(Math.floor(i / 2)) });
+            chip('A', x + 8, y + 24, { fill: P.sky, size: 7, w: 14, h: 14, pad: 2 }); txt(f[2], x + 28, y + 26, { size: 8, maxW: 186, fit: true, font: 'sans' });
+            chip('C', x + 8, y + 44, { fill: P.paper, size: 7, w: 14, h: 14, pad: 2 }); txt(f[3], x + 28, y + 46, { size: 8, maxW: 172, fit: true, font: 'sans', color: P.light });
+            icon('cross', x + 200, y + 44, 1);
           }));
           show(g.at(3), () => banner('No cuentes citas: léelas', { y: 236 }));
         }
