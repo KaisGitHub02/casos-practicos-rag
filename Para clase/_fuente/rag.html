@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG y Gemini Notebook · Bloque 4</title>
+  <meta name="description" content="Bloque 4 del máster: por qué una IA inventa, cómo funciona RAG pieza a pieza y un caso práctico en Gemini Notebook con documentos que esconden trampas.">
+  <link rel="stylesheet" href="casos.css">
+  <link rel="stylesheet" href="rag.css">
+</head>
+<body>
+
+  <!-- Iconos (trazo 1.75, 24×24) -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-diagram" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M10 6h3.5a2 2 0 0 1 2 2v7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-screen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-tick" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+    <symbol id="i-question" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 2.3-2.4 3.8M12 17h.01"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1.1 2V16h5v-.2c.1-.8.5-1.5 1.1-2A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6L4 8.7"/><path d="M4 4v4.7h4.7"/></symbol>
+  </svg>
+
+  <div class="viewport" id="viewport">
+    <div class="stage" id="stage">
+
+      <header class="chrome-top">
+        <ul class="chrome-top__logos" aria-label="Entidades participantes">
+          <li><img src="assets/img/logos-corporativos.png" alt="Cámara de Comercio de Granada, T-Systems" width="520" height="55"></li>
+          <li class="lg-ntt"><img src="assets/img/logo-nttdata.png" alt="NTT DATA" width="314" height="64"></li>
+        </ul>
+        <span class="brand">
+          <span class="brand__name">Bloque 4 · RAG</span>
+          <span class="chrome-top__section" id="section-label">RAG y Gemini Notebook</span>
+        </span>
+      </header>
+
+      <nav class="rail" id="rail" aria-label="Recorrido del bloque">
+        <div class="rail__track" id="rail-track"></div>
+        <span class="rail__marker" id="rail-marker" aria-hidden="true"></span>
+      </nav>
+
+      <main class="slides" id="slides" aria-live="off">
+
+        <!-- 01 · Portada -->
+        <section class="slide slide--cover" id="portada" data-section="RAG y Gemini Notebook" aria-label="Portada">
+          <div class="cover">
+            <h1 class="cover__title">Que la IA responda con tus documentos, no con su memoria</h1>
+            <p class="cover__kind">Bloque 4 · RAG, embeddings y Gemini Notebook</p>
+            <p class="cover__sub">Por qué un modelo inventa, cómo funciona RAG pieza a pieza y un caso práctico en el que cada respuesta tiene que poder demostrarse.</p>
+            <p class="cover__meta">Máster en Inteligencia Artificial · Empresa, personas y documentos del caso ficticios</p>
+          </div>
+          <div class="lanes" data-lanes aria-hidden="true"></div>
+        </section>
+
+        <!-- 02 · Método -->
+        <section class="slide slide--light" id="metodo" data-section="Cómo vamos a trabajar" aria-label="Cómo vamos a trabajar">
+          <div class="method">
+            <div class="method__head">
+              <h2>Cómo vamos a trabajar</h2>
+              <p class="lede">Primero entendemos el problema y abrimos la caja pieza a pieza. Después lo practicamos con un cliente y, sobre todo, aprendemos a comprobar lo que responde la herramienta.</p>
+            </div>
+            <div class="method__steps" role="tablist" aria-label="Pasos del bloque" data-method></div>
+            <div class="method__detail" id="method-detail" role="tabpanel" aria-live="polite"></div>
+            <p class="method__note"><b>Por qué en este orden</b>Una herramienta como Gemini Notebook se aprende en diez minutos. Lo difícil es saber cuándo su respuesta está bien y, si no lo está, en qué pieza ha fallado.</p>
+          </div>
+        </section>
+
+        <!-- 03 · Con y sin fuentes -->
+        <section class="slide slide--light" id="comparar" data-section="Con y sin fuentes" aria-label="Un chat general frente a un cuaderno con fuentes">
+          <div class="start">
+            <div class="start__head">
+              <h2>La misma pregunta, dos respuestas</h2>
+              <p class="lede">«¿Qué criterios exactos se evalúan en la práctica de este máster?» Así responde un chat general y así un cuaderno con los apuntes como fuente.</p>
+            </div>
+            <div class="compare" role="table" aria-label="Chat general frente a cuaderno con fuentes">
+              <div class="compare__row compare__row--head" role="row">
+                <span role="columnheader"><span class="visually-hidden">Aspecto</span></span>
+                <button type="button" class="compare__who compare__who--c2" role="columnheader" data-goto="e-problema">
+                  <b>Chat general · sin documentos</b><span>Responde con lo que aprendió</span>
+                </button>
+                <button type="button" class="compare__who compare__who--c1" role="columnheader" data-goto="e-rag">
+                  <b>Cuaderno con fuentes · RAG</b><span>Busca primero, responde después</span>
+                </button>
+              </div>
+              <div class="compare__row" role="row">
+                <span class="compare__k" role="rowheader">De dónde sale</span>
+                <p role="cell">De patrones de textos parecidos que vio al entrenarse. <b>Nunca leyó vuestros apuntes.</b></p>
+                <p role="cell">De los <b>fragmentos de los apuntes</b> que encuentra para esa pregunta.</p>
+              </div>
+              <div class="compare__row" role="row">
+                <span class="compare__k" role="rowheader">Qué responde</span>
+                <p role="cell">Cuatro criterios con porcentajes redondos, ordenados y seguros. <b>Inventados.</b></p>
+                <p role="cell">Los cinco criterios reales de la rúbrica, cada uno con su número de cita.</p>
+              </div>
+              <div class="compare__row" role="row">
+                <span class="compare__k" role="rowheader">Cómo se comprueba</span>
+                <p role="cell">No se puede: no hay nada que abrir.</p>
+                <p role="cell">Abriendo la cita: aparece el fragmento exacto que lo dice.</p>
+              </div>
+              <div class="compare__row" role="row">
+                <span class="compare__k" role="rowheader">Cuando no lo sabe</span>
+                <p role="cell">Rellena el hueco con algo plausible.</p>
+                <p role="cell">Puede decir «las fuentes no contienen esa información». <b>Puede</b>: hay que comprobarlo.</p>
+              </div>
+            </div>
+            <p class="start__note"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>RAG no hace que la IA «sepa más»: hace que lo que diga se pueda comprobar. Y eso solo sirve si alguien abre la cita.</p>
+          </div>
+        </section>
+
+        <!-- 04-12 · Un concepto por diapositiva (las genera rag.js) -->
+        <template id="tpl-conceptos"></template>
+
+        <!-- 13 · Caso · Contexto -->
+        <section class="slide slide--module" id="c-contexto" data-step="c-contexto" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: quién es Marta y qué le pasa">
+          <div class="intro">
+            <div class="intro__story">
+              <p class="person"><span class="person__avatar" aria-hidden="true">M</span><span><b>Marta</b>Responsable de atención al cliente · Viajes Lunaria, agencia de viajes de Granada</span></p>
+              <blockquote class="quote">«Cada agente responde de memoria. El mes pasado devolvimos dinero con los porcentajes de 2024 y nos llovieron las reclamaciones.»</blockquote>
+              <p class="intro__text">Su equipo atiende por teléfono y chat decenas de consultas al día sobre cancelaciones y reembolsos. Os pide montar en <b>Gemini Notebook</b> un cuaderno de consulta en el que <b>cada respuesta se pueda demostrar</b>.</p>
+              <p class="intro__text">Para este caso, <b>hoy es lunes, 10 de noviembre de 2026</b>.</p>
+              <p class="fiction">Caso ficticio: la empresa, las personas y los documentos son inventados.</p>
+            </div>
+            <div class="intro__facts">
+              <dl class="figures">
+                <div><dt>Agentes</dt><dd>6</dd><dd class="figures__sub">teléfono y chat</dd></div>
+                <div><dt>Consultas de cancelación</dt><dd>~40</dd><dd class="figures__sub">cada día</dd></div>
+                <div><dt>Reclamaciones</dt><dd>3</dd><dd class="figures__sub">el mes pasado, por importes mal calculados</dd></div>
+                <div><dt>Documentos</dt><dd>6</dd><dd class="figures__sub">en la carpeta que os pasa</dd></div>
+              </dl>
+              <div class="tools">
+                <h3>Con qué trabaja hoy</h3>
+                <ul><li>Teléfono y chat</li><li>CRM de reservas</li><li>PDF de la política en cada escritorio</li><li>FAQ de la web</li><li>Cuenta de Google de la empresa</li></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14 · Caso · Hoy -->
+        <section class="slide slide--module" id="c-hoy" data-step="c-hoy" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: cómo responden hoy">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">Así responden hoy</h2>
+              <ul class="chips"><li>De memoria</li><li>Varias versiones</li><li>Sin citas</li></ul>
+              <p class="module__claim">El problema no es la falta de información: es que hay demasiadas versiones y nadie sabe cuál manda.</p>
+              <h3 class="module__label">Qué pasa hoy</h3>
+              <ol class="how">
+                <li>El cliente llama y el agente <b>busca en su copia</b> de la política.</li>
+                <li>Si no la encuentra, <b>responde de memoria</b> o mira la FAQ de la web.</li>
+                <li>Nadie sabe <b>qué versión</b> tiene cada uno ni qué se decidió en el último comité.</li>
+              </ol>
+              <dl class="deps">
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>Errores</dt><dd>Reembolsos con porcentajes de 2024.</dd></div>
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>Tiempo</dt><dd>Llamadas largas buscando en el PDF.</dd></div>
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Clientes</dt><dd>Respuestas distintas según quién atienda.</dd></div>
+              </dl>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <div class="tabs" role="tablist" aria-label="Qué ver" data-rag-tabs>
+                  <button type="button" class="tab" role="tab" aria-selected="true" data-pane="hoy-notas"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Lo que contó Marta</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="hoy-vinetas"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>En viñetas</button>
+                </div>
+                <span class="sample">Notas sin ordenar</span>
+              </div>
+              <div class="viewer__body">
+                <div class="rag-pane" id="hoy-notas">
+                  <div class="rag-pane__scroll">
+                    <ul class="notes" aria-label="Notas de la reunión con Marta" data-rag-notas></ul>
+                  </div>
+                  <div class="task">
+                    <p class="task__text"><b>Vuestra tarea</b>Antes de abrir Gemini Notebook, haced una lista de riesgos: qué fuentes pueden confundir a la herramienta, qué no debería subirse nunca y qué preguntas serán difíciles.</p>
+                  </div>
+                </div>
+                <div class="rag-pane" id="hoy-vinetas" hidden>
+                  <div class="px" data-px="caso"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 15 · Caso · Documentos -->
+        <section class="slide slide--module" id="c-docs" data-step="c-docs" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: los seis documentos">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">Seis documentos, una carpeta</h2>
+              <p class="module__claim">Es lo que os pasa Marta. Leedlos antes de subir nada: no todos dicen lo mismo y no todos deberían salir de la empresa.</p>
+              <h3 class="module__label">Elige un documento</h3>
+              <div class="cases" role="radiogroup" aria-label="Documentos del caso" data-rag-docs></div>
+              <p class="rag-foot">Descargad cada archivo o copiad su texto para pegarlo en Gemini Notebook como «texto copiado».</p>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <span class="viewer__title" id="doc-title"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg><span></span></span>
+                <span class="rag-actions">
+                  <button type="button" class="btn rag-btn" data-doc-act="copy"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg>Copiar texto</button>
+                  <button type="button" class="btn btn--primary rag-btn" data-doc-act="dl"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>Descargar .md</button>
+                </span>
+              </div>
+              <div class="viewer__body viewer__body--flow">
+                <article class="doc" id="doc-view"></article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 16 · Caso · Preguntas -->
+        <section class="slide slide--module" id="c-preguntas" data-step="c-preguntas" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: las ocho preguntas">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">Ocho preguntas reales</h2>
+              <p class="module__claim">Las han hecho clientes este mes. Preguntadlas tal cual en el cuaderno, abrid todas las citas y anotad aquí lo que veis.</p>
+              <h3 class="module__label">Elige una pregunta</h3>
+              <div class="cases cases--compact" role="radiogroup" aria-label="Preguntas del caso" data-rag-preguntas></div>
+              <p class="rag-foot">Lo que escribís se guarda solo en este navegador. Descargadlo antes de cambiar de ordenador.</p>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <span class="viewer__title" id="q-title"><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg><span></span></span>
+                <span class="rag-actions"><button type="button" class="btn btn--primary rag-btn" data-rag-dl="respuestas"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>Descargar mis respuestas .md</button></span>
+              </div>
+              <div class="viewer__body viewer__body--flow">
+                <div class="qform" id="q-view"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 17 · Caso · Encargo -->
+        <section class="slide slide--soft" id="c-reto" data-step="c-reto" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: el encargo">
+          <div class="brief">
+            <div class="brief__head">
+              <h2>El encargo de Marta</h2>
+              <p class="brief__ask">«Quiero que cualquier agente pueda preguntar y que cada respuesta venga con la línea exacta de la política que la respalda. Y si no está, que lo diga.»</p>
+            </div>
+            <div class="brief__cols">
+              <div class="brief__col">
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Lo que hay que respetar</h3>
+                <ul class="dots">
+                  <li>Solo la cuenta de Google de la empresa.</li>
+                  <li>Ningún dato de clientes en herramientas de IA: lo prohíbe el manual interno.</li>
+                  <li>La decisión final la toma el agente, no la herramienta.</li>
+                  <li>Las fuentes oficiales las aprueba Operaciones.</li>
+                </ul>
+              </div>
+              <div class="brief__col">
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>Preguntas para analizarlo</h3>
+                <ul class="dots">
+                  <li>Si dos documentos se contradicen, ¿cuál manda y por qué?</li>
+                  <li>¿Qué hacéis con una decisión que todavía no está en la política?</li>
+                  <li>¿Cómo sabréis si una cita prueba la respuesta o solo habla del tema?</li>
+                  <li>¿Qué pregunta no debería poder responder el cuaderno?</li>
+                  <li>¿Cómo comprobaríais que sigue funcionando el 1 de diciembre?</li>
+                </ul>
+              </div>
+            </div>
+            <div class="hint" data-hint>
+              <button type="button" class="hint__btn" aria-expanded="false" aria-controls="hint-c"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg>Mostrar pista</button>
+              <p class="hint__text" id="hint-c" hidden>Antes de subir nada, ordenad los seis documentos por autoridad, fecha y versión. Y abrid siempre todas las citas: la trampa suele estar en la condición que la respuesta se ha saltado.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 18 · Método · Fases -->
+        <section class="slide slide--light" id="m-fases" data-step="m-fases" data-who="m" data-section="Método · Fases" aria-label="Las seis fases del caso">
+          <div class="method method--fases">
+            <div class="method__head">
+              <h2>Seis fases, dos horas</h2>
+              <p class="lede">En parejas: una persona pregunta y la otra verifica las citas. A mitad de la fase 3 os intercambiáis.</p>
+            </div>
+            <div class="method__steps" role="tablist" aria-label="Fases del caso" data-rag-fases></div>
+            <div class="method__detail" id="fase-detail" role="tabpanel" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <!-- 19 · Método · Verificar -->
+        <section class="slide slide--module" id="m-verificar" data-step="m-verificar" data-who="m" data-section="Método · Verificar una cita" aria-label="Cómo verificar una cita">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">Cómo se verifica una cita</h2>
+              <p class="module__claim">Dos comprobaciones: la cita frente a la afirmación (S·R·C) y la fuente frente al calendario (A·F·V). Elegid un veredicto para ver un ejemplo.</p>
+              <h3 class="module__label">Cinco veredictos</h3>
+              <div class="cases" role="radiogroup" aria-label="Veredictos" data-rag-verificar></div>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <span class="viewer__title" id="v-title"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg><span></span></span>
+                <span class="sample">Ejemplo de otra empresa</span>
+              </div>
+              <div class="viewer__body viewer__body--flow">
+                <div class="verify" id="v-view"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 20 · Entrega -->
+        <section class="slide slide--soft" id="entrega" data-step="entrega" data-who="m" data-section="Método · Entrega" aria-label="Qué entregáis y cómo se valora">
+          <div class="deliver">
+            <div class="deliver__head">
+              <h2>Qué entregáis y cómo se valora</h2>
+              <p class="lede">Cuenta más demostrar cada respuesta con su cita que acertarlas todas. Una respuesta correcta que no podéis demostrar vale poco.</p>
+            </div>
+            <div class="weights" aria-label="Peso orientativo de cada parte">
+              <div class="weights__bar" aria-hidden="true" data-rag-pesos-bar></div>
+              <ol class="weights__list" data-rag-pesos></ol>
+            </div>
+            <div class="deliver__check">
+              <h3>Antes de entregar</h3>
+              <ul class="todo" data-todo="rag" data-rag-check></ul>
+              <button type="button" class="btn btn--primary rag-dl" data-rag-dl="plantilla"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>Descargar plantilla de entrega .md</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 21 · Cierre -->
+        <section class="slide slide--black" id="cierre" data-tone="dark" data-section="Cierre" aria-label="Cierre">
+          <div class="cover cover--close">
+            <h1 class="cover__title">Una respuesta citada no es una respuesta comprobada</h1>
+            <dl class="questions">
+              <div><dt>Explicación</dt><dd>¿En qué pieza falla un RAG cuando responde mal: en la búsqueda o en la respuesta?</dd></div>
+              <div><dt>Caso</dt><dd>¿Qué cita os costó más verificar y qué le faltaba?</dd></div>
+            </dl>
+          </div>
+          <div class="lanes lanes--close" data-lanes aria-hidden="true"></div>
+        </section>
+
+      </main>
+
+      <footer class="chrome-bottom">
+        <span class="chrome-bottom__title">Bloque 4 · RAG y Gemini Notebook</span>
+        <div class="progress" aria-hidden="true"><span class="progress__fill" id="progress-fill"></span></div>
+        <div class="deck-nav">
+          <button class="icon-btn" id="btn-fullscreen" type="button" aria-label="Pantalla completa" title="Pantalla completa (F)"><svg class="ic" aria-hidden="true"><use href="#i-screen"/></svg></button>
+          <button class="icon-btn" id="slide-prev" type="button" aria-label="Diapositiva anterior" title="Anterior (←)"><svg class="ic" aria-hidden="true"><use href="#i-prev"/></svg></button>
+          <span class="deck-nav__counter" id="slide-counter" aria-live="polite">01 / 21</span>
+          <button class="icon-btn" id="slide-next" type="button" aria-label="Diapositiva siguiente" title="Siguiente (→)"><svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></button>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Vista ampliada (la usa casos.js para los diagramas) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <div class="lightbox__bar">
+      <h2 class="lightbox__title" id="lightbox-title"></h2>
+      <button class="icon-btn icon-btn--dark" id="lightbox-close" type="button" aria-label="Cerrar vista ampliada" title="Cerrar (Esc)"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="lightbox__body" id="lightbox-body"></div>
+  </div>
+
+  <!-- Explicación completa de un concepto (la abre rag.js) -->
+  <div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
+    <div class="reader__panel">
+      <div class="reader__bar">
+        <h2 class="reader__title" id="reader-title"></h2>
+        <button class="icon-btn" id="reader-close" type="button" aria-label="Cerrar" title="Cerrar (Esc)"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="reader__body" id="reader-body"></div>
+    </div>
+  </div>
+
+  <script src="sibou/engine.js"></script>
+  <script src="sibou/kit.js"></script>
+  <script src="sibou/b4.js"></script>
+  <script src="sibou/caso-b4.js"></script>
+  <script src="sibou/md.js"></script>
+  <script src="rag_datos.js"></script>
+  <script src="rag.js"></script>
+  <script src="casos.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+/* ══════════════════════════════════════════
+   Solución del caso · estilos propios
+   Se suma a casos.css y rag.css de «Para clase/_fuente».
+   ══════════════════════════════════════════ */
+
+/* Fuentes */
+.sol-sources { grid-template-columns: repeat(3, 1fr); }
+.sol-src { border-top: 3px solid var(--line-2); }
+.sol-src--ok { border-top-color: var(--green); }
+.sol-src--warn { border-top-color: var(--orange); }
+.sol-src--ko { border-top-color: var(--red-ink); }
+.sol-src__dec { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; font: 600 13.5px var(--brand); color: var(--black); }
+.sol-src .rule__text { font-size: 14.5px; }
+.pill { display: inline-block; padding: 1px 9px; font: 600 12px/1.6 var(--brand); border: 1px solid currentColor; }
+.pill--ok { color: var(--green-ink); background: var(--green-tint); }
+.pill--warn { color: var(--orange-ink); background: var(--tint-orange); }
+.pill--ko { color: var(--red-ink); background: var(--red-tint); }
+
+/* Respuestas */
+.sol-answer { padding: 20px 26px 26px; display: grid; gap: 14px; }
+.sol-answer__q { font-size: 18px; line-height: 1.4; color: var(--ink-2); }
+.sol-answer__a { padding: 12px 16px; background: var(--green-tint); border-left: 4px solid var(--green); font-size: 19px; line-height: 1.45; }
+.sol-answer__a span { display: block; margin-bottom: 4px; font: 600 12px var(--brand); color: var(--green-ink); text-transform: uppercase; letter-spacing: .05em; }
+.sol-answer__a p { margin: 0; }
+.sol-answer__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 22px; }
+.sol-answer__grid dt { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font: 600 13px var(--brand); color: var(--black); }
+.sol-answer__grid dt .ic { width: 16px; height: 16px; color: var(--ink-3); }
+.sol-answer__grid dd { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.sol-answer__grid dd p { margin: 0 0 6px; }
+.verd { padding: 0 5px; }
+.verd--ok { background: var(--green-tint); color: var(--green-ink); }
+.verd--warn { background: var(--tint-orange); color: var(--orange-ink); }
+.verd--ko { background: var(--red-tint); color: var(--red-ink); }
+
+/* Listas, tablas y código */
+.sol-list { margin-top: 10px; display: grid; gap: 10px; }
+.sol-list li { position: relative; padding-left: 18px; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
+.sol-list li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--who, var(--blue)); }
+.sol-table { padding: 18px 22px; overflow-x: auto; }
+.sol-table table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.sol-table th, .sol-table td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; vertical-align: top; line-height: 1.45; }
+.sol-table th { background: var(--soft); font: 600 12.5px var(--brand); }
+.sol-table .num { text-align: center; font-weight: 700; white-space: nowrap; }
+.sol-note { padding: 0 22px 20px; font-size: 14px; color: var(--ink-3); }
+.sol-code { margin: 18px 22px; padding: 16px 18px; background: #0f1528; color: #eef1f8; font: 13.5px/1.6 ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap; }
+.sol-design .sol-list { padding: 18px 22px; }
+.sol-plan { padding: 20px 24px; font-size: 16px; line-height: 1.6; }
+
+/* Rúbrica */
+.sol-rubric { display: grid; gap: 22px; }
+.sol-rubric__head { display: grid; grid-template-columns: 520px 1fr; gap: 48px; align-items: end; }
+.sol-rubric__head .lede { margin-top: 0; }
+.sol-table--rubric { padding: 0; }
+.sol-table--rubric td, .sol-table--rubric th { font-size: 15px; }
+
+html.is-reflow .sol-sources,
+html.is-reflow .sol-answer__grid,
+html.is-reflow .sol-rubric__head { grid-template-columns: 1fr; }

@@ -1,0 +1,39 @@
+BLOQUE 4 · RAG Y GEMINI NOTEBOOK
+================================
+
+Cómo abrirlo
+------------
+Haz doble clic en «Bloque 4 - RAG y Gemini Notebook.html».
+Funciona en Safari, Chrome y Edge, sin conexión a internet. Es un único
+archivo: se puede enviar tal cual a los alumnos.
+
+Qué hay
+-------
+- Explicación: nueve conceptos, uno por diapositiva, cada uno con sus
+  viñetas animadas en pixel art y «Leer la explicación completa».
+- Caso · Viajes Lunaria: contexto, notas de la reunión, los seis
+  documentos (para descargar o copiar), las ocho preguntas y el encargo.
+- Método: las seis fases, cómo verificar una cita y la entrega.
+La solución está en «Solo docente/Solucion del caso».
+
+Empresa, personas y documentos son ficticios.
+
+Cómo se maneja
+--------------
+- Flechas ← →, Av Pág / Re Pág o el mando de presentación: cambiar de diapositiva.
+- Tecla F: pantalla completa.
+- Raíl superior: salta entre los pasos de la explicación, del caso y del método.
+- Viñetas: «Reproducir», las flechas pequeñas del visor o clic a izquierda y
+  derecha del dibujo. Los números de arriba saltan entre viñetas.
+- «Leer la explicación completa»: abre el texto completo del concepto (Esc cierra).
+- Documentos: «Descargar .md» o «Copiar texto» para pegarlo en Gemini Notebook.
+- Preguntas: lo que se escribe se guarda solo en ese navegador.
+  «Descargar mis respuestas .md» genera la entrega con lo escrito.
+- «Mostrar pista»: en el encargo. Está oculta por defecto.
+
+Carpeta _fuente
+---------------
+Archivos editables. Para regenerar el HTML tras un cambio (Node.js 18 o
+superior), desde la carpeta _fuente:
+
+    node generar.mjs

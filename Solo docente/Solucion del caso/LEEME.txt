@@ -1,0 +1,29 @@
+SOLUCIÓN DEL CASO · SOLO DOCENTE
+================================
+
+Para enseñar después de que las parejas presenten. No la compartas con
+los alumnos antes. No es la única respuesta válida: sirve para comparar,
+comentar y corregir con la rúbrica.
+
+Qué hay
+-------
+- Solucion - Viajes Lunaria.html
+    Presentación con el mismo estilo y la misma navegación que la de clase.
+    Doble clic para abrirla; funciona sin internet.
+    Idea de fondo y mapa de trampas, qué fuentes entran, las ocho respuestas
+    (cálculo, cita, trampa y veredicto), contaminación y diagnóstico, diseño
+    para producción, rúbrica, errores frecuentes y notas para la sesión.
+
+- Solucion - Viajes Lunaria.md
+    La misma solución en texto, para imprimir o adaptar.
+
+Carpeta _fuente
+---------------
+- solucion.html, solucion.css, solucion.js   Diapositivas, estilos y comportamiento.
+- b4-solucion.js                              Datos de la solución (copia de Sibou Lab).
+- generar.mjs                                 Regenera el HTML y el .md.
+
+Reutiliza casos.css, casos.js, rag.css, rag.js, fuentes y logos de
+«Para clase/_fuente». Para regenerar (Node.js 18 o superior), desde _fuente:
+
+    node generar.mjs
