@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RAG y Gemini Notebook · Bloque 4</title>
+  <title>Casos prácticos de IA · Inglés con IA y RAG</title>
   <meta name="description" content="Bloque 4 del máster: por qué una IA inventa, cómo funciona RAG pieza a pieza y un caso práctico en Gemini Notebook con documentos que esconden trampas.">
   <link rel="stylesheet" href="casos.css">
   <link rel="stylesheet" href="rag.css">
@@ -54,7 +54,7 @@
           <li class="lg-ntt"><img src="assets/img/logo-nttdata.png" alt="NTT DATA" width="314" height="64"></li>
         </ul>
         <span class="brand">
-          <span class="brand__name">Bloque 4 · RAG</span>
+          <span class="brand__name">Casos prácticos · IA</span>
           <span class="chrome-top__section" id="section-label">RAG y Gemini Notebook</span>
         </span>
       </header>
@@ -65,6 +65,207 @@
       </nav>
 
       <main class="slides" id="slides" aria-live="off">
+
+        <!-- ═════ CASO DE HOY · Profesor de inglés con IA ═════ -->
+
+        <!-- H1 · Portada del caso -->
+        <section class="slide slide--cover" id="h-portada" data-section="Caso de hoy · Profesor de inglés con IA" aria-label="Caso de hoy">
+          <div class="cover">
+            <h1 class="cover__title">Un profesor de inglés con IA para 20.000 empleados</h1>
+            <p class="cover__kind">Caso de hoy · Propuesta de consultoría en grupos de cuatro</p>
+            <p class="cover__sub">Un cliente real os pide una solución. Tendréis que entenderla, dibujarla, ponerle precio y fechas, y defenderla delante de él.</p>
+            <p class="cover__meta">Máster en Inteligencia Artificial · Empresa y personas ficticias · Precios orientativos para el ejercicio</p>
+          </div>
+        </section>
+
+        <!-- H2 · El cliente -->
+        <section class="slide slide--module" id="h-cliente" data-step="h-cliente" data-who="hoy" data-section="Caso de hoy · El cliente" aria-label="El cliente: quién es Elena y qué le pasa">
+          <div class="intro">
+            <div class="intro__story">
+              <p class="person"><span class="person__avatar" aria-hidden="true">E</span><span><b>Elena Prados</b>Directora de Talento y Formación · Grupo Velantis, energía e infraestructuras</span></p>
+              <blockquote class="quote">«Pagamos casi dos millones al año en clases de inglés y solo llegan al 13 % de la plantilla. Quiero que llegue a todos, que se pueda medir y que no nos cueste el triple.»</blockquote>
+              <p class="intro__text">Velantis trabaja con proveedores y clientes de 14 países. Hoy contrata clases con una academia: grupos de seis con profesor nativo y clases individuales para directivos. Ha oído que «la IA ya enseña idiomas» y ha pedido a <b>vuestra consultora</b> una propuesta para un <b>profesor de inglés con IA</b> para toda la empresa.</p>
+              <p class="intro__text">El profesorado hará de Elena: podéis preguntarle lo que necesitéis.</p>
+              <p class="fiction">Caso ficticio: la empresa y las personas son inventadas. Las cifras son orientativas para el ejercicio.</p>
+            </div>
+            <div class="intro__facts">
+              <dl class="figures">
+                <div><dt>Empleados</dt><dd>20.000</dd><dd class="figures__sub">en 14 países; 9.000 en planta y turnos</dd></div>
+                <div><dt>Necesitan inglés</dt><dd>~8.000</dd><dd class="figures__sub">para su puesto (compras, ingeniería, ventas, dirección)</dd></div>
+                <div><dt>Reciben clase hoy</dt><dd>2.700</dd><dd class="figures__sub">13,5 % de la plantilla</dd></div>
+                <div><dt>Gasto anual</dt><dd>1,9 M€</dd><dd class="figures__sub">academia: grupos a 38 €/h e individuales a 55 €/h</dd></div>
+              </dl>
+              <div class="tools">
+                <h3>Con qué trabajan hoy</h3>
+                <ul><li>Microsoft 365 y Teams</li><li>Entra ID (inicio de sesión)</li><li>SAP SuccessFactors (formación)</li><li>Academia externa</li><li>Móviles corporativos en planta</li></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- H3 · La reunión -->
+        <section class="slide slide--module" id="h-hoy" data-step="h-hoy" data-who="hoy" data-section="Caso de hoy · La reunión" aria-label="Lo que contó el cliente">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">Así aprenden inglés hoy</h2>
+              <ul class="chips"><li>Caro</li><li>Para pocos</li><li>Sin medir</li></ul>
+              <p class="module__claim">El problema no es que las clases sean malas: es que no llegan a quien más lo necesita y nadie sabe si sirven.</p>
+              <h3 class="module__label">Qué pasa hoy</h3>
+              <ol class="how">
+                <li>Grupos de seis, <b>dos horas a la semana</b>, con horario fijo de oficina.</li>
+                <li>La mitad de las clases <b>se cancelan</b> por reuniones o turnos.</li>
+                <li>Cada academia usa su test: <b>no hay forma de comparar</b> el progreso.</li>
+              </ol>
+              <dl class="deps">
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>Coste</dt><dd>1,9 M€ al año para 2.700 personas.</dd></div>
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>Huecos</dt><dd>Planta y turnos: sin acceso.</dd></div>
+                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Dirección</dt><dd>Quiere decidir en septiembre.</dd></div>
+              </dl>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <span class="viewer__title"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Lo que contó Elena en la reunión</span>
+                <span class="sample">Notas sin ordenar</span>
+              </div>
+              <div class="viewer__body viewer__body--flow">
+                <ul class="notes" aria-label="Notas de la reunión con Elena">
+                  <li>«Los directivos tienen clase individual con nativo, a 55 € la hora. Les encanta, pero no escala.»</li>
+                  <li>«En planta y en campo no pueden ir a clase a las cinco. Y es justo donde más falta hace: hablan por teléfono con proveedores extranjeros.»</li>
+                  <li>«Hay gente con miedo a hablar en público. Me piden practicar sin que les vea nadie.»</li>
+                  <li>«Compras necesita negociar por teléfono; ingeniería, leer especificaciones técnicas; ventas, hacer presentaciones.»</li>
+                  <li>«El comité de empresa pidió que no se grabe ninguna conversación sin consentimiento.»</li>
+                  <li>«IT exige inicio de sesión corporativo, datos en la Unión Europea y que todo pase por su revisión de seguridad.»</li>
+                  <li>«Si se pudiera, me gustaría que certificara el nivel para la evaluación anual.»</li>
+                  <li>«Queremos un piloto antes del verano de 2027 y decidir el despliegue en septiembre.»</li>
+                  <li>«No quiero quitar los profesores del todo: algo humano tiene que quedar.»</li>
+                  <li>«Ya me han ofrecido licencias de apps de idiomas. No sé si es mejor eso o algo hecho a medida.»</li>
+                </ul>
+              </div>
+              <div class="task">
+                <p class="task__text"><b>Vuestra tarea</b>Con estas notas, dibujad el proceso de hoy y vuestra propuesta en Excalidraw: quién hace qué, qué datos entran y salen, y dónde duele.</p>
+                <a class="btn btn--primary" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- H4 · Requisitos -->
+        <section class="slide slide--light" id="h-requisitos" data-step="h-requisitos" data-who="hoy" data-section="Caso de hoy · Requisitos" aria-label="Lo que pide el cliente">
+          <div class="rules">
+            <div class="rules__head">
+              <div>
+                <h2>Lo que pide Velantis</h2>
+                <p class="lede">Nueve requisitos sacados de la reunión. Algunos chocan entre sí: parte del trabajo es decir cuáles se pueden cumplir, cómo y a qué precio.</p>
+              </div>
+            </div>
+            <ol class="rules__grid hoy-reqs">
+              <li class="rule"><p class="rule__top"><span class="rule__n">R1</span><b>Conversación por voz</b></p><p class="rule__text">Hablar en tiempo real con el tutor, que corrige con tacto y adapta el ritmo. Respuesta en menos de 1,5 s.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R2</span><b>Nivel y plan personal</b></p><p class="rule__text">Prueba inicial (A1-C1) y un plan distinto para cada persona según su puesto y su tiempo.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R3</span><b>Situaciones del puesto</b></p><p class="rule__text">Simulaciones: llamada con un proveedor, reunión, presentación, email técnico. Con el vocabulario de Velantis.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R4</span><b>Pronunciación y escritura</b></p><p class="rule__text">Feedback de pronunciación, gramática y estilo, con ejemplos y ejercicios de refuerzo.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R5</span><b>Progreso medible</b></p><p class="rule__text">Evaluación comparable para todos (escala MCER) e informes agregados para RR. HH., sin acceso a las conversaciones.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R6</span><b>Integración</b></p><p class="rule__text">Inicio de sesión con Entra ID, acceso desde Teams y registro de horas en SuccessFactors.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R7</span><b>Privacidad y normativa</b></p><p class="rule__text">RGPD, datos en la UE, consentimiento para grabar, transparencia del Reglamento de IA y nada de entrenar modelos con sus datos.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R8</span><b>Para todos, a cualquier hora</b></p><p class="rule__text">Móvil y web, 24/7, accesible, útil en turnos y con mala cobertura en planta.</p></li>
+              <li class="rule"><p class="rule__top"><span class="rule__n">R9</span><b>Algo humano</b></p><p class="rule__text">Tutores humanos para escalados y sesiones de grupo mensuales. Coste total claramente inferior al actual por persona formada.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- H5 · Calculadora -->
+        <section class="slide slide--module" id="h-costes" data-step="h-costes" data-who="hoy" data-section="Caso de hoy · Costes" aria-label="Calculadora de costes">
+          <div class="module">
+            <div class="module__text">
+              <h2 class="module__title">¿Cuánto costaría?</h2>
+              <p class="module__claim">Un punto de partida para vuestro plan de costes. Mueved los supuestos y comparad con lo que costarían las mismas horas con profesores nativos.</p>
+              <div class="calc" data-calc>
+                <label>Empleados que lo usan <b data-out="emp"></b><input type="range" min="500" max="20000" step="500" value="8000" data-in="emp"></label>
+                <label>Minutos de práctica por semana <b data-out="min"></b><input type="range" min="20" max="180" step="10" value="60" data-in="min"></label>
+                <label>Parte del tiempo hablando por voz <b data-out="voz"></b><input type="range" min="0" max="100" step="10" value="60" data-in="voz"></label>
+                <label>Modelo de lenguaje <select data-in="modelo"><option value="pequeño">Pequeño (rápido y barato)</option><option value="mediano" selected>Mediano</option><option value="grande">Grande (más calidad, más caro)</option></select></label>
+                <label>Plataforma, equipo y soporte al año <b data-out="fijo"></b><input type="range" min="100000" max="1500000" step="50000" value="550000" data-in="fijo"></label>
+              </div>
+            </div>
+            <div class="viewer">
+              <div class="viewer__bar">
+                <span class="viewer__title"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><span>Coste anual estimado</span></span>
+                <span class="sample">Precios orientativos</span>
+              </div>
+              <div class="viewer__body viewer__body--flow">
+                <div class="calc-out" data-calc-out></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- H6 · Entregables -->
+        <section class="slide slide--soft" id="h-entregables" data-step="h-entregables" data-who="hoy" data-section="Caso de hoy · Qué entregáis" aria-label="Qué entregáis y cómo se valora">
+          <div class="deliver">
+            <div class="deliver__head">
+              <h2>Qué le presentáis a Elena</h2>
+              <p class="lede">Grupos de cuatro. Tres horas de trabajo y diez minutos de presentación por grupo. Cuanto más real, mejor: cifras, fechas, nombres de modelos y riesgos.</p>
+            </div>
+            <div class="weights" aria-label="Peso orientativo de cada entrega">
+              <div class="weights__bar" aria-hidden="true"><span class="w1" style="--w: 20"></span><span class="w2" style="--w: 20"></span><span class="w3" style="--w: 15"></span><span class="w4" style="--w: 15"></span><span class="w5" style="--w: 15"></span><span class="w6" style="--w: 10"></span><span class="w7" style="--w: 5"></span></div>
+              <ol class="weights__list">
+                <li class="w1"><b>Diagramas de flujo y de secuencia</b><em>20 %</em><span>Proceso de hoy y propuesta, y la secuencia de una sesión de voz (app, voz a texto, modelo, evaluación, texto a voz).</span></li>
+                <li class="w2"><b>Mock de la app en Excalidraw</b><em>20 %</em><span>Todas las pantallas: prueba de nivel, plan, conversación, simulación del puesto, feedback, progreso, panel de RR. HH. y privacidad.</span></li>
+                <li class="w3"><b>Arquitectura y modelos</b><em>15 %</em><span>Qué modelos usaríais (lenguaje, voz, pronunciación, RAG), dónde se alojan y por qué. Comprar o construir.</span></li>
+                <li class="w4"><b>Plan de costes</b><em>15 %</em><span>Desarrollo, operación y coste por persona; comparación con profesores nativos.</span></li>
+                <li class="w5"><b>Plan de implantación e hitos</b><em>15 %</em><span>Fases, fechas, equipo y criterios para pasar de piloto a despliegue.</span></li>
+                <li class="w6"><b>Fiabilidad y riesgos</b><em>10 %</em><span>Cómo medís la calidad del tutor, errores, sesgo de acento, privacidad, Reglamento de IA y plan B.</span></li>
+                <li class="w7"><b>Presentación</b><em>5 %</em><span>Diez minutos y preguntas del cliente.</span></li>
+              </ol>
+            </div>
+            <div class="deliver__check">
+              <h3>Restricciones de Velantis</h3>
+              <ul class="dots hoy-dots">
+                <li>Piloto con 200 personas funcionando antes de junio de 2027.</li>
+                <li>Decisión de despliegue en el comité de septiembre de 2027.</li>
+                <li>Presupuesto del primer año: no más de lo que se gasta hoy.</li>
+                <li>Todo dato personal, en la Unión Europea.</li>
+              </ul>
+              <a class="btn btn--primary rag-dl" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+            </div>
+          </div>
+        </section>
+
+        <!-- H7 · Preguntas del cliente -->
+        <section class="slide slide--soft" id="h-preguntas" data-step="h-preguntas" data-who="hoy" data-section="Caso de hoy · Preparad la defensa" aria-label="Lo que os va a preguntar el cliente">
+          <div class="brief">
+            <div class="brief__head">
+              <h2>Lo que os va a preguntar Elena</h2>
+              <p class="brief__ask">«No quiero la propuesta más bonita. Quiero la que me atrevería a presentar a mi comité de dirección.»</p>
+            </div>
+            <div class="brief__cols">
+              <div class="brief__col">
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>Negocio y dinero</h3>
+                <ul class="dots">
+                  <li>¿Por qué no compro licencias de una app de idiomas que ya existe?</li>
+                  <li>¿Cuánto me cuesta si todo el mundo la usa a la vez el lunes a las nueve?</li>
+                  <li>¿Qué pasa si el proveedor del modelo sube precios o desaparece?</li>
+                  <li>¿Cuándo dejo de pagar a la academia, y a cuánta?</li>
+                  <li>¿Qué hacen los de planta, que no tienen ordenador?</li>
+                </ul>
+              </div>
+              <div class="brief__col">
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Calidad, personas y riesgos</h3>
+                <ul class="dots">
+                  <li>¿Qué pasa si el tutor enseña algo mal? ¿Cómo lo detectáis?</li>
+                  <li>¿Cómo sé que la gente mejora de verdad y no solo que lo usa?</li>
+                  <li>¿Puedo usar su nivel para decidir ascensos o la evaluación anual?</li>
+                  <li>¿Dónde están las grabaciones y quién las escucha?</li>
+                  <li>¿Entiende igual un acento andaluz, indio o nigeriano?</li>
+                </ul>
+              </div>
+            </div>
+            <div class="hint" data-hint>
+              <button type="button" class="hint__btn" aria-expanded="false" aria-controls="hint-hoy"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg>Mostrar pista</button>
+              <p class="hint__text" id="hint-hoy" hidden>Comparad comprar frente a construir con números. Separad la práctica (conversación, voz, feedback) de la evaluación del nivel. Y ojo: usar la IA para decidir sobre la carrera de una persona puede convertirla en un sistema de alto riesgo según el Reglamento europeo de IA.</p>
+            </div>
+          </div>
+        </section>
+
 
         <!-- 01 · Portada -->
         <section class="slide slide--cover" id="portada" data-section="RAG y Gemini Notebook" aria-label="Portada">
@@ -134,6 +335,41 @@
 
         <!-- 04-12 · Un concepto por diapositiva (las genera rag.js) -->
         <template id="tpl-conceptos"></template>
+
+        <!-- ═════ LABORATORIOS ═════ -->
+
+        <section class="slide slide--light" id="l-espacio" data-step="l-espacio" data-who="lab" data-section="Laboratorio · Espacio de embeddings" aria-label="Laboratorio: espacio de embeddings">
+          <div class="labslide">
+            <header class="labslide__head">
+              <div><p class="concept-n">Laboratorio 1 de 3</p><h2>Explorador del espacio de embeddings</h2></div>
+              <p class="lede">Cada punto es una palabra o frase. Gira el espacio, pulsa un punto para ver sus vecinos o escribe una frase y mira dónde cae. Prueba «se permite» y «contract».</p>
+            </header>
+            <div class="labslide__body" data-lab="espacio"></div>
+            <p class="labslide__note">Mapa didáctico: coordenadas preparadas a mano y cercanía medida por distancia en 3 dimensiones. Un modelo real usa cientos o miles de dimensiones y suele comparar con la similitud coseno.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--light" id="l-troceado" data-step="l-troceado" data-who="lab" data-section="Laboratorio · Troceado en vivo" aria-label="Laboratorio: troceado en vivo">
+          <div class="labslide">
+            <header class="labslide__head">
+              <div><p class="concept-n">Laboratorio 2 de 3</p><h2>Troceado en vivo</h2></div>
+              <p class="lede">Elige un documento del caso, una estrategia y un tamaño. Mira dónde caen los cortes y qué avisos salen, y lanza una pregunta para ver qué fragmentos se recuperarían.</p>
+            </header>
+            <div class="labslide__body" data-lab="troceado"></div>
+            <p class="labslide__note">La recuperación de este laboratorio es por palabras clave y simplificada, para que se vea el efecto del troceado. Un sistema real usa embeddings, búsqueda híbrida y reordenación.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--light" id="l-modelo" data-step="l-modelo" data-who="lab" data-section="Laboratorio · Por dentro del modelo" aria-label="Laboratorio: por dentro del modelo">
+          <div class="labslide">
+            <header class="labslide__head">
+              <div><p class="concept-n">Laboratorio 3 de 3</p><h2>Por dentro del modelo</h2></div>
+              <p class="lede">Escribe una frase y sigue su recorrido: tokens, vectores, atención entre tokens y probabilidades de la siguiente palabra. Sube y baja la temperatura y genera paso a paso.</p>
+            </header>
+            <div class="labslide__body" data-lab="modelo"></div>
+            <p class="labslide__note">Modelo de juguete: tokens, atención y probabilidades son ilustrativos y están preparados para enseñar el mecanismo; no salen de un modelo real.</p>
+          </div>
+        </section>
 
         <!-- 13 · Caso · Contexto -->
         <section class="slide slide--module" id="c-contexto" data-step="c-contexto" data-who="c2" data-section="Caso · Viajes Lunaria" aria-label="Caso: quién es Marta y qué le pasa">
@@ -353,12 +589,12 @@
       </main>
 
       <footer class="chrome-bottom">
-        <span class="chrome-bottom__title">Bloque 4 · RAG y Gemini Notebook</span>
+        <span class="chrome-bottom__title">Casos prácticos · Máster en IA</span>
         <div class="progress" aria-hidden="true"><span class="progress__fill" id="progress-fill"></span></div>
         <div class="deck-nav">
           <button class="icon-btn" id="btn-fullscreen" type="button" aria-label="Pantalla completa" title="Pantalla completa (F)"><svg class="ic" aria-hidden="true"><use href="#i-screen"/></svg></button>
           <button class="icon-btn" id="slide-prev" type="button" aria-label="Diapositiva anterior" title="Anterior (←)"><svg class="ic" aria-hidden="true"><use href="#i-prev"/></svg></button>
-          <span class="deck-nav__counter" id="slide-counter" aria-live="polite">01 / 21</span>
+          <span class="deck-nav__counter" id="slide-counter" aria-live="polite">01 / 31</span>
           <button class="icon-btn" id="slide-next" type="button" aria-label="Diapositiva siguiente" title="Siguiente (→)"><svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></button>
         </div>
       </footer>
@@ -394,6 +630,8 @@
   <script src="sibou/md.js"></script>
   <script src="rag_datos.js"></script>
   <script src="rag.js"></script>
+  <script src="labs.js"></script>
+  <script src="ingles.js"></script>
   <script src="casos.js"></script>
 </body>
 </html>

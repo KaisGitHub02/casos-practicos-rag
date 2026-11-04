@@ -9,6 +9,12 @@
    ══════════════════════════════════════════ */
 
 window.CP_STEPS = [
+  { id: 'h-cliente',     who: 'hoy', label: 'Cliente',     slide: 'h-cliente' },
+  { id: 'h-hoy',         who: 'hoy', label: 'Reunión',     slide: 'h-hoy' },
+  { id: 'h-requisitos',  who: 'hoy', label: 'Requisitos',  slide: 'h-requisitos' },
+  { id: 'h-costes',      who: 'hoy', label: 'Costes',      slide: 'h-costes' },
+  { id: 'h-entregables', who: 'hoy', label: 'Entregables', slide: 'h-entregables' },
+  { id: 'h-preguntas',   who: 'hoy', label: 'Defensa',     slide: 'h-preguntas' },
   { id: 'e-problema',   who: 'c1', label: 'Problema',   slide: 'e-problema' },
   { id: 'e-embeddings', who: 'c1', label: 'Embeddings', slide: 'e-embeddings' },
   { id: 'e-chunking',   who: 'c1', label: 'Chunking',   slide: 'e-chunking' },
@@ -18,6 +24,9 @@ window.CP_STEPS = [
   { id: 'e-evaluar',    who: 'c1', label: 'Evaluar',    slide: 'e-evaluar' },
   { id: 'e-citas',      who: 'c1', label: 'Citas',      slide: 'e-citas' },
   { id: 'e-notebook',   who: 'c1', label: 'Notebook',   slide: 'e-notebook' },
+  { id: 'l-espacio',    who: 'lab', label: 'Embeddings', slide: 'l-espacio' },
+  { id: 'l-troceado',   who: 'lab', label: 'Troceado',   slide: 'l-troceado' },
+  { id: 'l-modelo',     who: 'lab', label: 'Modelo',     slide: 'l-modelo' },
   { id: 'c-contexto',   who: 'c2', label: 'Contexto',   slide: 'c-contexto' },
   { id: 'c-hoy',        who: 'c2', label: 'Hoy',        slide: 'c-hoy' },
   { id: 'c-docs',       who: 'c2', label: 'Documentos', slide: 'c-docs' },
@@ -29,7 +38,9 @@ window.CP_STEPS = [
 ];
 
 window.CP_WHO = {
+  hoy: { name: 'Caso de hoy · Inglés con IA' },
   c1: { name: 'Explicación' },
+  lab: { name: 'Laboratorios' },
   c2: { name: 'Caso · Viajes Lunaria' },
   m:  { name: 'Método' }
 };

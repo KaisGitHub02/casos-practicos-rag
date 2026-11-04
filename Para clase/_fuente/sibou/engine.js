@@ -20,7 +20,7 @@
   };
 
   const FONTS = {
-    pixel: '"Tiny5", "Pixelify Sans", "Courier New", monospace',
+    pixel: '"Pixelify Sans", "Tiny5", "Courier New", monospace',
     sans: '"Atkinson Hyperlegible", Arial, sans-serif',
     mono: '"JetBrains Mono", "Courier New", monospace'
   };
@@ -79,7 +79,10 @@
   /* Pixelify solo para textos en mayúsculas (títulos, etiquetas); el resto en Atkinson, más legible */
   const LOWER = /[a-zñáéíóúü0-9]/;
   function pick(s, o) { return o.font || (LOWER.test(String(s)) ? 'sans' : 'pixel'); }
-  function font(size, o = {}) { const f = o.font || 'pixel'; return f === 'pixel' ? `400 ${size * 1.12}px ${FONTS.pixel}` : `${o.weight || (f === 'sans' ? 700 : 600)} ${size}px ${FONTS[f]}`; }
+  /* Escala del texto: legible de lejos (tamaño mínimo 8 y un 8 % más grande) */
+  const TEXT_SCALE = 1.08;
+  const eff = size => Math.max(size, 8) * TEXT_SCALE;
+  function font(size, o = {}) { const f = o.font || 'pixel'; const z = eff(size); return f === 'pixel' ? `600 ${z * 1.1}px ${FONTS.pixel}` : `${o.weight || (f === 'sans' ? 700 : 600)} ${z}px ${FONTS[f]}`; }
   function measure(s, size, o = {}) { s = L(s); c.font = font(size, Object.assign({}, o, { font: pick(s, o) })); return c.measureText(String(s)).width; }
 
   function wrapLines(s, maxW, size, o) {
@@ -105,13 +108,13 @@
     let size = o.size || 10;
     if (o.fit && o.maxW) { c.font = font(size, o); while (size > 5 && c.measureText(String(s)).width > o.maxW) { size -= 0.5; c.font = font(size, o); } }
     const lines = o.fit ? [String(s)] : wrapLines(s, o.maxW, size, o);
-    const lh = o.lh || R(size * 1.28);
+    const lh = o.lh || R(eff(size) * 1.24);
     c.font = font(size, o);
     c.fillStyle = o.color || P.white;
     c.textAlign = o.align || 'left';
     c.textBaseline = 'top';
     let yy = y;
-    if (o.valign === 'middle') yy = y - (lines.length * lh) / 2 + (lh - size) / 2;
+    if (o.valign === 'middle') yy = y - (lines.length * lh) / 2 + (lh - eff(size)) / 2;
     if (o.shadow) { c.fillStyle = o.shadow; lines.forEach((ln, i) => c.fillText(ln, x + 1, yy + i * lh + 1)); c.fillStyle = o.color || P.white; }
     lines.forEach((ln, i) => c.fillText(ln, x, yy + i * lh));
     let w = 0; lines.forEach(ln => { w = Math.max(w, c.measureText(ln).width); });
@@ -278,7 +281,7 @@
     const size = o.size || 8.5;
     const user = o.who === 'user';
     const lines = wrapLines(L(s), w - 14, size, { font: o.font || 'sans' });
-    const lh = R(size * 1.3);
+    const lh = R(eff(size) * 1.26);
     const h = lines.length * lh + 10;
     const fill = o.fill || (user ? P.blue : P.white);
     box(x, y, w, h, { fill, border: P.ink, shadow: false });

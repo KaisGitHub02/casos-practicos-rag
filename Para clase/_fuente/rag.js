@@ -25,6 +25,9 @@
   const EASE = 'cubic-bezier(.16, 1, .3, 1)';
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* El lienzo no pide las fuentes por sí solo: se cargan al arrancar */
+  if (document.fonts && document.fonts.load) ['600 12px "Pixelify Sans"', '700 12px "Atkinson Hyperlegible"', '400 12px "Atkinson Hyperlegible"', '500 12px "JetBrains Mono"'].forEach((f) => document.fonts.load(f).catch(() => {}));
+
   const DATA = window.RAG_DATA || {};
   const CASO = (window.PL && PL.practicas && PL.practicas.b4) || null;
   const conceptById = (id) => ((window.PL && PL.concepts) || []).find((c) => c.id === id);
