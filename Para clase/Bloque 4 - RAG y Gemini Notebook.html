@@ -1482,7 +1482,10 @@ html.is-reflow .lightbox__body { margin: 0 8px 8px; }
 .module--concept .deps { margin-top: 18px; }
 .module--concept .deps > div { padding: 8px 0; grid-template-columns: 132px 1fr; }
 .module--concept .deps dd { font-size: 14px; }
-.concept-more { margin-top: 16px; align-self: flex-start; }
+.concept-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.concept-top .concept-n { margin-bottom: 0; }
+.concept-more { flex: none; min-height: 34px; padding: 0 12px; font-size: 13.5px; white-space: nowrap; }
+.module--concept .module__text { overflow: hidden; }
 
 /* ───────── Reproductor de viñetas ───────── */
 .viewer--px { background: #0f1528; border-color: #0f1528; }
@@ -1824,6 +1827,98 @@ html.is-reflow .hoy-reqs { grid-template-columns: 1fr; }
 #h-entregables .deliver__head .lede { font-size: 17px; }
 html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
 
+/* ───────── Caso de hoy · licitación ───────── */
+.rfp { display: flex; flex-direction: column; gap: 16px; height: 100%; min-height: 0; overflow: hidden; }
+.rfp__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.rfp__head h2 { font-size: 34px; }
+.rfp__head .lede { max-width: 980px; margin-top: 6px; font-size: 16.5px; }
+.rfp-ref { margin-bottom: 14px; font: 600 13px var(--mono); color: var(--who-ink, var(--green-ink)); letter-spacing: .04em; }
+
+.rfp-people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; min-height: 0; }
+.rfp-people > li { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--who, var(--green)); }
+.rfp-people > li.is-veto { border-top-color: var(--red-ink); }
+.rfp-people > li.is-veto .rfp-wants { color: var(--red-ink); font-weight: 600; }
+.rfp-people > li.rfp-you { background: var(--soft); border-top-color: var(--black); }
+.rfp-people q { font-size: 15.5px; line-height: 1.4; color: var(--black); quotes: "«" "»"; }
+.rfp-people p { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.rfp-who { display: flex; align-items: center; gap: 10px; }
+.rfp-who b { display: block; font: 600 15px var(--brand); color: var(--black); }
+.rfp-who span:last-child { font-size: 13px; color: var(--ink-3); line-height: 1.3; }
+.rfp-av { flex: none; width: 36px; height: 36px; display: grid; place-items: center; background: var(--who, var(--green)); color: #fff; font: 600 13px var(--brand); }
+.is-veto .rfp-av { background: var(--red-ink); }
+.rfp-you .rfp-av { background: var(--black); font-size: 11px; }
+.rfp-wants { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line-2); }
+
+.rfp-tabs .tab { padding: 0 10px; font-size: 13px; }
+.rfp-doc { padding: 18px 22px; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.rfp-doc h3 { margin-bottom: 12px; font: 600 16px var(--brand); color: var(--black); }
+.rfp-doc p { margin: 10px 0 0; }
+.rfp-doc .dots li { margin-bottom: 8px; }
+.rfp-note { padding: 10px 14px; background: var(--tint-orange); border-left: 4px solid var(--orange); }
+
+.rfp-t { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.35; background: var(--paper); }
+.rfp-t th, .rfp-t td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.rfp-t thead th { font: 600 12.5px var(--brand); color: var(--ink-3); background: var(--soft); border-bottom: 2px solid var(--line-2); }
+.rfp-t tr.is-total td { font-weight: 700; border-top: 2px solid var(--black); }
+.rfp-req td:first-child { font: 700 13px var(--mono); color: var(--who-ink, var(--green-ink)); white-space: nowrap; }
+.rfp-req td:nth-child(2) { font-weight: 600; width: 27%; }
+.rfp-req td:nth-child(3) { width: 1%; }
+.rfp-req th, .rfp-req td { padding: 5px 10px; }
+.rfp-m, .rfp-d { display: inline-block; padding: 1px 7px; font: 600 11.5px var(--brand); white-space: nowrap; }
+.rfp-m { background: var(--black); color: #fff; }
+.rfp-d { background: var(--soft); border: 1px solid var(--line-2); color: var(--ink-2); }
+
+.rfp-bars { display: grid; gap: 8px; }
+.rfp-bars li { display: grid; grid-template-columns: 1fr 150px 48px; gap: 12px; align-items: center; }
+.rfp-bars i { height: 12px; background: linear-gradient(90deg, var(--who, var(--green)) calc(var(--v) * 1%), var(--soft) 0); border: 1px solid var(--line); }
+.rfp-bars b { text-align: right; }
+
+.rfp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; min-height: 0; }
+.rfp-cols--wide { grid-template-columns: 1.55fr 1fr; }
+.rfp-h { margin-bottom: 10px; font: 600 15px var(--brand); color: var(--black); }
+.rfp-agenda { display: grid; gap: 8px; }
+.rfp-agenda li { display: grid; grid-template-columns: 52px 1fr; column-gap: 12px; padding: 9px 12px; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--who, var(--green)); }
+.rfp-agenda time { grid-row: span 2; font: 700 15px var(--mono); color: var(--who-ink, var(--green-ink)); }
+.rfp-agenda b { font-size: 15px; }
+.rfp-agenda span { font-size: 14px; color: var(--ink-2); }
+.rfp-score td:last-child { width: 48px; text-align: right; font-weight: 700; }
+.rfp-score th { padding-top: 10px; font: 600 13px var(--brand); background: var(--soft); }
+.rfp-score code { font: 600 13.5px var(--mono); }
+.rfp-rules { margin-top: 12px; }
+.rfp-rules li { font-size: 14px; }
+.rfp-env { padding: 16px 18px; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--who, var(--green)); min-height: 0; }
+.rfp-list { display: grid; gap: 6px; padding-left: 1.4em; list-style: decimal; font-size: 14.5px; line-height: 1.4; }
+.rfp-list--dots { list-style: disc; margin-bottom: 14px; }
+.rfp-qcols .dots li { font-size: 15px; }
+
+.calc-check { display: flex !important; align-items: center; gap: 8px; font-weight: 600; }
+.calc-check input { width: 16px; height: 16px; accent-color: var(--who); }
+.calc .calc-check { grid-template-columns: none; }
+.calc-t { margin-top: 16px; font-size: 13.5px; }
+.calc-t td:not(:first-child), .calc-t th:not(:first-child) { text-align: right; white-space: nowrap; }
+.calc-pico { margin-top: 14px; padding: 10px 14px; background: var(--tint-orange); border-left: 4px solid var(--orange); font-size: 14px; }
+
+html.is-reflow .rfp { height: auto; overflow: visible; }
+html.is-reflow .rfp-people, html.is-reflow .rfp-cols { grid-template-columns: 1fr; }
+html.is-reflow .rfp__head { flex-direction: column; align-items: flex-start; }
+html.is-reflow .rfp-req { display: block; overflow-x: auto; }
+html.is-reflow .rfp-bars li { grid-template-columns: 1fr 80px 40px; }
+#h-costes .module { grid-template-columns: 470px 1fr; gap: 32px; }
+#h-costes .calc { grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+#h-costes .calc label:has(select), #h-costes .calc .calc-check { grid-column: 1 / -1; }
+#h-costes .calc label { font-size: 12.5px; }
+#h-costes .calc label b { font-size: 15px; }
+#h-costes .calc-out { padding: 14px 18px; }
+#h-costes .calc-kpis b { font-size: 24px; }
+#h-costes .calc-rows li { grid-template-columns: 250px 1fr 90px; font-size: 14px; }
+#h-costes .calc-h { margin: 14px 0 8px; }
+html.is-reflow #h-costes .module, html.is-reflow #h-costes .calc { grid-template-columns: 1fr; }
+html.is-reflow #h-costes .calc-rows li { grid-template-columns: 1fr; }
+html.is-reflow .rfp-tabs { flex-wrap: wrap; height: auto; }
+html.is-reflow #h-anexos .viewer__bar { height: auto; padding: 6px; }
+html.is-reflow .rfp-doc .rfp-t { display: block; overflow-x: auto; }
+html.is-reflow .rfp-doc { padding: 14px; }
+
 </style>
 </head>
 <body>
@@ -1884,129 +1979,196 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
 
       <main class="slides" id="slides" aria-live="off">
 
-        <!-- ═════ CASO DE HOY · Profesor de inglés con IA ═════ -->
+        <!-- ═════ CASO DE HOY · Licitación: tutor de inglés con IA ═════ -->
 
-        <!-- H1 · Portada del caso -->
-        <section class="slide slide--cover" id="h-portada" data-section="Caso de hoy · Profesor de inglés con IA" aria-label="Caso de hoy">
+        <!-- H1 · Portada -->
+        <section class="slide slide--cover" id="h-portada" data-section="Caso de hoy · Licitación RFP-VEL-2026-117" aria-label="Caso de hoy">
           <div class="cover">
-            <h1 class="cover__title">Un profesor de inglés con IA para 20.000 empleados</h1>
-            <p class="cover__kind">Caso de hoy · Propuesta de consultoría en grupos de cuatro</p>
-            <p class="cover__sub">Un cliente real os pide una solución. Tendréis que entenderla, dibujarla, ponerle precio y fechas, y defenderla delante de él.</p>
-            <p class="cover__meta">Máster en Inteligencia Artificial · Empresa y personas ficticias · Precios orientativos para el ejercicio</p>
+            <p class="rfp-ref">RFP-VEL-2026-117 · Solicitud de propuestas · Confidencial</p>
+            <h1 class="cover__title">Tutor de inglés con IA para 20.000 empleados</h1>
+            <p class="cover__kind">Caso de hoy · Licitación de consultoría · Grupos de cuatro · 4 horas</p>
+            <p class="cover__sub">Grupo Velantis ha invitado a cuatro consultoras. Cada grupo es una. Hay que leer el pliego, hacer las preguntas justas, diseñar la solución, ponerle precio y fechas, y defenderla ante siete personas que no quieren lo mismo.</p>
+            <p class="cover__meta">Máster en Inteligencia Artificial · Empresa y personas ficticias · Cifras y precios orientativos para el ejercicio</p>
           </div>
         </section>
 
-        <!-- H2 · El cliente -->
-        <section class="slide slide--module" id="h-cliente" data-step="h-cliente" data-who="hoy" data-section="Caso de hoy · El cliente" aria-label="El cliente: quién es Elena y qué le pasa">
-          <div class="intro">
-            <div class="intro__story">
-              <p class="person"><span class="person__avatar" aria-hidden="true">E</span><span><b>Elena Prados</b>Directora de Talento y Formación · Grupo Velantis, energía e infraestructuras</span></p>
-              <blockquote class="quote">«Pagamos casi dos millones al año en clases de inglés y solo llegan al 13 % de la plantilla. Quiero que llegue a todos, que se pueda medir y que no nos cueste el triple.»</blockquote>
-              <p class="intro__text">Velantis trabaja con proveedores y clientes de 14 países. Hoy contrata clases con una academia: grupos de seis con profesor nativo y clases individuales para directivos. Ha oído que «la IA ya enseña idiomas» y ha pedido a <b>vuestra consultora</b> una propuesta para un <b>profesor de inglés con IA</b> para toda la empresa.</p>
-              <p class="intro__text">El profesorado hará de Elena: podéis preguntarle lo que necesitéis.</p>
-              <p class="fiction">Caso ficticio: la empresa y las personas son inventadas. Las cifras son orientativas para el ejercicio.</p>
-            </div>
-            <div class="intro__facts">
-              <dl class="figures">
-                <div><dt>Empleados</dt><dd>20.000</dd><dd class="figures__sub">en 14 países; 9.000 en planta y turnos</dd></div>
-                <div><dt>Necesitan inglés</dt><dd>~8.000</dd><dd class="figures__sub">para su puesto (compras, ingeniería, ventas, dirección)</dd></div>
-                <div><dt>Reciben clase hoy</dt><dd>2.700</dd><dd class="figures__sub">13,5 % de la plantilla</dd></div>
-                <div><dt>Gasto anual</dt><dd>1,9 M€</dd><dd class="figures__sub">academia: grupos a 38 €/h e individuales a 55 €/h</dd></div>
-              </dl>
-              <div class="tools">
-                <h3>Con qué trabajan hoy</h3>
-                <ul><li>Microsoft 365 y Teams</li><li>Entra ID (inicio de sesión)</li><li>SAP SuccessFactors (formación)</li><li>Academia externa</li><li>Móviles corporativos en planta</li></ul>
+        <!-- H2 · Quién decide -->
+        <section class="slide slide--light" id="h-cliente" data-step="h-cliente" data-who="hoy" data-section="Caso de hoy · Quién decide" aria-label="Las personas que deciden en Velantis">
+          <div class="rfp">
+            <header class="rfp__head">
+              <div>
+                <h2>Quién decide en Velantis</h2>
+                <p class="lede">Energía e infraestructuras · 20.000 personas en 8 países · gasta 1,9 M€ al año en clases de inglés que solo reciben 2.700. Firma quien patrocina, pero dos de estas personas pueden vetar.</p>
               </div>
-            </div>
+            </header>
+            <ul class="rfp-people">
+              <li><p class="rfp-who"><span class="rfp-av">EP</span><span><b>Elena Prados</b>Directora de Personas · patrocina</span></p><q>Que llegue a todos y que pueda medirlo. Y si se puede, que el nivel cuente en la evaluación anual.</q><p class="rfp-wants">Quiere: alcance, medición, una historia para el comité de dirección.</p></li>
+              <li><p class="rfp-who"><span class="rfp-av">JO</span><span><b>Javier Ortiz</b>Director de Sistemas (CIO)</span></p><q>Ya pagamos Copilot para 1.500 personas. Convencedme de que no basta con eso.</q><p class="rfp-wants">Quiere: nada de sistemas sueltos; Teams, Entra ID e Intune.</p></li>
+              <li class="is-veto"><p class="rfp-who"><span class="rfp-av">NS</span><span><b>Nuria Sanz</b>Seguridad de la información (CISO)</span></p><q>Nada sale de la UE y pasáis mi cuestionario y un pentest. Si no, no entra.</q><p class="rfp-wants">Puede vetar. Su revisión tarda de 8 a 10 semanas.</p></li>
+              <li><p class="rfp-who"><span class="rfp-av">LG</span><span><b>Laura Gil</b>Delegada de Protección de Datos</span></p><q>Quiero la evaluación de impacto antes del piloto, no después. Y la voz es un dato personal.</q><p class="rfp-wants">Quiere: base legal, minimización, plazos de borrado.</p></li>
+              <li><p class="rfp-who"><span class="rfp-av">MD</span><span><b>Marc Duran</b>Compras</span></p><q>Coste total a tres años, precio por usuario activo y penalizaciones si no cumplís el nivel de servicio.</q><p class="rfp-wants">Quiere: comparar cuatro ofertas con la misma plantilla.</p></li>
+              <li class="is-veto"><p class="rfp-who"><span class="rfp-av">CE</span><span><b>Comités de empresa</b>España y Alemania</span></p><q>Ninguna herramienta que pueda medir el rendimiento de la plantilla sin acuerdo previo.</q><p class="rfp-wants">En Alemania pueden bloquear el despliegue sin ese acuerdo.</p></li>
+              <li><p class="rfp-who"><span class="rfp-av">AV</span><span><b>Andrés Vela</b>Director Comercial</span></p><q>Mis comerciales presentan en inglés. Quiero que la IA les diga si suenan nerviosos o inseguros.</q><p class="rfp-wants">Quiere: resultados visibles en su equipo en el piloto.</p></li>
+              <li class="rfp-you"><p class="rfp-who"><span class="rfp-av">Vos</span><span><b>Vuestra consultora</b>4 personas · compite con otras 3</span></p><p>El profesorado hará de cada una de estas personas. No todo lo que piden se puede o se debe hacer: parte del trabajo es decir que no, con argumentos.</p></li>
+            </ul>
           </div>
         </section>
 
-        <!-- H3 · La reunión -->
-        <section class="slide slide--module" id="h-hoy" data-step="h-hoy" data-who="hoy" data-section="Caso de hoy · La reunión" aria-label="Lo que contó el cliente">
+        <!-- H3 · Anexos del pliego -->
+        <section class="slide slide--module" id="h-anexos" data-step="h-anexos" data-who="hoy" data-section="Caso de hoy · Anexos del pliego" aria-label="Anexos del pliego">
           <div class="module">
             <div class="module__text">
-              <h2 class="module__title">Así aprenden inglés hoy</h2>
-              <ul class="chips"><li>Caro</li><li>Para pocos</li><li>Sin medir</li></ul>
-              <p class="module__claim">El problema no es que las clases sean malas: es que no llegan a quien más lo necesita y nadie sabe si sirven.</p>
-              <h3 class="module__label">Qué pasa hoy</h3>
+              <h2 class="module__title">Lo que dicen los anexos</h2>
+              <ul class="chips"><li>6 anexos</li><li>Datos reales del cliente</li></ul>
+              <p class="module__claim">Las cifras que importan no están en la reunión, sino en los anexos. Leedlos todos antes de diseñar nada.</p>
+              <h3 class="module__label">Lo que conviene buscar</h3>
               <ol class="how">
-                <li>Grupos de seis, <b>dos horas a la semana</b>, con horario fijo de oficina.</li>
-                <li>La mitad de las clases <b>se cancelan</b> por reuniones o turnos.</li>
-                <li>Cada academia usa su test: <b>no hay forma de comparar</b> el progreso.</li>
+                <li>Por qué <b>fracasó</b> lo que ya se probó.</li>
+                <li>Qué colectivos <b>no pueden</b> usar lo que penséis hacer.</li>
+                <li>Qué <b>plazos</b> no dependen de vosotros.</li>
+                <li>Qué dinero ya está <b>comprometido</b> el primer año.</li>
               </ol>
-              <dl class="deps">
-                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>Coste</dt><dd>1,9 M€ al año para 2.700 personas.</dd></div>
-                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-warn"/></svg>Huecos</dt><dd>Planta y turnos: sin acceso.</dd></div>
-                <div><dt><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Dirección</dt><dd>Quiere decidir en septiembre.</dd></div>
-              </dl>
+              <a class="btn btn--primary rag-dl" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
             </div>
             <div class="viewer">
               <div class="viewer__bar">
-                <span class="viewer__title"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Lo que contó Elena en la reunión</span>
-                <span class="sample">Notas sin ordenar</span>
+                <div class="tabs rfp-tabs" role="tablist" aria-label="Anexos" data-rag-tabs>
+                  <button type="button" class="tab" role="tab" aria-selected="true" data-pane="ax-a">A · Plantilla</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="ax-b">B · Encuesta</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="ax-c">C · Piloto 2024</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="ax-d">D · Academia</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="ax-e">E · Sistemas</button>
+                  <button type="button" class="tab" role="tab" aria-selected="false" data-pane="ax-f">F · Comités</button>
+                </div>
               </div>
-              <div class="viewer__body viewer__body--flow">
-                <ul class="notes" aria-label="Notas de la reunión con Elena">
-                  <li>«Los directivos tienen clase individual con nativo, a 55 € la hora. Les encanta, pero no escala.»</li>
-                  <li>«En planta y en campo no pueden ir a clase a las cinco. Y es justo donde más falta hace: hablan por teléfono con proveedores extranjeros.»</li>
-                  <li>«Hay gente con miedo a hablar en público. Me piden practicar sin que les vea nadie.»</li>
-                  <li>«Compras necesita negociar por teléfono; ingeniería, leer especificaciones técnicas; ventas, hacer presentaciones.»</li>
-                  <li>«El comité de empresa pidió que no se grabe ninguna conversación sin consentimiento.»</li>
-                  <li>«IT exige inicio de sesión corporativo, datos en la Unión Europea y que todo pase por su revisión de seguridad.»</li>
-                  <li>«Si se pudiera, me gustaría que certificara el nivel para la evaluación anual.»</li>
-                  <li>«Queremos un piloto antes del verano de 2027 y decidir el despliegue en septiembre.»</li>
-                  <li>«No quiero quitar los profesores del todo: algo humano tiene que quedar.»</li>
-                  <li>«Ya me han ofrecido licencias de apps de idiomas. No sé si es mejor eso o algo hecho a medida.»</li>
-                </ul>
-              </div>
-              <div class="task">
-                <p class="task__text"><b>Vuestra tarea</b>Con estas notas, dibujad el proceso de hoy y vuestra propuesta en Excalidraw: quién hace qué, qué datos entran y salen, y dónde duele.</p>
-                <a class="btn btn--primary" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+              <div class="viewer__body">
+                <div class="rag-pane" id="ax-a"><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo A · Plantilla y necesidad de inglés</h3>
+                  <table class="rfp-t">
+                    <thead><tr><th>Colectivo</th><th>Personas</th><th>Necesitan inglés</th><th>Nivel medio</th><th>Acceso</th></tr></thead>
+                    <tbody>
+                      <tr><td>Planta, campo y mantenimiento</td><td>7.600</td><td>1.500</td><td>A1-A2</td><td>Turnos; sin PC; móvil personal prohibido en zonas ATEX; wifi solo en comedores</td></tr>
+                      <tr><td>Oficina corporativa</td><td>6.500</td><td>2.300</td><td>B1</td><td>PC y Teams</td></tr>
+                      <tr><td>Ingeniería y proyectos</td><td>3.200</td><td>2.400</td><td>B1-B2</td><td>PC; viajes a obra</td></tr>
+                      <tr><td>Compras y logística</td><td>1.300</td><td>900</td><td>B1</td><td>PC; llamadas con proveedores</td></tr>
+                      <tr><td>Ventas</td><td>900</td><td>700</td><td>B2</td><td>Portátil y móvil corporativo</td></tr>
+                      <tr><td>Dirección</td><td>500</td><td>200</td><td>B2-C1</td><td>Hoy, clase individual con nativo</td></tr>
+                      <tr class="is-total"><td>Total</td><td>20.000</td><td>8.000</td><td></td><td></td></tr>
+                    </tbody>
+                  </table>
+                  <p>Por país: España 7.800 · Alemania 3.100 · México 2.600 · Brasil 2.100 · Polonia 1.900 · Portugal 1.200 · Marruecos 700 · India 600.</p>
+                  <p>Móviles corporativos gestionados con Intune: 6.900, de los cuales 3.100 están en planta.</p>
+                </div></div>
+                <div class="rag-pane" id="ax-b" hidden><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo B · Encuesta interna (marzo de 2026, 3.412 respuestas)</h3>
+                  <ul class="rfp-bars">
+                    <li><span>«No puedo ir a clase por horario o turnos»</span><i style="--v: 41"></i><b>41 %</b></li>
+                    <li><span>«Me da vergüenza hablar delante de compañeros»</span><i style="--v: 27"></i><b>27 %</b></li>
+                    <li><span>Prefiere practicar en el móvil</span><i style="--v: 63"></i><b>63 %</b></li>
+                    <li><span>Practicaría 15 min al día si es en horario laboral</span><i style="--v: 58"></i><b>58 %</b></li>
+                    <li><span>Practicaría 15 min al día fuera de horario</span><i style="--v: 22"></i><b>22 %</b></li>
+                    <li><span>Confía en que una IA le corrija bien</span><i style="--v: 34"></i><b>34 %</b></li>
+                    <li><span>Le preocupa que su jefe vea sus errores</span><i style="--v: 49"></i><b>49 %</b></li>
+                  </ul>
+                  <p>Comentario frecuente en planta: «Necesito entender al técnico alemán por radio y por teléfono, no aprobar un examen».</p>
+                </div></div>
+                <div class="rag-pane" id="ax-c" hidden><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo C · Piloto de 2024 con una app de idiomas comercial</h3>
+                  <p>1.000 licencias anuales a 96 € (96.000 €). Voluntario, fuera de horario, sin objetivos ni seguimiento del responsable.</p>
+                  <ul class="rfp-bars">
+                    <li><span>Activas a los 30 días</span><i style="--v: 38"></i><b>38 %</b></li>
+                    <li><span>Activas a los 90 días</span><i style="--v: 11"></i><b>11 %</b></li>
+                    <li><span>Activas a los 12 meses</span><i style="--v: 6"></i><b>6 %</b></li>
+                  </ul>
+                  <p><b>Coste real por persona activa al final del año: 1.600 €.</b> Más caro por persona que la academia.</p>
+                  <p>Motivos de abandono: «no tenía que ver con mi trabajo» (44 %), «no tenía tiempo» (31 %), «nadie me lo pedía ni lo veía» (19 %).</p>
+                  <p class="rfp-note">Nota de Elena: «Si vuestra propuesta no explica por qué esta vez no va a pasar lo mismo, no la leo».</p>
+                </div></div>
+                <div class="rag-pane" id="ax-d" hidden><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo D · Contrato con la academia actual</h3>
+                  <ul class="dots">
+                    <li>Grupos de 6 a 38 €/h e individuales a 55 €/h. Gasto de 2026: 1,9 M€.</li>
+                    <li>Renovación anual automática salvo preaviso de 6 meses. <b>El preaviso venció el 30/09/2026</b>: el contrato sigue en vigor hasta el 31/03/2028.</li>
+                    <li>Cláusula de volumen: Velantis puede reducir hasta un <b>60 %</b> las horas con 3 meses de preaviso, pagando al menos el 40 % del volumen de 2026 (760.000 €).</li>
+                    <li>La academia ha ofrecido «sus propios tutores con IA» a 14 € por usuario al mes, sin datos de uso ni de resultados.</li>
+                  </ul>
+                </div></div>
+                <div class="rag-pane" id="ax-e" hidden><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo E · Requisitos de Sistemas y Seguridad</h3>
+                  <ul class="dots">
+                    <li>Microsoft 365 E3 para 12.000 personas; Teams como canal principal. Copilot para 1.500.</li>
+                    <li>Identidad con Entra ID; altas y bajas automáticas (SCIM) desde SuccessFactors.</li>
+                    <li>Datos personales tratados y guardados en la UE. Cualquier subencargado, declarado.</li>
+                    <li>Cuestionario de seguridad de 120 preguntas, pentest externo y revisión de arquitectura: <b>de 8 a 10 semanas</b> desde que se entrega la documentación completa.</li>
+                    <li>La red de planta bloquea tráfico no autorizado; abrir un servicio nuevo lleva un cambio de 4 semanas.</li>
+                    <li>Nada de modelos entrenados con datos de Velantis sin aprobación de Seguridad y de la DPD.</li>
+                  </ul>
+                </div></div>
+                <div class="rag-pane" id="ax-f" hidden><div class="rag-pane__scroll rfp-doc">
+                  <h3>Anexo F · Extracto de las actas de los comités</h3>
+                  <ul class="dots">
+                    <li><b>España:</b> la empresa debe informar de los parámetros y reglas de los algoritmos que afecten a las condiciones de trabajo (art. 64.4.d del Estatuto de los Trabajadores). Uso voluntario. Si se hace en horario laboral, computa para las 20 horas anuales de formación retribuida (art. 23.3 ET).</li>
+                    <li><b>Alemania:</b> cualquier sistema técnico capaz de vigilar el comportamiento o el rendimiento requiere un acuerdo de empresa con el Betriebsrat (§ 87.1.6 BetrVG). La última negociación de este tipo duró cinco meses.</li>
+                    <li>Ambos comités: ningún dato de la herramienta se usará para evaluaciones, ascensos ni medidas disciplinarias.</li>
+                    <li>Se pide que las grabaciones de voz no se conserven más de lo necesario y que nadie de RR. HH. pueda escucharlas.</li>
+                  </ul>
+                </div></div>
               </div>
             </div>
           </div>
         </section>
 
         <!-- H4 · Requisitos -->
-        <section class="slide slide--light" id="h-requisitos" data-step="h-requisitos" data-who="hoy" data-section="Caso de hoy · Requisitos" aria-label="Lo que pide el cliente">
-          <div class="rules">
-            <div class="rules__head">
+        <section class="slide slide--light" id="h-requisitos" data-step="h-requisitos" data-who="hoy" data-section="Caso de hoy · Requisitos" aria-label="Requisitos del pliego">
+          <div class="rfp">
+            <header class="rfp__head">
               <div>
-                <h2>Lo que pide Velantis</h2>
-                <p class="lede">Nueve requisitos sacados de la reunión. Algunos chocan entre sí: parte del trabajo es decir cuáles se pueden cumplir, cómo y a qué precio.</p>
+                <h2>Requisitos del pliego</h2>
+                <p class="lede">Incumplir un requisito obligatorio sin una alternativa justificada excluye la oferta. Cada requisito tiene un criterio de aceptación medible: así se comprobará en el piloto.</p>
               </div>
-            </div>
-            <ol class="rules__grid hoy-reqs">
-              <li class="rule"><p class="rule__top"><span class="rule__n">R1</span><b>Conversación por voz</b></p><p class="rule__text">Hablar en tiempo real con el tutor, que corrige con tacto y adapta el ritmo. Respuesta en menos de 1,5 s.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R2</span><b>Nivel y plan personal</b></p><p class="rule__text">Prueba inicial (A1-C1) y un plan distinto para cada persona según su puesto y su tiempo.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R3</span><b>Situaciones del puesto</b></p><p class="rule__text">Simulaciones: llamada con un proveedor, reunión, presentación, email técnico. Con el vocabulario de Velantis.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R4</span><b>Pronunciación y escritura</b></p><p class="rule__text">Feedback de pronunciación, gramática y estilo, con ejemplos y ejercicios de refuerzo.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R5</span><b>Progreso medible</b></p><p class="rule__text">Evaluación comparable para todos (escala MCER) e informes agregados para RR. HH., sin acceso a las conversaciones.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R6</span><b>Integración</b></p><p class="rule__text">Inicio de sesión con Entra ID, acceso desde Teams y registro de horas en SuccessFactors.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R7</span><b>Privacidad y normativa</b></p><p class="rule__text">RGPD, datos en la UE, consentimiento para grabar, transparencia del Reglamento de IA y nada de entrenar modelos con sus datos.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R8</span><b>Para todos, a cualquier hora</b></p><p class="rule__text">Móvil y web, 24/7, accesible, útil en turnos y con mala cobertura en planta.</p></li>
-              <li class="rule"><p class="rule__top"><span class="rule__n">R9</span><b>Algo humano</b></p><p class="rule__text">Tutores humanos para escalados y sesiones de grupo mensuales. Coste total claramente inferior al actual por persona formada.</p></li>
-            </ol>
+            </header>
+            <table class="rfp-t rfp-req">
+              <thead><tr><th>ID</th><th>Requisito</th><th>Tipo</th><th>Criterio de aceptación</th></tr></thead>
+              <tbody>
+                <tr><td>F1</td><td>Conversación por voz con el tutor</td><td><span class="rfp-m">Obligatorio</span></td><td>Latencia p95 &lt; 1,2 s desde que la persona deja de hablar hasta que empieza la respuesta, medida en 4G.</td></tr>
+                <tr><td>F2</td><td>Prueba de nivel inicial (MCER A1-C1)</td><td><span class="rfp-m">Obligatorio</span></td><td>Correlación ≥ 0,8 con un examen externo reconocido en una muestra de 150 personas.</td></tr>
+                <tr><td>F3</td><td>Simulaciones por puesto con contenido de Velantis</td><td><span class="rfp-m">Obligatorio</span></td><td>≥ 40 escenarios al lanzar (llamada con proveedor, reunión de obra, auditoría, presentación) con glosarios y catálogos propios.</td></tr>
+                <tr><td>F4</td><td>Corrección de pronunciación y gramática</td><td><span class="rfp-m">Obligatorio</span></td><td>&lt; 5 % de correcciones erróneas en una revisión mensual por lingüistas (muestra de 300).</td></tr>
+                <tr><td>F5</td><td>Panel de progreso para RR. HH.</td><td><span class="rfp-m">Obligatorio</span></td><td>Solo datos agregados de grupos de 10 o más personas; sin acceso a conversaciones.</td></tr>
+                <tr><td>F6</td><td>Detección de nervios o inseguridad en la voz</td><td><span class="rfp-d">Deseable</span></td><td>Indicador de «seguridad al hablar» por persona en las presentaciones de ventas.</td></tr>
+                <tr><td>F7</td><td>Práctica con poca o ninguna cobertura</td><td><span class="rfp-d">Deseable</span></td><td>Ejercicios descargables que se sincronizan al recuperar la red.</td></tr>
+                <tr><td>N1</td><td>Escala</td><td><span class="rfp-m">Obligatorio</span></td><td>2.000 sesiones de voz simultáneas sin degradación (pico del lunes de 8 a 10 h).</td></tr>
+                <tr><td>N2</td><td>Disponibilidad</td><td><span class="rfp-m">Obligatorio</span></td><td>99,5 % mensual de 6 a 22 h CET. Penalización: 5 % de la cuota mensual por cada 0,5 % por debajo.</td></tr>
+                <tr><td>N3</td><td>Datos y privacidad</td><td><span class="rfp-m">Obligatorio</span></td><td>Tratamiento en la UE, sin entrenar modelos con datos de Velantis, audio borrado en 30 días como máximo.</td></tr>
+                <tr><td>N4</td><td>Identidad e integración</td><td><span class="rfp-m">Obligatorio</span></td><td>SSO con Entra ID, SCIM desde SuccessFactors, acceso desde Teams y registro de horas formativas.</td></tr>
+                <tr><td>N5</td><td>Idiomas y accesibilidad</td><td><span class="rfp-m">Obligatorio</span></td><td>Interfaz en es, de, pt, pl y en; WCAG 2.2 AA.</td></tr>
+                <tr><td>N6</td><td>Equidad entre acentos</td><td><span class="rfp-m">Obligatorio</span></td><td>La tasa de error del reconocimiento de voz no varía más de 5 puntos entre hablantes de es, de, pl, pt-BR, ar y hi.</td></tr>
+                <tr><td>N7</td><td>Seguridad</td><td><span class="rfp-m">Obligatorio</span></td><td>Cuestionario de la CISO y pentest superados antes de que entre ninguna persona en el piloto.</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
         <!-- H5 · Calculadora -->
-        <section class="slide slide--module" id="h-costes" data-step="h-costes" data-who="hoy" data-section="Caso de hoy · Costes" aria-label="Calculadora de costes">
+        <section class="slide slide--module" id="h-costes" data-step="h-costes" data-who="hoy" data-section="Caso de hoy · Costes a tres años" aria-label="Calculadora del coste total a tres años">
           <div class="module">
-            <div class="module__text">
-              <h2 class="module__title">¿Cuánto costaría?</h2>
-              <p class="module__claim">Un punto de partida para vuestro plan de costes. Mueved los supuestos y comparad con lo que costarían las mismas horas con profesores nativos.</p>
+            <div class="module__text" data-fit>
+              <h2 class="module__title">Coste total a tres años</h2>
+              <p class="module__claim">Compras compara ofertas por coste a tres años y por persona <b>activa</b>, no por licencia. Ajustad los supuestos y defended los vuestros.</p>
               <div class="calc" data-calc>
-                <label>Empleados que lo usan <b data-out="emp"></b><input type="range" min="500" max="20000" step="500" value="8000" data-in="emp"></label>
-                <label>Minutos de práctica por semana <b data-out="min"></b><input type="range" min="20" max="180" step="10" value="60" data-in="min"></label>
+                <label>Personas con acceso <b data-out="emp"></b><input type="range" min="1000" max="20000" step="500" value="8000" data-in="emp"></label>
+                <label>Activas al año (practican cada semana) <b data-out="act"></b><input type="range" min="5" max="80" step="5" value="35" data-in="act"></label>
+                <label>Minutos de práctica a la semana por persona activa <b data-out="min"></b><input type="range" min="15" max="150" step="15" value="60" data-in="min"></label>
                 <label>Parte del tiempo hablando por voz <b data-out="voz"></b><input type="range" min="0" max="100" step="10" value="60" data-in="voz"></label>
                 <label>Modelo de lenguaje <select data-in="modelo"><option value="pequeño">Pequeño (rápido y barato)</option><option value="mediano" selected>Mediano</option><option value="grande">Grande (más calidad, más caro)</option></select></label>
-                <label>Plataforma, equipo y soporte al año <b data-out="fijo"></b><input type="range" min="100000" max="1500000" step="50000" value="550000" data-in="fijo"></label>
+                <label>Puesta en marcha (una vez) <b data-out="setup"></b><input type="range" min="100000" max="1500000" step="50000" value="650000" data-in="setup"></label>
+                <label>Equipo, plataforma y soporte al año <b data-out="fijo"></b><input type="range" min="100000" max="1500000" step="50000" value="480000" data-in="fijo"></label>
+                <label class="calc-check"><input type="checkbox" checked data-in="tutor"> Sesión mensual en grupo con tutor humano para cada persona activa</label>
               </div>
             </div>
             <div class="viewer">
               <div class="viewer__bar">
-                <span class="viewer__title"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><span>Coste anual estimado</span></span>
+                <span class="viewer__title"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><span>Plantilla económica (simplificada)</span></span>
                 <span class="sample">Precios orientativos</span>
               </div>
               <div class="viewer__body viewer__body--flow">
@@ -2016,70 +2178,130 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
           </div>
         </section>
 
-        <!-- H6 · Entregables -->
-        <section class="slide slide--soft" id="h-entregables" data-step="h-entregables" data-who="hoy" data-section="Caso de hoy · Qué entregáis" aria-label="Qué entregáis y cómo se valora">
-          <div class="deliver">
-            <div class="deliver__head">
-              <h2>Qué le presentáis a Elena</h2>
-              <p class="lede">Grupos de cuatro. Tres horas de trabajo y diez minutos de presentación por grupo. Cuanto más real, mejor: cifras, fechas, nombres de modelos y riesgos.</p>
-            </div>
-            <div class="weights" aria-label="Peso orientativo de cada entrega">
-              <div class="weights__bar" aria-hidden="true"><span class="w1" style="--w: 20"></span><span class="w2" style="--w: 20"></span><span class="w3" style="--w: 15"></span><span class="w4" style="--w: 15"></span><span class="w5" style="--w: 15"></span><span class="w6" style="--w: 10"></span><span class="w7" style="--w: 5"></span></div>
-              <ol class="weights__list">
-                <li class="w1"><b>Diagramas de flujo y de secuencia</b><em>20 %</em><span>Proceso de hoy y propuesta, y la secuencia de una sesión de voz (app, voz a texto, modelo, evaluación, texto a voz).</span></li>
-                <li class="w2"><b>Mock de la app en Excalidraw</b><em>20 %</em><span>Todas las pantallas: prueba de nivel, plan, conversación, simulación del puesto, feedback, progreso, panel de RR. HH. y privacidad.</span></li>
-                <li class="w3"><b>Arquitectura y modelos</b><em>15 %</em><span>Qué modelos usaríais (lenguaje, voz, pronunciación, RAG), dónde se alojan y por qué. Comprar o construir.</span></li>
-                <li class="w4"><b>Plan de costes</b><em>15 %</em><span>Desarrollo, operación y coste por persona; comparación con profesores nativos.</span></li>
-                <li class="w5"><b>Plan de implantación e hitos</b><em>15 %</em><span>Fases, fechas, equipo y criterios para pasar de piloto a despliegue.</span></li>
-                <li class="w6"><b>Fiabilidad y riesgos</b><em>10 %</em><span>Cómo medís la calidad del tutor, errores, sesgo de acento, privacidad, Reglamento de IA y plan B.</span></li>
-                <li class="w7"><b>Presentación</b><em>5 %</em><span>Diez minutos y preguntas del cliente.</span></li>
-              </ol>
-            </div>
-            <div class="deliver__check">
-              <h3>Restricciones de Velantis</h3>
-              <ul class="dots hoy-dots">
-                <li>Piloto con 200 personas funcionando antes de junio de 2027.</li>
-                <li>Decisión de despliegue en el comité de septiembre de 2027.</li>
-                <li>Presupuesto del primer año: no más de lo que se gasta hoy.</li>
-                <li>Todo dato personal, en la Unión Europea.</li>
-              </ul>
-              <a class="btn btn--primary rag-dl" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+        <!-- H6 · Cómo se adjudica -->
+        <section class="slide slide--soft" id="h-pliego" data-step="h-pliego" data-who="hoy" data-section="Caso de hoy · Cómo se adjudica" aria-label="Calendario y criterios de adjudicación">
+          <div class="rfp">
+            <header class="rfp__head">
+              <div>
+                <h2>Cómo se adjudica</h2>
+                <p class="lede">Igual que en una licitación de verdad: preguntas por escrito con respuesta para todos, dos sobres, puntuación con fórmula y defensa oral.</p>
+              </div>
+            </header>
+            <div class="rfp-cols">
+              <div>
+                <h3 class="rfp-h">Las cuatro horas de hoy</h3>
+                <ol class="rfp-agenda">
+                  <li><time>0:00</time><b>Lectura del pliego</b><span>Anexos, requisitos y criterios. Repartid papeles en el grupo.</span></li>
+                  <li><time>0:25</time><b>Ronda de aclaraciones</b><span>Máximo 5 preguntas por escrito por grupo. Las respuestas se leen en voz alta para todos los grupos.</span></li>
+                  <li><time>0:45</time><b>Diseño de la solución</b><span>Arquitectura, flujos, mock en Excalidraw y modelos.</span></li>
+                  <li><time>2:00</time><b>Plan, costes y riesgos</b><span>Hitos con fechas, plantilla económica y cumplimiento.</span></li>
+                  <li><time>3:00</time><b>Entrega de los dos sobres</b><span>Pasada la hora, la oferta no se admite.</span></li>
+                  <li><time>3:10</time><b>Defensa oral</b><span>8 minutos y 5 de preguntas. El profesorado cambia de papel sin avisar.</span></li>
+                </ol>
+              </div>
+              <div>
+                <h3 class="rfp-h">Puntuación (100 puntos)</h3>
+                <table class="rfp-t rfp-score">
+                  <tbody>
+                    <tr><th colspan="2">Sobre A · Técnico · 60 puntos</th></tr>
+                    <tr><td>Solución, arquitectura y modelos</td><td>15</td></tr>
+                    <tr><td>Experiencia de aprendizaje y mock</td><td>12</td></tr>
+                    <tr><td>Cumplimiento legal y riesgos</td><td>13</td></tr>
+                    <tr><td>Plan de implantación e hitos</td><td>10</td></tr>
+                    <tr><td>Medición: KPI y criterios del piloto</td><td>10</td></tr>
+                    <tr><th colspan="2">Sobre B · Económico · 40 puntos</th></tr>
+                    <tr><td colspan="2"><code>puntos = 40 × (TCO más bajo ÷ vuestro TCO)</code></td></tr>
+                  </tbody>
+                </table>
+                <ul class="dots rfp-rules">
+                  <li>Menos de 30 puntos técnicos: se excluye y no se abre el sobre económico.</li>
+                  <li>Un TCO más de un 25 % por debajo de la media es «anormalmente bajo»: hay que justificarlo en la defensa.</li>
+                  <li>Un requisito obligatorio incumplido sin alternativa: exclusión.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
 
-        <!-- H7 · Preguntas del cliente -->
-        <section class="slide slide--soft" id="h-preguntas" data-step="h-preguntas" data-who="hoy" data-section="Caso de hoy · Preparad la defensa" aria-label="Lo que os va a preguntar el cliente">
+        <!-- H7 · Entregables -->
+        <section class="slide slide--soft" id="h-entregables" data-step="h-entregables" data-who="hoy" data-section="Caso de hoy · Qué entregáis" aria-label="Contenido de los dos sobres">
+          <div class="rfp">
+            <header class="rfp__head">
+              <div>
+                <h2>Qué va en cada sobre</h2>
+                <p class="lede">Doce diapositivas como máximo en el sobre A y la plantilla económica en el B. Todo lo que dibujéis, en Excalidraw.</p>
+              </div>
+              <a class="btn btn--primary" href="https://excalidraw.com" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-pen"/></svg>Abrir Excalidraw<svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>
+            </header>
+            <div class="rfp-cols rfp-cols--wide">
+              <div class="rfp-env">
+                <h3 class="rfp-h">Sobre A · Técnico</h3>
+                <ol class="rfp-list">
+                  <li><b>Resumen ejecutivo</b> en una diapositiva: qué, cuánto, cuándo y el riesgo principal.</li>
+                  <li><b>Arquitectura</b>: componentes, modelos, dónde se guarda cada dato y qué sale de la UE (nada).</li>
+                  <li><b>Diagrama de flujo</b> de la persona: alta, consentimiento, nivel, plan, práctica y progreso.</li>
+                  <li><b>Diagrama de secuencia</b> de un turno de voz con el presupuesto de latencia de cada tramo (total ≤ 1,2 s).</li>
+                  <li><b>Mock de la app</b>: al menos 8 pantallas, incluido el panel de RR. HH. y la de privacidad.</li>
+                  <li><b>Modelos</b>: dos candidatos por pieza (voz a texto, lenguaje, texto a voz, pronunciación, RAG) con coste, latencia, región y plan B.</li>
+                  <li><b>Comprar, construir o híbrido</b>, con números. Incluid Copilot y la oferta de la academia.</li>
+                  <li><b>Plan</b>: Gantt con fechas reales (seguridad, evaluación de impacto, comités, piloto, decisión), equipo y RACI.</li>
+                  <li><b>Cumplimiento</b>: cada uso clasificado según el Reglamento de IA y lo que <b>no</b> haréis.</li>
+                  <li><b>KPI del piloto</b> y criterio de continuar o parar; y los cinco riesgos principales con su plan B.</li>
+                </ol>
+              </div>
+              <div class="rfp-env">
+                <h3 class="rfp-h">Sobre B · Económico</h3>
+                <ul class="rfp-list rfp-list--dots">
+                  <li>Puesta en marcha, desglosada: equipo, contenido, integración, seguridad.</li>
+                  <li>Coste anual: modelos, infraestructura, equipo, tutores humanos, contenido nuevo.</li>
+                  <li>Coste por persona activa y por hora de práctica.</li>
+                  <li>Tres escenarios de adopción: 20 %, 35 % y 60 %.</li>
+                  <li>TCO a tres años, incluido lo que se sigue pagando a la academia.</li>
+                  <li>Comparación con la academia, con licencias de una app y con la oferta de la academia.</li>
+                </ul>
+                <h3 class="rfp-h">Restricciones</h3>
+                <ul class="dots hoy-dots">
+                  <li>Piloto con 200 personas de 2 países funcionando antes del 30/06/2027.</li>
+                  <li>Comité de dirección: 22/09/2027.</li>
+                  <li>Año 1 ≤ 1,9 M€, contando la academia.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- H8 · Defensa -->
+        <section class="slide slide--soft" id="h-preguntas" data-step="h-preguntas" data-who="hoy" data-section="Caso de hoy · Preparad la defensa" aria-label="Lo que os van a preguntar en la defensa">
           <div class="brief">
             <div class="brief__head">
-              <h2>Lo que os va a preguntar Elena</h2>
-              <p class="brief__ask">«No quiero la propuesta más bonita. Quiero la que me atrevería a presentar a mi comité de dirección.»</p>
+              <h2>Lo que os van a preguntar</h2>
+              <p class="brief__ask">«No quiero la propuesta más bonita. Quiero la que me atrevería a presentar a mi comité de dirección.» · Elena</p>
             </div>
-            <div class="brief__cols">
+            <div class="brief__cols rfp-qcols">
               <div class="brief__col">
-                <h3><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>Negocio y dinero</h3>
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-question"/></svg>Elena, Andrés y Compras</h3>
                 <ul class="dots">
-                  <li>¿Por qué no compro licencias de una app de idiomas que ya existe?</li>
-                  <li>¿Cuánto me cuesta si todo el mundo la usa a la vez el lunes a las nueve?</li>
-                  <li>¿Qué pasa si el proveedor del modelo sube precios o desaparece?</li>
-                  <li>¿Cuándo dejo de pagar a la academia, y a cuánta?</li>
-                  <li>¿Qué hacen los de planta, que no tienen ordenador?</li>
+                  <li>¿Por qué esta vez no se va a abandonar a los 90 días como en 2024?</li>
+                  <li>¿Podemos usar el nivel en la evaluación anual?</li>
+                  <li>¿Por qué no me dais el indicador de nervios que pedí?</li>
+                  <li>¿Qué pasa con vuestro precio si la adopción es del 60 % y no del 35 %?</li>
+                  <li>¿Cuánto pago a la academia cada año y cuándo deja de hacer falta?</li>
                 </ul>
               </div>
               <div class="brief__col">
-                <h3><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Calidad, personas y riesgos</h3>
+                <h3><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Sistemas, Seguridad, DPD y comités</h3>
                 <ul class="dots">
-                  <li>¿Qué pasa si el tutor enseña algo mal? ¿Cómo lo detectáis?</li>
-                  <li>¿Cómo sé que la gente mejora de verdad y no solo que lo usa?</li>
-                  <li>¿Puedo usar su nivel para decidir ascensos o la evaluación anual?</li>
-                  <li>¿Dónde están las grabaciones y quién las escucha?</li>
-                  <li>¿Entiende igual un acento andaluz, indio o nigeriano?</li>
+                  <li>¿Por qué no basta con Copilot? ¿Y qué pasa si sube de precio vuestro modelo?</li>
+                  <li>¿2.000 sesiones simultáneas son de verdad necesarias? Enseñadme la cuenta.</li>
+                  <li>¿Qué hacen los 7.600 de planta, sin PC y sin móvil en zona ATEX?</li>
+                  <li>¿Quién puede escuchar una grabación y cuándo se borra?</li>
+                  <li>¿Cómo cabe el piloto de junio si mi revisión tarda diez semanas y el Betriebsrat cinco meses?</li>
                 </ul>
               </div>
             </div>
             <div class="hint" data-hint>
               <button type="button" class="hint__btn" aria-expanded="false" aria-controls="hint-hoy"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg>Mostrar pista</button>
-              <p class="hint__text" id="hint-hoy" hidden>Comparad comprar frente a construir con números. Separad la práctica (conversación, voz, feedback) de la evaluación del nivel. Y ojo: usar la IA para decidir sobre la carrera de una persona puede convertirla en un sistema de alto riesgo según el Reglamento europeo de IA.</p>
+              <p class="hint__text" id="hint-hoy" hidden>Hay al menos tres peticiones que no se deben aceptar tal cual. Reconocer emociones en el trabajo está prohibido por el Reglamento de IA (art. 5); usar el nivel para evaluar o ascender lo convierte en un sistema de alto riesgo (anexo III); y los plazos de Seguridad y del Betriebsrat obligan a elegir bien en qué país y con qué colectivo hacer el piloto.</p>
             </div>
           </div>
         </section>
@@ -3296,6 +3518,14 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
     (lines || []).forEach((l, i) => txt(l, x + 13, y + 18 + i * 12, { size: 8, color: P.white, maxW: w - 20, fit: true, font: 'sans' }));
   }
 
+  /* bloque de texto grande, para hojas que se tienen que leer de lejos */
+  function slabBig(x, y, w, h, label, col, lines) {
+    box(x, y, w, h, { fill: P.gray2, shadow: false });
+    rect(x + 2, y + 2, 5, h - 4, col);
+    txt(label, x + 14, y + 5, { size: 8.5, color: col, weight: 700 });
+    (lines || []).forEach((l, i) => txt(l, x + 14, y + 19 + i * 14, { size: 9.5, color: P.white, maxW: w - 22, fit: true, font: 'sans' }));
+  }
+
   /* ------------------------------------------------------------------ */
   PL.concept({
     id: 'problema-fuentes', block: 'b4', slide: 'S2', title: 'Una IA general no conoce tus fuentes',
@@ -3594,7 +3824,7 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
           show(g.at(4), () => {
             const sx = 262, sw = 190;
             rect(sx, 196, sw, 6, P.gray2); rect(sx, 196, sw / 2, 6, P.red); rect(sx + sw / 2, 196, sw / 2, 6, P.mint);
-            [['−1', 0, 'opuesto'], ['0', 0.5, 'sin relación'], ['1', 1, 'mismo sentido']].forEach(m => { rect(sx + sw * m[1] - 1, 190, 2, 18, P.white); txt(m[0], sx + sw * m[1], 176, { size: 8, align: 'center' }); txt(m[2], sx + sw * m[1], 212, { size: 7.5, align: 'center', color: P.light }); });
+            [['−1', 0, 'opuesto'], ['0', 0.5, 'sin relación'], ['1', 1, 'mismo sentido']].forEach(m => { rect(sx + sw * m[1] - 1, 190, 2, 18, P.white); txt(m[0], sx + sw * m[1], 176, { size: 8, align: 'center' }); txt(m[2], sx + sw * m[1] + (m[1] === 1 ? -6 : m[1] === 0 ? 6 : 0), 212, { size: 7.5, align: m[1] === 1 ? 'right' : m[1] === 0 ? 'left' : 'center', color: P.light }); });
             banner('Se compara la dirección, no la longitud', { y: 238, h: 22 });
           });
         }
@@ -4218,110 +4448,214 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
     ],
     panels: [
       {
-        title: 'El flujo completo',
-        caption: 'Arriba, la preparación de las fuentes; abajo, lo que ocurre con cada pregunta.',
+        title: 'La idea: examen a libro abierto',
+        caption: 'El mismo modelo y la misma pregunta. A la izquierda contesta de memoria; a la derecha, primero consulta los documentos.',
         steps: [
-          'Se incorporan documentos autorizados al sistema.',
-          'El sistema extrae el texto, lo divide en fragmentos y los indexa con sus metadatos.',
-          'La persona formula una pregunta, que se transforma en un vector para buscar por significado.',
-          'Se recuperan los fragmentos más relevantes, aplicando filtros de fuente, fecha o permisos.',
-          'Pregunta y fragmentos entran juntos en el contexto del modelo, que redacta la respuesta con citas.'
+          'Sin RAG, el modelo contesta de memoria, con lo que aprendió al entrenarse. Vuestra política de cancelación no estaba ahí.',
+          'Aun así contesta con seguridad: «Te devolvemos el 70 %». No sabe que en agosto hay una excepción.',
+          'Con RAG, antes de contestar busca en los documentos de la empresa y abre la página que trata el tema.',
+          'Contesta con lo que dice esa página e indica de dónde lo ha sacado. Eso es RAG: un examen a libro abierto.'
         ],
         draw(g) {
-          txt('PREPARACIÓN (una vez)', 20, 8, { size: 8, color: P.light });
-          txt('CADA PREGUNTA', 20, 112, { size: 8, color: P.light });
-          const top = flow([{ t: 'FUENTES', icon: 'folder' }, { t: 'TROCEAR', icon: 'scissors' }, { t: 'ÍNDICE', icon: 'db' }], 20, 22, 290, { bw: 82, bh: 56, active: g.step <= 1 ? g.step * 1.5 | 0 : -1, reveal: i => g.at(i === 0 ? 0 : 1) });
-          const bot = flow([{ t: 'PREGUNTA', icon: 'question' }, { t: 'VECTOR', icon: 'chip' }, { t: 'RECUPERAR', icon: 'search' }, { t: 'CONTEXTO', icon: 'list' }, { t: 'RESPUESTA', icon: 'chat' }], 20, 128, 440, { bw: 76, bh: 56, active: g.step >= 2 ? [0, 0, 1, 2, 4][g.step] : -1, reveal: i => g.at([2, 2, 3, 4, 4][i]) });
-          show(g.at(3), () => { path([[top[2].cx, 80], [top[2].cx, 104], [bot[2].cx, 104], [bot[2].cx, 126]], { color: P.mint }); chip('filtros', bot[2].cx + 8, 92, { fill: P.yellow, size: 7 }); });
-          show(g.at(4), () => { chip('respuesta + citas [1][2]', 360, 200, { align: 'center', fill: P.mint, size: 9, icon: 'link' }); robot(330, 22, { color: P.purple }); txt('modelo generativo', 346, 64, { size: 7.5, color: P.light, align: 'center' }); arrow(bot[3].cx, 126, 346, 70, { color: P.purple, dash: true }); });
-          if (g.on(3)) banner('Se recupera antes de generar', { y: 240, h: 22 });
-        }
-      },
-      {
-        title: 'Lo que resuelve RAG',
-        caption: 'Cuatro ventajas de responder a partir de fuentes recuperadas, cada una en acción.',
-        steps: [
-          'Documentación propia sin reentrenar: los documentos entran en el índice; el modelo no se toca.',
-          'Información nueva: se cambia la versión 2025 por la 2026 en el índice y la siguiente respuesta ya la usa.',
-          'Trazabilidad: cada afirmación lleva un número que abre el fragmento exacto.',
-          'Menos huecos: donde antes el modelo rellenaba con algo plausible, ahora hay un fragmento o un «no consta».'
-        ],
-        draw(g) {
-          const C = [[14, 16], [246, 16], [14, 128], [246, 128]];
-          const T = ['SIN REENTRENAR', 'INFORMACIÓN NUEVA', 'TRAZABILIDAD', 'MENOS HUECOS'];
-          C.forEach((c, i) => show(g.at(i), () => card(c[0], c[1], 220, 104, T[i], P.mint, { active: g.on(i) })));
-          show(g.at(0), () => {
-            const [x, y] = C[0];
-            icon('doc', x + 16, y + 40, 2); icon('doc', x + 16, y + 66, 2);
-            packet([[x + 46, y + 56], [x + 108, y + 56]], 1.4, P.yellow);
-            icon('db', x + 112, y + 42, 3);
-            icon('gear', x + 178, y + 46, 2); line(x + 172, y + 44, x + 206, y + 78, P.red, 2); txt('el modelo no cambia', x + 110, y + 86, { size: 7.5, color: P.light, align: 'center' });
-          });
+          rect(239, 8, 2, 220, P.gray3);
+          txt('SIN RAG · DE MEMORIA', 120, 10, { size: 10, color: P.red, align: 'center' });
+          txt('CON RAG · LIBRO ABIERTO', 360, 10, { size: 10, color: P.mint, align: 'center' });
+          /* izquierda */
+          robot(36, 64, { s: 3, color: P.purple, mood: g.from(1) ? 'sure' : 'think' });
+          show(g.at(0), () => { box(110, 48, 116, 76, { fill: P.gray2, shadow: false }); txt('lo que recuerda', 168, 54, { size: 8.5, color: P.light, align: 'center' }); txt('textos de internet hasta su fecha de corte', 168, 72, { size: 9, color: P.white, align: 'center', maxW: 104, font: 'sans' }); });
           show(g.at(1), () => {
-            const [x, y] = C[1], sw = g.at(1) > 0.6;
-            chip('política 2025', x + 14, y + 36, { fill: sw ? P.gray3 : P.orange, size: 8, strike: sw ? P.red : null });
-            chip('política 2026', x + 14, y + 62, { fill: P.mint, size: 8, a: 1 });
-            arrow(x + 120, y + 70, x + 150, y + 70, { color: P.mint, p: g.at(1) });
-            icon('db', x + 156, y + 48, 3);
-            txt('basta con actualizar el índice', x + 110, y + 88, { size: 7.5, color: P.light, align: 'center' });
+            bubble(16, 150, 210, 34, { tx: 60, ty: 130 });
+            txt('«Te devolvemos el 70 %.»', 121, 160, { size: 10.5, color: P.ink, align: 'center', font: 'sans' });
+            show(late(g.at(1)), () => { icon('cross', 20, 196, 2); txt('falso: en agosto es el 50 %', 50, 199, { size: 9.5, color: P.red }); }, 0);
           });
+          /* derecha */
+          robot(258, 64, { s: 3, color: P.purple, mood: g.from(3) ? 'happy' : 'think' });
           show(g.at(2), () => {
-            const [x, y] = C[2];
-            box(x + 12, y + 30, 110, 40, { fill: P.white, shadow: false }); txt('El reembolso es del 70 %', x + 18, y + 36, { size: 7.5, color: P.ink, font: 'sans', maxW: 80 });
-            chip('1', x + 102, y + 34, { fill: P.yellow, size: 7, w: 14, h: 13, pad: 2 }); glow(x + 102, y + 34, 14, 13, P.yellow);
-            arrow(x + 124, y + 42, x + 146, y + 42, { color: P.yellow });
-            paper(x + 148, y + 26, 62, 66, { title: '§2' }); rect(x + 152, y + 48, 54, 14, 'rgba(247,207,90,.6)'); txt('15-30 d: 70 %', x + 179, y + 51, { size: 6.5, color: P.ink, align: 'center', font: 'sans' }); bars(x + 154, y + 70, 48, 2, { seed: 5, color: P.light });
+            paper(340, 34, 126, 104, { title: 'Política v3 · 2026', size: 8.5 });
+            bars(348, 56, 108, 2, { seed: 4, color: P.light });
+            rect(344, 78, 116, 30, 'rgba(247,207,90,.75)');
+            txt('§7 · Del 15/7 al 31/8, máximo 50 %', 349, 81, { size: 8.5, color: P.ink, maxW: 108, font: 'sans' });
+            bars(348, 116, 108, 2, { seed: 9, color: P.light });
+            arrow(310, 92, 336, 92, { color: P.yellow, p: g.at(2) });
+            icon('search', 312, 66, 1.5);
           });
           show(g.at(3), () => {
-            const [x, y] = C[3];
-            txt('antes', x + 56, y + 28, { size: 7.5, color: P.red, align: 'center' }); txt('ahora', x + 166, y + 28, { size: 7.5, color: P.mint, align: 'center' });
-            box(x + 14, y + 42, 84, 34, { fill: P.gray2, shadow: false }); qmark(x + 46, y + 48, P.red, 2);
-            box(x + 122, y + 42, 84, 34, { fill: P.gray2, shadow: false }); chip('[2] §7', x + 164, y + 50, { align: 'center', fill: P.mint, size: 7.5 });
-            txt('o «no consta»', x + 164, y + 82, { size: 7.5, color: P.light, align: 'center' });
+            bubble(250, 150, 216, 34, { tx: 282, ty: 130 });
+            txt('«El 50 % [Política v3, §7].»', 358, 160, { size: 10.5, color: P.ink, align: 'center', font: 'sans' });
+            icon('check', 254, 196, 2); txt('dato correcto y con su fuente', 284, 199, { size: 9.5, color: P.mint });
           });
+          if (g.on(3)) banner('RAG: buscar primero en tus documentos, responder después y citar', { y: 236 });
         }
       },
       {
-        title: 'Dónde puede fallar',
-        caption: 'Cinco puntos débiles a lo largo del flujo. RAG reduce riesgos, no los elimina.',
+        title: 'Paso 1 · Preparar los documentos (una sola vez)',
+        caption: 'Antes de recibir ninguna pregunta, los documentos se trocean en fichas, se convierten en números y se guardan.',
         steps: [
-          'Recuperación: puede traer un fragmento irrelevante o incompleto.',
-          'Fuentes: no corrige documentos obsoletos, contradictorios o mal escaneados.',
-          'Generación: el modelo puede interpretar mal una evidencia correcta o inventar una conexión.',
-          'Permisos: no sustituye el control de acceso ni la política de datos.',
-          'Persona usuaria: si no abre la cita, el error pasa inadvertido.'
+          'Se parte de un documento autorizado y vigente: la política de cancelación v3, de 2026.',
+          'Se trocea en fichas pequeñas, cada una con una idea completa (regla y excepción juntas).',
+          'Cada ficha se convierte en una lista de números, su embedding, que resume de qué trata.',
+          'Las fichas se guardan en el índice con sus números y sus metadatos: versión, fecha y quién puede verlas.'
         ],
         draw(g) {
-          const nodes = flow([{ t: 'FUENTES', icon: 'folder' }, { t: 'RECUPERAR', icon: 'search' }, { t: 'MODELO', icon: 'chip' }, { t: 'RESPUESTA', icon: 'chat' }], 20, 70, 440, { bw: 84, bh: 56 });
-          const fails = [[1, 'fragmento erróneo', 0, true, 22], [0, 'obsoleto o mal escaneado', 1, false, 160], [2, 'malinterpreta o inventa', 2, true, 22], [0, 'no sustituye los permisos', 3, false, 182], [3, 'nadie abre la cita', 4, false, 160]];
-          fails.forEach(f => show(g.at(f[2]), () => {
-            const n = nodes[f[0]];
-            icon('warn', n.cx - 12, f[3] ? 46 : 130, 2);
-            chip(f[1], Math.max(70, n.cx), f[4], { align: 'center', fill: P.red, size: 8 });
-            if (g.on(f[2])) pulse(n.cx, n.cy, P.red, 30);
+          paper(14, 20, 104, 196, { title: 'Política v3', size: 9 });
+          txt('2026 · vigente', 22, 38, { size: 8, color: P.navy });
+          const S = [['§2', P.sky, 'Si cancelas entre 15 y 30 días antes: 70 %'], ['§7', P.orange, 'Del 15/7 al 31/8, el máximo es el 50 %'], ['§9', P.pink, 'Con seguro de cancelación: 100 %']];
+          S.forEach((s, i) => { const y = 56 + i * 52; rect(20, y, 4, 42, s[1]); txt(s[0], 30, y + 2, { size: 9, color: P.ink }); bars(30, y + 18, 80, 3, { seed: i + 2, color: P.light, gap: 6 }); });
+          show(g.at(1), () => icon('scissors', 124, 104, 2));
+          S.forEach((s, i) => show(clamp(g.at(1) * 2 - i * 0.4), () => {
+            const y = 26 + i * 64;
+            box(160, y, 150, 52, { fill: P.paper, shadow: false }); rect(162, y + 2, 5, 48, s[1]);
+            txt(`Ficha ${s[0]}`, 173, y + 5, { size: 8.5, color: P.navy });
+            txt(s[2], 173, y + 20, { size: 9, color: P.ink, maxW: 132, font: 'sans' });
+          }, 0));
+          show(g.at(2), () => S.forEach((s, i) => {
+            const y = 26 + i * 64;
+            arrow(312, y + 26, 326, y + 26, { color: P.teal });
+            txt(['[0,21  −0,40  0,77 …]', '[0,18  −0,33  0,81 …]', '[−0,52  0,10  0,06 …]'][i], 330, y + 20, { size: 8.5, color: P.teal, font: 'mono' });
           }));
-          show(g.at(4), () => banner('RAG reduce el riesgo; no lo elimina', { y: 236 }));
+          show(g.at(3), () => {
+            box(130, 206, 336, 30, { fill: P.gray2, border: P.teal, shadow: false });
+            icon('db', 136, 213, 1);
+            txt('ÍNDICE: ficha + números + versión v3 · 2026 · acceso público', 156, 214, { size: 9.5, color: P.white, maxW: 304, fit: true });
+          });
+          if (g.on(3)) banner('Se repite solo cuando cambia un documento', { y: 244, h: 20 });
         }
       },
       {
-        title: 'Checklist de calidad de un sistema con fuentes',
-        caption: 'Preguntas para evaluar un asistente que responde a partir de documentos.',
+        title: 'Paso 2 · Buscar: la pregunta también se convierte en números',
+        caption: 'Se compara la pregunta con todas las fichas y se quedan las que más se parecen.',
         steps: [
-          '¿Las fuentes son fiables, vigentes y autorizadas? ¿Se identifican versión y fecha?',
-          '¿Respeta los permisos de quien pregunta? ¿Incluye citas navegables y relevantes?',
-          '¿La cita respalda la afirmación exacta, no solo el tema? ¿Qué hace cuando no hay evidencia o es contradictoria?',
-          '¿Hay una persona responsable de actualizar y retirar fuentes?'
+          'Llega la pregunta de un cliente: cancela 20 días antes un viaje del 10 de agosto.',
+          'La pregunta se convierte en números con el mismo modelo que se usó para las fichas.',
+          'Se compara con cada ficha del índice: cuanto más se parecen los números, más se parece el significado.',
+          'Se quedan las dos más parecidas (top-k = 2). Ojo: «parecido» no es «correcto»; por eso después se cita.'
         ],
         draw(g) {
-          const items = [['Fuentes fiables, vigentes y autorizadas', 0], ['Versión y fecha identificables', 0], ['Respeta los permisos de quien pregunta', 1], ['Citas navegables y relevantes', 1], ['La cita respalda la afirmación exacta', 2], ['Responde bien sin evidencia o con contradicciones', 2], ['Responsable de actualizar y retirar fuentes', 3]];
-          items.forEach((it, i) => show(g.at(it[1]), () => {
-            const y = 14 + i * 34;
-            box(14, y, 380, 28, { fill: P.gray2, shadow: false });
-            badge(i + 1, 20, y + 7, P.teal);
-            txt(it[0], 42, y + 9, { size: 9, maxW: 340, fit: true });
-            icon('check', 372, y + 8, 1);
+          person(16, 18, { shirt: P.teal, still: true });
+          bubble(54, 14, 412, 38, { tx: 46, ty: 30 });
+          txt('«Cancelo 20 días antes un viaje del 10 de agosto. ¿Cuánto me devolvéis?»', 260, 25, { size: 10, color: P.ink, align: 'center', font: 'sans', maxW: 396, fit: true });
+          show(g.at(1), () => { arrow(110, 56, 110, 70, { color: P.yellow }); chip('pregunta → [0,19  −0,38  0,74 …]', 60, 72, { fill: P.yellow, size: 9, font: 'mono' }); });
+          const R = [['Ficha §2 · 15-30 días antes: 70 %', 0.91, P.sky], ['Ficha §7 · del 15/7 al 31/8: máx. 50 %', 0.88, P.orange], ['Ficha §9 · con seguro: 100 %', 0.35, P.pink]];
+          R.forEach((r, i) => show(g.at(2), () => {
+            const y = 104 + i * 36, keep = i < 2, dim = g.from(3) && !keep;
+            box(14, y, 250, 28, { fill: dim ? P.gray3 : P.paper, shadow: false });
+            rect(16, y + 2, 5, 24, r[2]);
+            txt(r[0], 28, y + 8, { size: 9, color: P.ink, maxW: 230, fit: true, font: 'sans' });
+            const w = 150 * r[1] * clamp(g.at(2) * 1.6 - i * 0.2);
+            rect(276, y + 8, 150, 12, P.gray2); rect(276, y + 8, w, 12, dim ? P.light : P.mint);
+            txt(String(r[1]).replace('.', ','), 432, y + 7, { size: 10, color: dim ? P.light : P.mint });
+            if (g.from(3)) { if (keep) badge(i + 1, 2, y + 7, P.mint); else chip('fuera', 258, y + 6, { align: 'right', fill: P.red, size: 8.5 }); }
+          }, 0));
+          show(g.at(2), () => txt('parecido de significado (0 = nada, 1 = igual)', 351, 94, { size: 8, color: P.light, align: 'center' }), 0);
+          if (g.on(3)) banner('Al modelo solo le llegarán estas dos fichas', { y: 222 });
+        }
+      },
+      {
+        title: 'Paso 3 · Montar el prompt: la hoja que lee el modelo',
+        caption: 'El modelo no recibe solo la pregunta: recibe una hoja con reglas, fichas numeradas y la pregunta.',
+        steps: [
+          'El sistema prepara una hoja con tres partes. Es lo único que va a leer el modelo.',
+          'Primero, las reglas: responde solo con estas fuentes, cita cada dato y, si no está, dilo.',
+          'Después, las dos fichas recuperadas, numeradas [1] y [2] para poder citarlas.',
+          'Al final, la pregunta. Lo que no esté en esta hoja, el modelo no lo sabe.'
+        ],
+        draw(g) {
+          box(138, 8, 328, 220, { fill: P.gray, shadow: false });
+          txt('PROMPT AUMENTADO', 302, 14, { size: 9.5, color: P.yellow, align: 'center' });
+          show(g.at(1), () => slabBig(148, 32, 308, 62, 'REGLAS', P.yellow, ['Responde SOLO con las fuentes de abajo.', 'Cita cada dato con su número [n].', 'Si no está en las fuentes, di «no consta».']));
+          show(g.at(2), () => slabBig(148, 100, 308, 50, 'FUENTES', P.teal, ['[1] §2 · 15-30 días antes: 70 %', '[2] §7 · del 15/7 al 31/8: máximo 50 %']));
+          show(g.at(3), () => slabBig(148, 156, 308, 36, 'PREGUNTA', P.sky, ['Cancelo 20 días antes, viaje el 10 de agosto.']));
+          /* fichas que entran en la hoja */
+          if (g.on(2)) [['§2', P.sky], ['§7', P.orange]].forEach((f, i) => { const m = mix([20, 60 + i * 50], [150, 112 + i * 14], g.at(2)); box(m[0], m[1], 34, 22, { fill: P.paper, shadow: false }); rect(m[0] + 2, m[1] + 2, 4, 18, f[1]); txt(f[0], m[0] + 10, m[1] + 6, { size: 8.5, color: P.ink }); });
+          robot(30, 150, { s: 2, color: P.purple, mood: 'think' });
+          show(g.at(3), () => { arrow(66, 176, 132, 176, { color: P.purple, dash: true }); txt('solo lee esto', 76, 204, { size: 9, color: P.light, align: 'center' }); }, 0);
+          if (g.on(3)) banner('Si la ficha correcta no está en la hoja, no hay respuesta correcta posible', { y: 236 });
+        }
+      },
+      {
+        title: 'Paso 4 · Responder y citar',
+        caption: 'Cada dato de la respuesta lleva el número de la ficha de la que sale, y una persona lo comprueba.',
+        steps: [
+          'El modelo redacta la respuesta usando solo la hoja y marca con un número de dónde sale cada dato.',
+          'Cada número abre su ficha: [1] la de plazos, [2] la de agosto.',
+          'La persona de atención al cliente abre las dos citas y comprueba que dicen exactamente eso.',
+          'Solo entonces contesta al cliente. Sin este último paso, un error pasaría inadvertido.'
+        ],
+        draw(g) {
+          robot(14, 14, { s: 2, color: P.purple });
+          bubble(58, 10, 408, 60, { tx: 50, ty: 34 });
+          txt(typed('«Te devolvemos el 50 %. Por plazo serían un 70 % [1], pero del 15 de julio al 31 de agosto el máximo es el 50 % [2].»', g.from(1) ? 1 : g.at(0) * 1.3), 70, 18, { size: 10, color: P.ink, maxW: 386, font: 'sans' });
+          const F = [['[1] Política v3 · §2', 'Entre 15 y 30 días antes: 70 %', 60, P.sky], ['[2] Política v3 · §7', 'Del 15/7 al 31/8: máximo 50 %', 260, P.orange]];
+          F.forEach((f, i) => show(g.at(1), () => {
+            arrow(f[2] + 100, 74, f[2] + 100, 94, { color: P.yellow });
+            paper(f[2], 96, 200, 76, { title: f[0], size: 9 });
+            bars(f[2] + 8, 116, 180, 1, { seed: i + 3, color: P.light });
+            rect(f[2] + 4, 126, 192, 22, 'rgba(247,207,90,.75)');
+            txt(f[1], f[2] + 10, 130, { size: 9.5, color: P.ink, font: 'sans' });
+            bars(f[2] + 8, 156, 180, 1, { seed: i + 7, color: P.light });
+            if (g.from(2)) icon('check', f[2] + 176, 98, 1.5);
+          }, 0));
+          show(g.at(2), () => { person(14, 120, { shirt: P.teal, still: true }); icon('eye', 18, 98, 1.5); }, 0);
+          show(g.at(3), () => { chip('Respuesta enviada al cliente', 240, 186, { align: 'center', fill: P.mint, size: 10, icon: 'mail' }); });
+          if (g.on(3)) banner('Citar no basta: alguien tiene que abrir la cita', { y: 236 });
+        }
+      },
+      {
+        title: 'Resumen: los cuatro pasos',
+        caption: 'Un paso se hace al preparar los documentos; los otros tres, con cada pregunta.',
+        steps: [
+          'Una vez, y cada vez que cambia un documento: preparar las fichas y guardarlas en el índice.',
+          'Con cada pregunta: buscar las fichas parecidas, montar la hoja y responder citando.'
+        ],
+        draw(g) {
+          const B = [['1', 'PREPARAR', 'trocear en fichas, pasarlas a números y guardarlas', P.teal], ['2', 'BUSCAR', 'la pregunta a números y quedarse con las fichas más parecidas', P.yellow], ['3', 'MONTAR LA HOJA', 'reglas + fichas numeradas + pregunta', P.yellow], ['4', 'RESPONDER', 'solo con la hoja, citando cada dato, y comprobar las citas', P.yellow]];
+          show(g.at(0), () => { rect(14, 44, 104, 3, P.teal); txt('UNA VEZ', 66, 28, { size: 9.5, color: P.teal, align: 'center' }); });
+          show(g.at(1), () => { rect(130, 44, 336, 3, P.yellow); txt('EN CADA PREGUNTA', 298, 28, { size: 9.5, color: P.yellow, align: 'center' }); });
+          B.forEach((b, i) => show(g.at(i === 0 ? 0 : 1), () => {
+            const x = 14 + i * 116;
+            box(x, 56, 104, 150, { fill: P.gray2, shadow: false });
+            badge(b[0], x + 8, 64, b[3], { s: 20, size: 11 });
+            txt(b[1], x + 34, 68, { size: 9, color: P.white, maxW: 66, fit: true });
+            txt(b[2], x + 8, 96, { size: 9.5, color: P.light, maxW: 90, font: 'sans' });
+            if (i < 3) arrow(x + 104, 130, x + 116, 130, { color: P.light });
           }, 4));
-          show(g.at(3), () => { person(420, 200, { shirt: P.teal, label: 'responsable' }); });
+          if (g.on(1)) banner('Recuperar antes de generar: eso es RAG', { y: 222 });
+        }
+      },
+      {
+        title: 'Dónde se rompe: un ejemplo por paso',
+        caption: 'Con la misma pregunta del cliente, cuatro formas distintas de acabar con una respuesta equivocada.',
+        steps: [
+          'Documentos: si en el índice sigue la política de 2024, contestará «80 %» con una cita perfecta… a un documento caducado.',
+          'Búsqueda: si solo recupera la ficha de plazos y no la de agosto, dirá «70 %». La excepción nunca llegó a la hoja.',
+          'Respuesta: aun con las dos fichas buenas, el modelo puede mezclarlas mal o añadir algo que ninguna dice.',
+          'Persona: si nadie abre la cita, cualquiera de estos errores llega al cliente. RAG reduce errores; no los elimina.'
+        ],
+        draw(g) {
+          const C = [[14, 14, '1 · DOCUMENTOS', P.orange], [246, 14, '2 · BÚSQUEDA', P.yellow], [14, 122, '4 · RESPUESTA', P.pink], [246, 122, 'PERSONA', P.sky]];
+          C.forEach((c, i) => show(g.at(i), () => card(c[0], c[1], 220, 100, c[2], c[3], { active: g.on(i) })));
+          show(g.at(0), () => {
+            chip('Política 2024 · caducada', 24, 40, { fill: P.orange, size: 9, icon: 'calendar' });
+            txt('«El 80 % [1]»', 24, 66, { size: 12, color: P.red, font: 'sans' });
+            txt('cita impecable a un documento que ya no vale', 24, 88, { size: 9, color: P.light, maxW: 200, font: 'sans' });
+          });
+          show(g.at(1), () => {
+            chip('§2 recuperada', 256, 40, { fill: P.mint, size: 9 }); chip('§7 no llegó', 360, 40, { fill: P.red, size: 9 });
+            txt('«El 70 %»', 256, 66, { size: 12, color: P.red, font: 'sans' });
+            txt('la excepción de agosto nunca llegó a la hoja', 256, 88, { size: 9, color: P.light, maxW: 200, font: 'sans' });
+          });
+          show(g.at(2), () => {
+            chip('§2', 24, 148, { fill: P.mint, size: 9 }); chip('§7', 56, 148, { fill: P.mint, size: 9 }); txt('fichas correctas', 92, 151, { size: 9, color: P.mint });
+            txt('«El 60 % [1][2]»', 24, 174, { size: 12, color: P.red, font: 'sans' });
+            txt('mezcla las dos reglas en algo que ninguna dice', 24, 196, { size: 9, color: P.light, maxW: 200, font: 'sans' });
+          });
+          show(g.at(3), () => {
+            person(258, 150, { shirt: P.teal, still: true });
+            icon('eye', 290, 152, 2); line(288, 150, 310, 172, P.red, 2);
+            txt('nadie abre la cita', 320, 152, { size: 10, color: P.white });
+            txt('el error, sea cual sea, llega al cliente', 320, 172, { size: 9, color: P.light, maxW: 140, font: 'sans' });
+          });
+          if (g.on(3)) banner('Ante un error, primero: ¿llegó la ficha correcta a la hoja?', { y: 236 });
         }
       },
       {
@@ -4347,36 +4681,24 @@ html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
         }
       },
       {
-        title: 'Una pregunta, de principio a fin',
-        caption: 'El recorrido completo de una pregunta real, pieza a pieza, con lo que pasa dentro de cada una.',
+        title: 'Checklist de calidad de un sistema con fuentes',
+        caption: 'Preguntas para evaluar un asistente que responde a partir de documentos.',
         steps: [
-          'Llega la pregunta: «Cancelo con 20 días un viaje del 10 de agosto. ¿Cuánto me devolvéis?».',
-          'Búsqueda híbrida: palabras clave y significado devuelven 20 candidatos.',
-          'Filtros: fuera la política de 2024 (derogada) y la exportación del CRM (sin permiso).',
-          'Reordenación: la tabla del §2 y la excepción de temporada alta (§7) suben a los primeros puestos.',
-          'Prompt aumentado: instrucciones de anclaje, [1] §2, [2] §7 y la pregunta.',
-          'Respuesta: «El 50 % [1][2]». Y la persona abre las dos citas antes de contestar al cliente.'
+          '¿Las fuentes son fiables, vigentes y autorizadas? ¿Se identifican versión y fecha?',
+          '¿Respeta los permisos de quien pregunta? ¿Incluye citas navegables y relevantes?',
+          '¿La cita respalda la afirmación exacta, no solo el tema? ¿Qué hace cuando no hay evidencia o es contradictoria?',
+          '¿Hay una persona responsable de actualizar y retirar fuentes?'
         ],
         draw(g) {
-          const nodes = flow([{ t: 'PREGUNTA', icon: 'question' }, { t: 'BUSCAR', icon: 'search' }, { t: 'FILTRAR', icon: 'lock' }, { t: 'REORDENAR', icon: 'star' }, { t: 'PROMPT', icon: 'list' }, { t: 'RESPUESTA', icon: 'chat' }], 14, 14, 452, { bw: 66, bh: 54, active: g.step, size: 7 });
-          if (g.step > 0) { const a = nodes[g.step - 1], b = nodes[g.step]; const m = mix([a.cx, a.cy + 30], [b.cx, b.cy + 30], g.at(g.step)); rect(m[0] - 4, m[1] - 4, 8, 8, P.ink); rect(m[0] - 3, m[1] - 3, 6, 6, P.yellow); }
-          const panel = (fn) => { box(14, 86, 452, 142, { fill: P.gray2, shadow: false }); fn(); };
-          if (g.on(0)) panel(() => { person(30, 116, { shirt: P.teal, still: true }); bubble(70, 106, 380, 50, { text: '«Cancelo con 20 días un viaje del 10 de agosto. ¿Cuánto me devolvéis?»', tx: 62, ty: 132, size: 9, font: 'sans' }); txt('pregunta autónoma: no hace falta reescribirla', 240, 180, { size: 8, color: P.light, align: 'center' }); });
-          if (g.on(1)) panel(() => { for (let i = 0; i < 20; i++) { const x = 30 + (i % 10) * 43, y = 104 + Math.floor(i / 10) * 40; show(clamp(g.at(1) * 3 - i / 10), () => { box(x, y, 36, 30, { fill: P.paper, shadow: false }); bars(x + 5, y + 7, 26, 3, { seed: i + 1, gap: 6, color: P.navy }); }, 0); } txt('20 candidatos · palabras clave + significado', 240, 196, { size: 8.5, color: P.light, align: 'center' }); });
-          if (g.on(2)) panel(() => { [['Política v3 §2', 0], ['Política v3 §7', 0], ['Política 2024 §2', 1], ['CRM · reclamaciones', 2], ['Manual §5', 0]].forEach((r, i) => { const y = 96 + i * 24, out = r[1] && g.at(2) > 0.5; chip(r[0], 30, y, { fill: out ? P.gray3 : P.paper, size: 8, w: 170, strike: out ? P.red : null }); if (r[1] === 1) chip('derogada', 214, y, { fill: P.orange, size: 7.5, icon: 'calendar' }); if (r[1] === 2) chip('sin permiso', 214, y, { fill: P.pink, size: 7.5, icon: 'lock' }); }); });
-          if (g.on(3)) panel(() => { [['Política v3 §2 · tabla', 0.91, 2], ['Política v3 §7 · temporada alta', 0.88, 4], ['Manual §3 · cancelaciones', 0.62, 1], ['FAQ (no indexada)', 0, -1]].slice(0, 3).forEach((r, i) => { const y = 100 + i * 34, from = 100 + r[2] * 22, yy = lerp(from, y, ease(g.at(3))); badge(i + 1, 30, yy + 4, i < 2 ? P.mint : P.gray3); txt(r[0], 52, yy + 4, { size: 9, color: i < 2 ? P.white : P.light }); txt(String(r[1]).replace('.', ','), 330, yy + 4, { size: 8.5, color: P.mint }); }); });
-          if (g.on(4)) panel(() => { slab(24, 94, 432, 34, 'INSTRUCCIONES', P.yellow, ['Solo con las fuentes · cita [n] · si no consta, dilo']); slab(24, 132, 432, 46, 'FUENTES', P.teal, ['[1] Política v3.0 §2: 15-30 días → 70 %', '[2] Política v3.0 §7: 15/7-31/8 → 50 %']); slab(24, 182, 432, 34, 'PREGUNTA', P.sky, ['20 días · salida 10 de agosto']); });
-          if (g.on(5)) panel(() => {
-            robot(26, 104, { s: 2, color: P.purple });
-            bubble(70, 98, 172, 44, { text: 'El 50 %: es temporada alta [1][2].', tx: 64, ty: 120, size: 9, font: 'sans' });
-            [['[1] §2 · tabla', '15-30 días → 70 %'], ['[2] §7 · temporada alta', '15/7-31/8 → 50 %']].forEach((c, i) => {
-              const x = 262 + i * 102;
-              show(clamp(g.at(5) * 2 - i * 0.5), () => { paper(x, 94, 96, 80, { title: c[0], size: 6.5 }); bars(x + 6, 112, 80, 2, { seed: i + 3, color: P.light }); rect(x + 4, 128, 88, 18, 'rgba(247,207,90,.65)'); txt(c[1], x + 8, 132, { size: 7.5, color: P.ink, font: 'sans' }); bars(x + 6, 152, 80, 2, { seed: i + 7, color: P.light }); }, 0);
-            });
-            arrow(244, 120, 258, 130, { color: P.yellow });
-            person(190, 160, { shirt: P.teal, still: true });
-            show(late(g.at(5)), () => { icon('check', 262, 186, 2); icon('check', 364, 186, 2); txt('antes de contestar, la persona abre y comprueba las dos citas', 240, 212, { size: 8, color: P.mint, align: 'center' }); }, 0);
-          });
+          const items = [['Fuentes fiables, vigentes y autorizadas', 0], ['Versión y fecha identificables', 0], ['Respeta los permisos de quien pregunta', 1], ['Citas navegables y relevantes', 1], ['La cita respalda la afirmación exacta', 2], ['Responde bien sin evidencia o con contradicciones', 2], ['Responsable de actualizar y retirar fuentes', 3]];
+          items.forEach((it, i) => show(g.at(it[1]), () => {
+            const y = 14 + i * 34;
+            box(14, y, 380, 28, { fill: P.gray2, shadow: false });
+            badge(i + 1, 20, y + 7, P.teal);
+            txt(it[0], 42, y + 9, { size: 9, maxW: 340, fit: true });
+            icon('check', 372, y + 8, 1);
+          }, 4));
+          show(g.at(3), () => { person(420, 200, { shirt: P.teal, label: 'responsable' }); });
         }
       }
     ],
@@ -5931,12 +6253,13 @@ PL.sources = {
    ══════════════════════════════════════════ */
 
 window.CP_STEPS = [
-  { id: 'h-cliente',     who: 'hoy', label: 'Cliente',     slide: 'h-cliente' },
-  { id: 'h-hoy',         who: 'hoy', label: 'Reunión',     slide: 'h-hoy' },
-  { id: 'h-requisitos',  who: 'hoy', label: 'Requisitos',  slide: 'h-requisitos' },
-  { id: 'h-costes',      who: 'hoy', label: 'Costes',      slide: 'h-costes' },
-  { id: 'h-entregables', who: 'hoy', label: 'Entregables', slide: 'h-entregables' },
-  { id: 'h-preguntas',   who: 'hoy', label: 'Defensa',     slide: 'h-preguntas' },
+  { id: 'h-cliente',     who: 'hoy', label: 'Quién decide', slide: 'h-cliente' },
+  { id: 'h-anexos',      who: 'hoy', label: 'Anexos',       slide: 'h-anexos' },
+  { id: 'h-requisitos',  who: 'hoy', label: 'Requisitos',   slide: 'h-requisitos' },
+  { id: 'h-costes',      who: 'hoy', label: 'TCO',          slide: 'h-costes' },
+  { id: 'h-pliego',      who: 'hoy', label: 'Adjudicación', slide: 'h-pliego' },
+  { id: 'h-entregables', who: 'hoy', label: 'Sobres',       slide: 'h-entregables' },
+  { id: 'h-preguntas',   who: 'hoy', label: 'Defensa',      slide: 'h-preguntas' },
   { id: 'e-problema',   who: 'c1', label: 'Problema',   slide: 'e-problema' },
   { id: 'e-embeddings', who: 'c1', label: 'Embeddings', slide: 'e-embeddings' },
   { id: 'e-chunking',   who: 'c1', label: 'Chunking',   slide: 'e-chunking' },
@@ -5960,7 +6283,7 @@ window.CP_STEPS = [
 ];
 
 window.CP_WHO = {
-  hoy: { name: 'Caso de hoy · Inglés con IA' },
+  hoy: { name: 'Caso de hoy · Licitación' },
   c1: { name: 'Explicación' },
   lab: { name: 'Laboratorios' },
   c2: { name: 'Caso · Viajes Lunaria' },
@@ -6347,14 +6670,16 @@ window.RAG_DATA = {
       return `<section class="slide slide--module" id="${k.slide}" data-step="${k.slide}" data-who="c1" data-section="Explicación · ${esc(k.n)}. ${esc(k.title)}" aria-label="Concepto ${k.n}: ${esc(k.title)}">
         <div class="module module--concept">
           <div class="module__text">
-            <p class="concept-n">Concepto ${k.n} de ${total}</p>
+            <div class="concept-top">
+              <p class="concept-n">Concepto ${k.n} de ${total}</p>
+              ${c ? `<button type="button" class="btn btn--sm concept-more" data-reader="${esc(k.concept)}">${icon('book')}Explicación completa</button>` : ''}
+            </div>
             <h2 class="module__title">${esc(k.title)}</h2>
             <ul class="chips">${k.chips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
             <p class="module__claim">${esc(k.claim)}</p>
             <h3 class="module__label">Lo esencial</h3>
             <ol class="how">${k.how.map((t) => `<li>${t}</li>`).join('')}</ol>
             <dl class="deps">${k.deps.map(([ic, dt, dd]) => `<div><dt>${icon(ic)}${esc(dt)}</dt><dd>${esc(dd)}</dd></div>`).join('')}</dl>
-            ${c ? `<button type="button" class="btn concept-more" data-reader="${esc(k.concept)}">${icon('book')}Leer la explicación completa</button>` : ''}
           </div>
           <div class="viewer viewer--px">
             <div class="px" data-px="concept:${esc(k.concept)}" aria-label="${nPanels} viñetas animadas"></div>
@@ -6366,6 +6691,21 @@ window.RAG_DATA = {
     holder.innerHTML = html;
     tpl.replaceWith(...holder.children);
   })();
+
+  /* Red de seguridad: si una columna de texto no cabe en la diapositiva,
+     se reduce un poco (hasta el 82 %) en vez de desbordar */
+  function fitText(slide) {
+    $$('.module__text, .rfp, [data-fit]', slide).forEach((t) => {
+      if (document.documentElement.classList.contains('is-reflow')) { t.style.zoom = ''; return; }
+      let z = 1;
+      t.style.zoom = '';
+      while (t.scrollHeight > t.clientHeight + 1 && z > 0.82) { z -= 0.03; t.style.zoom = z.toFixed(2); }
+    });
+  }
+  const fitActive = () => { const s = $('.slide.is-active'); if (s) fitText(s); };
+  new MutationObserver(fitActive).observe(document.getElementById('slides') || document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', fitActive);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitActive);
 
   /* ═════════ 3. Reproductor de viñetas pixel art ═════════
      Usa PL.renderPanel (sibou/engine.js). Solo anima mientras la
@@ -7335,8 +7675,9 @@ window.RAG_DATA = {
 </script>
   <script>
 /* ══════════════════════════════════════════
-   Caso de hoy · Profesor de inglés con IA
-   Calculadora de costes: IA frente a profesores nativos.
+   Caso de hoy · Licitación del tutor de inglés con IA
+   Plantilla económica simplificada: coste total a tres años por
+   persona activa, con el contrato de la academia y el pico de uso.
    Los precios son orientativos para el ejercicio (orden de magnitud
    realista); los grupos deben verificar los vigentes de cada proveedor.
    ══════════════════════════════════════════ */
@@ -7353,54 +7694,86 @@ window.RAG_DATA = {
   const TOK_IN = 1500, TOK_OUT = 250;           // por minuto de práctica
   const STT = 0.006;                            // voz a texto, por minuto
   const TTS = 15, TTS_CHARS = 450;              // texto a voz: €/millón de caracteres y caracteres por minuto
-  const WEEKS = 40;
-  const NATIVO_GRUPO = 38, GRUPO = 6, NATIVO_1A1 = 55;
-  const HOY = { gasto: 1900000, personas: 2700 };
+  const WEEKS = 44;                             // semanas laborables con práctica
+  const TUTOR = { grupo: 8, min: 45, eur: 38 }; // sesión mensual en grupo con tutor humano
+  const ACADEMIA = { hoy: 1900000, personas: 2700, minimo: 760000 }; // anexo D
+  const APP = 96;                               // licencia anual de app (anexo C)
+  const OFERTA_ACADEMIA = 14 * 12;              // tutores con IA de la academia, por usuario y año
+  const ARRANQUE = 0.5;                         // año 1: despliegue completo desde octubre
+  const PICO = 0.3;                             // parte de la práctica semanal en las 10 horas punta
 
-  const eur = (v, d = 0) => v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: d, minimumFractionDigits: d });
+  const eur = (v) => {
+    if (Math.abs(v) >= 1e6) return `${(v / 1e6).toLocaleString('es-ES', { maximumFractionDigits: 2 })} M€`;
+    return v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  };
+  const eur4 = (v) => v.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 4, minimumFractionDigits: 4 });
   const num = (v) => Math.round(v).toLocaleString('es-ES');
   const get = (k) => host.querySelector(`[data-in="${k}"]`);
   const show = (k, v) => { const n = host.querySelector(`[data-out="${k}"]`); if (n) n.textContent = v; };
 
   function calc() {
-    const emp = +get('emp').value, min = +get('min').value, voz = +get('voz').value / 100, fijo = +get('fijo').value;
+    const emp = +get('emp').value, act = +get('act').value / 100, min = +get('min').value, voz = +get('voz').value / 100;
+    const setup = +get('setup').value, fijo = +get('fijo').value, conTutor = get('tutor').checked;
     const m = LLM[get('modelo').value];
-    show('emp', num(emp)); show('min', min + ' min'); show('voz', Math.round(voz * 100) + ' %'); show('fijo', eur(fijo));
+    const activos = emp * act;
+    show('emp', num(emp)); show('act', `${Math.round(act * 100)} % · ${num(activos)} personas`); show('min', min + ' min'); show('voz', Math.round(voz * 100) + ' %'); show('setup', eur(setup)); show('fijo', eur(fijo));
 
-    const minutos = emp * min * WEEKS;
+    const minutos = activos * min * WEEKS;
     const porMinTexto = (TOK_IN * m.in + TOK_OUT * m.out) / 1e6;
     const porMinVoz = STT + TTS_CHARS * TTS / 1e6;
     const porMin = porMinTexto + voz * porMinVoz;
-    const variable = minutos * porMin;
-    const ia = variable + fijo;
-    const horas = emp * min * WEEKS / 60;
-    const grupo = horas / GRUPO * NATIVO_GRUPO;
-    const uno = horas * NATIVO_1A1;
-    const hoyPorPersona = HOY.gasto / HOY.personas;
-    const max = Math.max(ia, grupo);
+    const uso = minutos * porMin;
+    const tutores = conTutor ? activos * 12 * (TUTOR.min / 60) * TUTOR.eur / TUTOR.grupo : 0;
+
+    const filas = [
+      ['Puesta en marcha', [setup, 0, 0]],
+      ['Uso de modelos (voz y texto)', [uso * ARRANQUE, uso, uso]],
+      ['Equipo, plataforma y soporte', [fijo, fijo, fijo]],
+      ['Tutores humanos', [tutores * ARRANQUE, tutores, tutores]],
+      ['Academia (mínimo del contrato)', [ACADEMIA.minimo, 0, 0]]
+    ];
+    const anio = [0, 1, 2].map((i) => filas.reduce((s, f) => s + f[1][i], 0));
+    const tco = anio[0] + anio[1] + anio[2];
+    const run = uso + fijo + tutores;
+    const porActivo = run / activos;
+    const porHora = run / (minutos / 60);
+    const pico = activos * min * PICO / 600;
+    const okAnio1 = anio[0] <= ACADEMIA.hoy;
+
+    const comp = [
+      ['Vuestra propuesta', porActivo, 'is-ia'],
+      ['Academia hoy (2.700 personas)', ACADEMIA.hoy / ACADEMIA.personas, 'is-grupo'],
+      ['Licencias de app, misma adopción', APP / act, 'is-uno'],
+      ['Tutores IA de la academia, misma adopción', OFERTA_ACADEMIA / act, 'is-uno']
+    ];
+    const max = Math.max(...comp.map((c) => c[1]));
     const bar = (v, cls) => `<span class="calc-bar ${cls}"><i style="width:${Math.max(1, Math.min(100, v / max * 100)).toFixed(1)}%"></i></span>`;
 
     out.innerHTML = `
       <div class="calc-kpis">
-        <div><span>Coste IA al año</span><b>${eur(ia)}</b><small>${eur(variable)} de uso + ${eur(fijo)} fijos</small></div>
-        <div><span>Por empleado y año</span><b>${eur(ia / emp)}</b><small>hoy: ${eur(hoyPorPersona)} por persona formada</small></div>
-        <div><span>Ahorro frente a clases en grupo</span><b class="${grupo > ia ? 'is-ok' : 'is-ko'}">${grupo > ia ? '−' : '+'}${Math.abs(Math.round((1 - ia / grupo) * 100))} %</b><small>con las mismas horas de práctica</small></div>
+        <div><span>TCO a tres años</span><b>${eur(tco)}</b><small>la academia, sin cambios: ${eur(ACADEMIA.hoy * 3)}</small></div>
+        <div><span>Por persona activa y año</span><b>${eur(porActivo)}</b><small>${eur(porHora)} por hora de práctica</small></div>
+        <div><span>Año 1 frente al límite de 1,9 M€</span><b class="${okAnio1 ? 'is-ok' : 'is-ko'}">${eur(anio[0])}</b><small>${okAnio1 ? 'cabe en el presupuesto' : 'excede el presupuesto: replanificad'}</small></div>
       </div>
-      <h3 class="calc-h">Las mismas ${num(horas)} horas de práctica al año</h3>
-      <ul class="calc-rows">
-        <li><span>Tutor con IA</span>${bar(ia, 'is-ia')}<b>${eur(ia)}</b></li>
-        <li><span>Nativo, grupos de ${GRUPO} a ${NATIVO_GRUPO} €/h</span>${bar(grupo, 'is-grupo')}<b>${eur(grupo)}</b></li>
-        <li><span>Nativo, 1 a 1 a ${NATIVO_1A1} €/h</span>${bar(uno, 'is-uno')}<b>${eur(uno)}${uno > max ? ` <em>(×${(uno / max).toFixed(0)})</em>` : ''}</b></li>
-      </ul>
-      <details class="calc-sup"><summary>Supuestos de la calculadora</summary>
+      <table class="rfp-t calc-t">
+        <thead><tr><th></th><th>Año 1</th><th>Año 2</th><th>Año 3</th></tr></thead>
+        <tbody>${filas.map((f) => `<tr><td>${f[0]}</td>${f[1].map((v) => `<td>${v ? eur(v) : '—'}</td>`).join('')}</tr>`).join('')}
+          <tr class="is-total"><td>Total</td>${anio.map((v) => `<td>${eur(v)}</td>`).join('')}</tr></tbody>
+      </table>
+      <h3 class="calc-h">Coste por persona activa y año</h3>
+      <ul class="calc-rows">${comp.map((c) => `<li><span>${c[0]}</span>${bar(c[1], c[2])}<b>${eur(c[1])}</b></li>`).join('')}</ul>
+      <p class="calc-pico"><b>Pico estimado: ~${num(pico)} sesiones de voz simultáneas.</b> El requisito N1 pide 2.000. ¿Lo aceptáis, lo negociáis o lo dimensionáis por tramos?</p>
+      <details class="calc-sup"><summary>Supuestos de la plantilla</summary>
         <ul>
-          <li>${num(minutos)} minutos de práctica al año (${WEEKS} semanas).</li>
-          <li>Por minuto: ${num(TOK_IN)} tokens de entrada y ${TOK_OUT} de salida → ${eur(porMinTexto, 4)} con el modelo ${get('modelo').value}.</li>
-          <li>Voz: ${eur(STT, 3)}/min de voz a texto + ${TTS_CHARS} caracteres de texto a voz a ${TTS} €/millón → ${eur(porMinVoz, 4)} por minuto hablado.</li>
-          <li>Coste medio por minuto: ${eur(porMin, 4)}.</li>
-          <li>No incluye: desarrollo inicial (amortizadlo en «plataforma»), tutores humanos de apoyo, licencias de evaluación certificada ni impuestos.</li>
+          <li>${num(minutos)} minutos de práctica al año (${WEEKS} semanas). Coste medio por minuto: ${eur4(porMin)}.</li>
+          <li>Por minuto: ${num(TOK_IN)} tokens de entrada y ${TOK_OUT} de salida (${eur4(porMinTexto)} con el modelo ${get('modelo').value}); voz: ${eur4(STT)}/min de voz a texto y ${TTS_CHARS} caracteres de texto a voz a ${TTS} €/millón.</li>
+          <li>Año 1: despliegue completo desde octubre (la mitad del uso) y mínimo del contrato de la academia (anexo D).</li>
+          <li>Tutor humano: una sesión de ${TUTOR.min} min al mes en grupos de ${TUTOR.grupo} a ${TUTOR.eur} €/h.</li>
+          <li>Pico: el ${Math.round(PICO * 100)} % de la práctica semanal cae en 10 horas punta.</li>
+          <li>Las licencias y la oferta de la academia se pagan por persona con acceso, practique o no. El piloto de 2024 se quedó en un 6-11 % de personas activas.</li>
+          <li>No incluye impuestos, tiempo de las personas en formación ni el examen externo de nivel.</li>
         </ul>
-        <p>Precios inventados del orden de magnitud real en 2026. Vuestro plan debe usar los vigentes de los proveedores que elijáis.</p>
+        <p>Precios inventados del orden de magnitud real en 2026. Vuestra oferta debe usar los vigentes de los proveedores que elijáis.</p>
       </details>`;
   }
 

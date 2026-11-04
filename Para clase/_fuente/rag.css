@@ -20,7 +20,10 @@
 .module--concept .deps { margin-top: 18px; }
 .module--concept .deps > div { padding: 8px 0; grid-template-columns: 132px 1fr; }
 .module--concept .deps dd { font-size: 14px; }
-.concept-more { margin-top: 16px; align-self: flex-start; }
+.concept-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.concept-top .concept-n { margin-bottom: 0; }
+.concept-more { flex: none; min-height: 34px; padding: 0 12px; font-size: 13.5px; white-space: nowrap; }
+.module--concept .module__text { overflow: hidden; }
 
 /* ───────── Reproductor de viñetas ───────── */
 .viewer--px { background: #0f1528; border-color: #0f1528; }
@@ -361,3 +364,95 @@ html.is-reflow .hoy-reqs { grid-template-columns: 1fr; }
 #h-entregables .weights__list li span { font-size: 13.5px; }
 #h-entregables .deliver__head .lede { font-size: 17px; }
 html.is-reflow #h-entregables .weights__list { grid-template-columns: 1fr; }
+
+/* ───────── Caso de hoy · licitación ───────── */
+.rfp { display: flex; flex-direction: column; gap: 16px; height: 100%; min-height: 0; overflow: hidden; }
+.rfp__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.rfp__head h2 { font-size: 34px; }
+.rfp__head .lede { max-width: 980px; margin-top: 6px; font-size: 16.5px; }
+.rfp-ref { margin-bottom: 14px; font: 600 13px var(--mono); color: var(--who-ink, var(--green-ink)); letter-spacing: .04em; }
+
+.rfp-people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; min-height: 0; }
+.rfp-people > li { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--who, var(--green)); }
+.rfp-people > li.is-veto { border-top-color: var(--red-ink); }
+.rfp-people > li.is-veto .rfp-wants { color: var(--red-ink); font-weight: 600; }
+.rfp-people > li.rfp-you { background: var(--soft); border-top-color: var(--black); }
+.rfp-people q { font-size: 15.5px; line-height: 1.4; color: var(--black); quotes: "«" "»"; }
+.rfp-people p { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.rfp-who { display: flex; align-items: center; gap: 10px; }
+.rfp-who b { display: block; font: 600 15px var(--brand); color: var(--black); }
+.rfp-who span:last-child { font-size: 13px; color: var(--ink-3); line-height: 1.3; }
+.rfp-av { flex: none; width: 36px; height: 36px; display: grid; place-items: center; background: var(--who, var(--green)); color: #fff; font: 600 13px var(--brand); }
+.is-veto .rfp-av { background: var(--red-ink); }
+.rfp-you .rfp-av { background: var(--black); font-size: 11px; }
+.rfp-wants { margin-top: auto; padding-top: 8px; border-top: 1px dashed var(--line-2); }
+
+.rfp-tabs .tab { padding: 0 10px; font-size: 13px; }
+.rfp-doc { padding: 18px 22px; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.rfp-doc h3 { margin-bottom: 12px; font: 600 16px var(--brand); color: var(--black); }
+.rfp-doc p { margin: 10px 0 0; }
+.rfp-doc .dots li { margin-bottom: 8px; }
+.rfp-note { padding: 10px 14px; background: var(--tint-orange); border-left: 4px solid var(--orange); }
+
+.rfp-t { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.35; background: var(--paper); }
+.rfp-t th, .rfp-t td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.rfp-t thead th { font: 600 12.5px var(--brand); color: var(--ink-3); background: var(--soft); border-bottom: 2px solid var(--line-2); }
+.rfp-t tr.is-total td { font-weight: 700; border-top: 2px solid var(--black); }
+.rfp-req td:first-child { font: 700 13px var(--mono); color: var(--who-ink, var(--green-ink)); white-space: nowrap; }
+.rfp-req td:nth-child(2) { font-weight: 600; width: 27%; }
+.rfp-req td:nth-child(3) { width: 1%; }
+.rfp-req th, .rfp-req td { padding: 5px 10px; }
+.rfp-m, .rfp-d { display: inline-block; padding: 1px 7px; font: 600 11.5px var(--brand); white-space: nowrap; }
+.rfp-m { background: var(--black); color: #fff; }
+.rfp-d { background: var(--soft); border: 1px solid var(--line-2); color: var(--ink-2); }
+
+.rfp-bars { display: grid; gap: 8px; }
+.rfp-bars li { display: grid; grid-template-columns: 1fr 150px 48px; gap: 12px; align-items: center; }
+.rfp-bars i { height: 12px; background: linear-gradient(90deg, var(--who, var(--green)) calc(var(--v) * 1%), var(--soft) 0); border: 1px solid var(--line); }
+.rfp-bars b { text-align: right; }
+
+.rfp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1; min-height: 0; }
+.rfp-cols--wide { grid-template-columns: 1.55fr 1fr; }
+.rfp-h { margin-bottom: 10px; font: 600 15px var(--brand); color: var(--black); }
+.rfp-agenda { display: grid; gap: 8px; }
+.rfp-agenda li { display: grid; grid-template-columns: 52px 1fr; column-gap: 12px; padding: 9px 12px; background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--who, var(--green)); }
+.rfp-agenda time { grid-row: span 2; font: 700 15px var(--mono); color: var(--who-ink, var(--green-ink)); }
+.rfp-agenda b { font-size: 15px; }
+.rfp-agenda span { font-size: 14px; color: var(--ink-2); }
+.rfp-score td:last-child { width: 48px; text-align: right; font-weight: 700; }
+.rfp-score th { padding-top: 10px; font: 600 13px var(--brand); background: var(--soft); }
+.rfp-score code { font: 600 13.5px var(--mono); }
+.rfp-rules { margin-top: 12px; }
+.rfp-rules li { font-size: 14px; }
+.rfp-env { padding: 16px 18px; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--who, var(--green)); min-height: 0; }
+.rfp-list { display: grid; gap: 6px; padding-left: 1.4em; list-style: decimal; font-size: 14.5px; line-height: 1.4; }
+.rfp-list--dots { list-style: disc; margin-bottom: 14px; }
+.rfp-qcols .dots li { font-size: 15px; }
+
+.calc-check { display: flex !important; align-items: center; gap: 8px; font-weight: 600; }
+.calc-check input { width: 16px; height: 16px; accent-color: var(--who); }
+.calc .calc-check { grid-template-columns: none; }
+.calc-t { margin-top: 16px; font-size: 13.5px; }
+.calc-t td:not(:first-child), .calc-t th:not(:first-child) { text-align: right; white-space: nowrap; }
+.calc-pico { margin-top: 14px; padding: 10px 14px; background: var(--tint-orange); border-left: 4px solid var(--orange); font-size: 14px; }
+
+html.is-reflow .rfp { height: auto; overflow: visible; }
+html.is-reflow .rfp-people, html.is-reflow .rfp-cols { grid-template-columns: 1fr; }
+html.is-reflow .rfp__head { flex-direction: column; align-items: flex-start; }
+html.is-reflow .rfp-req { display: block; overflow-x: auto; }
+html.is-reflow .rfp-bars li { grid-template-columns: 1fr 80px 40px; }
+#h-costes .module { grid-template-columns: 470px 1fr; gap: 32px; }
+#h-costes .calc { grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+#h-costes .calc label:has(select), #h-costes .calc .calc-check { grid-column: 1 / -1; }
+#h-costes .calc label { font-size: 12.5px; }
+#h-costes .calc label b { font-size: 15px; }
+#h-costes .calc-out { padding: 14px 18px; }
+#h-costes .calc-kpis b { font-size: 24px; }
+#h-costes .calc-rows li { grid-template-columns: 250px 1fr 90px; font-size: 14px; }
+#h-costes .calc-h { margin: 14px 0 8px; }
+html.is-reflow #h-costes .module, html.is-reflow #h-costes .calc { grid-template-columns: 1fr; }
+html.is-reflow #h-costes .calc-rows li { grid-template-columns: 1fr; }
+html.is-reflow .rfp-tabs { flex-wrap: wrap; height: auto; }
+html.is-reflow #h-anexos .viewer__bar { height: auto; padding: 6px; }
+html.is-reflow .rfp-doc .rfp-t { display: block; overflow-x: auto; }
+html.is-reflow .rfp-doc { padding: 14px; }

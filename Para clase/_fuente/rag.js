@@ -108,14 +108,16 @@
       return `<section class="slide slide--module" id="${k.slide}" data-step="${k.slide}" data-who="c1" data-section="Explicación · ${esc(k.n)}. ${esc(k.title)}" aria-label="Concepto ${k.n}: ${esc(k.title)}">
         <div class="module module--concept">
           <div class="module__text">
-            <p class="concept-n">Concepto ${k.n} de ${total}</p>
+            <div class="concept-top">
+              <p class="concept-n">Concepto ${k.n} de ${total}</p>
+              ${c ? `<button type="button" class="btn btn--sm concept-more" data-reader="${esc(k.concept)}">${icon('book')}Explicación completa</button>` : ''}
+            </div>
             <h2 class="module__title">${esc(k.title)}</h2>
             <ul class="chips">${k.chips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
             <p class="module__claim">${esc(k.claim)}</p>
             <h3 class="module__label">Lo esencial</h3>
             <ol class="how">${k.how.map((t) => `<li>${t}</li>`).join('')}</ol>
             <dl class="deps">${k.deps.map(([ic, dt, dd]) => `<div><dt>${icon(ic)}${esc(dt)}</dt><dd>${esc(dd)}</dd></div>`).join('')}</dl>
-            ${c ? `<button type="button" class="btn concept-more" data-reader="${esc(k.concept)}">${icon('book')}Leer la explicación completa</button>` : ''}
           </div>
           <div class="viewer viewer--px">
             <div class="px" data-px="concept:${esc(k.concept)}" aria-label="${nPanels} viñetas animadas"></div>
@@ -127,6 +129,21 @@
     holder.innerHTML = html;
     tpl.replaceWith(...holder.children);
   })();
+
+  /* Red de seguridad: si una columna de texto no cabe en la diapositiva,
+     se reduce un poco (hasta el 82 %) en vez de desbordar */
+  function fitText(slide) {
+    $$('.module__text, .rfp, [data-fit]', slide).forEach((t) => {
+      if (document.documentElement.classList.contains('is-reflow')) { t.style.zoom = ''; return; }
+      let z = 1;
+      t.style.zoom = '';
+      while (t.scrollHeight > t.clientHeight + 1 && z > 0.82) { z -= 0.03; t.style.zoom = z.toFixed(2); }
+    });
+  }
+  const fitActive = () => { const s = $('.slide.is-active'); if (s) fitText(s); };
+  new MutationObserver(fitActive).observe(document.getElementById('slides') || document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  window.addEventListener('resize', fitActive);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitActive);
 
   /* ═════════ 3. Reproductor de viñetas pixel art ═════════
      Usa PL.renderPanel (sibou/engine.js). Solo anima mientras la

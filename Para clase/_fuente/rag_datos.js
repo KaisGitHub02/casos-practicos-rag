@@ -9,12 +9,13 @@
    ══════════════════════════════════════════ */
 
 window.CP_STEPS = [
-  { id: 'h-cliente',     who: 'hoy', label: 'Cliente',     slide: 'h-cliente' },
-  { id: 'h-hoy',         who: 'hoy', label: 'Reunión',     slide: 'h-hoy' },
-  { id: 'h-requisitos',  who: 'hoy', label: 'Requisitos',  slide: 'h-requisitos' },
-  { id: 'h-costes',      who: 'hoy', label: 'Costes',      slide: 'h-costes' },
-  { id: 'h-entregables', who: 'hoy', label: 'Entregables', slide: 'h-entregables' },
-  { id: 'h-preguntas',   who: 'hoy', label: 'Defensa',     slide: 'h-preguntas' },
+  { id: 'h-cliente',     who: 'hoy', label: 'Quién decide', slide: 'h-cliente' },
+  { id: 'h-anexos',      who: 'hoy', label: 'Anexos',       slide: 'h-anexos' },
+  { id: 'h-requisitos',  who: 'hoy', label: 'Requisitos',   slide: 'h-requisitos' },
+  { id: 'h-costes',      who: 'hoy', label: 'TCO',          slide: 'h-costes' },
+  { id: 'h-pliego',      who: 'hoy', label: 'Adjudicación', slide: 'h-pliego' },
+  { id: 'h-entregables', who: 'hoy', label: 'Sobres',       slide: 'h-entregables' },
+  { id: 'h-preguntas',   who: 'hoy', label: 'Defensa',      slide: 'h-preguntas' },
   { id: 'e-problema',   who: 'c1', label: 'Problema',   slide: 'e-problema' },
   { id: 'e-embeddings', who: 'c1', label: 'Embeddings', slide: 'e-embeddings' },
   { id: 'e-chunking',   who: 'c1', label: 'Chunking',   slide: 'e-chunking' },
@@ -38,7 +39,7 @@ window.CP_STEPS = [
 ];
 
 window.CP_WHO = {
-  hoy: { name: 'Caso de hoy · Inglés con IA' },
+  hoy: { name: 'Caso de hoy · Licitación' },
   c1: { name: 'Explicación' },
   lab: { name: 'Laboratorios' },
   c2: { name: 'Caso · Viajes Lunaria' },
