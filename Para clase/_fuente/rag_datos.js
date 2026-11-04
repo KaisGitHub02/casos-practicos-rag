@@ -37,7 +37,7 @@ window.CP_WHO = {
 /* Líneas de la portada y el cierre */
 window.CP_LANES = [
   { who: 'c1', stops: ['¿Por qué inventa?', 'Embeddings y troceado', 'Índice y prompt', 'Citas que prueban'] },
-  { who: 'c2', stops: ['Seis documentos', 'Un cuaderno', 'Ocho preguntas', 'Cada cita, verificada'] }
+  { who: 'c2', stops: ['Diez documentos', 'Dos cuadernos', 'Catorce preguntas', 'Ataque y diseño'] }
 ];
 
 window.CP_DATA = {
@@ -56,8 +56,8 @@ window.CP_DATA = {
     },
     {
       n: 3, t: 'Practicar', d: 'Un caso real en Gemini Notebook',
-      doing: 'Montad un cuaderno para el equipo de atención de Viajes Lunaria con sus documentos, que esconden versiones caducadas, excepciones y datos que no deben subirse.',
-      out: 'Un cuaderno con fuentes vigentes y ocho respuestas citadas.',
+      doing: 'En grupos de cuatro, auditad diez documentos de Viajes Lunaria y montad dos cuadernos. Esconden versiones caducadas, anexos que sustituyen reglas, un seguro con letra pequeña, datos personales y una instrucción maliciosa.',
+      out: 'Dos cuadernos, catorce respuestas citadas y verificadas.',
       trap: 'Subir todo «para que tenga más información».'
     },
     {
@@ -231,6 +231,9 @@ window.RAG_DATA = {
     '«Si alguien amenaza con ir a la OMIC, me lo tienen que pasar a mí.»',
     '«Os paso también una exportación del CRM con las reclamaciones de octubre, por si os sirve.»',
     '«Trabajamos con la cuenta de Google de la empresa.»',
+    '«Los grupos tienen sus propias condiciones, en un anexo aparte. Nadie se acuerda de mirarlo.»',
+    '«Operaciones nos mandó un borrador de la nueva política. No sé si ya vale.»',
+    '«Os paso la grabación transcrita de la llamada de Luis del lunes. Creo que la lió con el seguro.»',
     '«A veces nos piden cancelar un vuelo suelto y no sabemos qué porcentaje aplicar.»'
   ],
 
@@ -281,19 +284,20 @@ window.RAG_DATA = {
 
   /* ───────────── Entrega ───────────── */
   pesos: [
-    ['Selección de fuentes y privacidad', 15, 'Qué subís, qué no y por qué: autoridad, fecha, versión y datos personales.'],
-    ['Respuestas correctas', 30, 'Las ocho preguntas, con cálculo explícito cuando hay importes.'],
+    ['Auditoría de fuentes y privacidad', 15, 'Matriz de los diez documentos, mapa de conflictos y anonimización.'],
+    ['Respuestas correctas', 25, 'Las catorce preguntas, con cálculo y todas las fuentes necesarias.'],
     ['Verificación de citas', 20, 'Cada cita abierta, con S·R·C, A·F·V y un veredicto razonado.'],
-    ['Diagnóstico', 15, 'Recuperación o generación, con la evidencia de qué se citó.'],
-    ['Diseño para producción', 20, 'Instrucciones, metadatos, troceado, banco de pruebas y plan para el 1 de diciembre.']
+    ['Control, inyección y ataque', 10, 'Cuaderno A frente a B, la instrucción oculta y vuestras preguntas de ataque.'],
+    ['Diagnóstico y métricas', 10, 'Recuperación o generación con evidencia; % de aciertos y de citas válidas.'],
+    ['Diseño para producción', 15, 'Instrucciones, metadatos, troceado, permisos, banco y mantenimiento.'],
+    ['Presentación y grupo', 5, 'Un hallazgo, una cita difícil y una decisión de diseño.']
   ],
   checklist: [
-    'Hemos leído los seis documentos antes de subir nada',
-    'El cuaderno solo tiene fuentes vigentes y sin datos personales',
-    'Hemos abierto todas las citas de las ocho preguntas',
-    'Cada veredicto dice qué falla: sujeto, regla, condición, autoridad, fecha o versión',
+    'Hemos auditado los diez documentos antes de subir nada',
+    'El cuaderno A solo tiene fuentes vigentes, sin borradores y sin datos personales',
+    'Hemos abierto todas las citas y cada veredicto dice qué falla (S·R·C o A·F·V)',
+    'Hemos encontrado la instrucción oculta y probado tres ataques propios',
     'Cada fallo está diagnosticado como recuperación o generación, con evidencia',
-    'Las instrucciones dicen qué hacer cuando algo no consta',
-    'El banco de pruebas incluye trampas, no solo preguntas fáciles'
+    'Las instrucciones dicen qué hacer si algo no consta, y el banco incluye ataques'
   ]
 };

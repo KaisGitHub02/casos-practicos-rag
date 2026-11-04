@@ -118,8 +118,9 @@
 .qform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 /* ───────── Método: seis fases ───────── */
-.method--fases .method__steps { grid-template-columns: repeat(6, 1fr); gap: 10px; }
-.method--fases .mstep__txt b { font-size: 21px; }
+.method--fases .method__steps { grid-template-columns: repeat(8, 1fr); gap: 8px; }
+.method--fases .mstep { padding-left: 12px; padding-right: 8px; }
+.method--fases .mstep__txt b { font-size: 18px; }
 .method--fases .mstep__txt span { font-size: 14px; }
 .method--fases .method__detail { grid-template-columns: 2fr 1fr .8fr; }
 .fase__what p, .fase__what li { font-size: 16px; line-height: 1.5; color: var(--ink-2); }
@@ -150,6 +151,8 @@
 /* ───────── Entrega: cinco pesos ───────── */
 .w4 { --wc: var(--green); }
 .w5 { --wc: var(--blue-light); }
+.w6 { --wc: var(--accent-ink); }
+.w7 { --wc: var(--ink-3); }
 
 /* ───────── Modo estrecho (móvil) ───────── */
 html.is-reflow .module--concept { grid-template-columns: 1fr; }
@@ -170,3 +173,13 @@ html.is-reflow .reader__terms div { grid-template-columns: 1fr; }
 @media (prefers-reduced-motion: reduce) {
   .px__panel, .px__dots button, .qform textarea, .qform select { transition: none; }
 }
+
+/* Listas largas del caso */
+.cases--two { grid-template-columns: 1fr 1fr; column-gap: 28px; }
+.cases--two .case { width: auto; margin: 0; padding: 6px 8px; }
+.cases--two .case b { font-size: 13.5px; }
+#entrega .weights__list li { padding-top: 4px; padding-bottom: 4px; }
+#entrega .deliver__head { margin-bottom: -10px; }
+#entrega .weights__list li span { font-size: 13.5px; }
+#entrega .weights__list { margin-top: 12px; }
+html.is-reflow .cases--two { grid-template-columns: 1fr; }

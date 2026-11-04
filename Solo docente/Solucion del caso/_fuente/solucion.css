@@ -4,7 +4,9 @@
    ══════════════════════════════════════════ */
 
 /* Fuentes */
-.sol-sources { grid-template-columns: repeat(3, 1fr); }
+.sol-sources { grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.sol-sources .rule { padding: 12px 14px; }
+.sol-sources .rule__text { font-size: 13px; line-height: 1.4; }
 .sol-src { border-top: 3px solid var(--line-2); }
 .sol-src--ok { border-top-color: var(--green); }
 .sol-src--warn { border-top-color: var(--orange); }
@@ -56,3 +58,10 @@
 html.is-reflow .sol-sources,
 html.is-reflow .sol-answer__grid,
 html.is-reflow .sol-rubric__head { grid-template-columns: 1fr; }
+
+/* Textos largos de la versión de 4 horas */
+#s-idea .module__claim { font-size: 16px; line-height: 1.5; }
+#s-idea .how li { font-size: 15px; }
+#s-respuestas .cases--two .case b { font-size: 12.5px; line-height: 1.3; }
+#s-notas .brief__ask { font-size: 22px; }
+#s-notas .dots li { font-size: 14px; line-height: 1.4; padding-top: 3px; padding-bottom: 3px; }

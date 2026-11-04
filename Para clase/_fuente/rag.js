@@ -386,7 +386,7 @@
     if (!list || !view || !CASO) return;
     const saved = store.get(Q_KEY, {});
 
-    buildCaseList(list, CASO.preguntas.map((p) => [String(p.n), { label: `P${p.n} · ${p.q.length > 44 ? p.q.slice(0, 42).trim() + '…' : p.q}` }]), (id, first) => {
+    buildCaseList(list, CASO.preguntas.map((p) => [String(p.n), { label: `P${p.n} · ${p.q.length > 30 ? p.q.slice(0, 28).trim() + '…' : p.q}` }]), (id, first) => {
       const p = CASO.preguntas.find((x) => String(x.n) === id);
       const a = saved[id] || {};
       title.textContent = `Pregunta ${p.n} de ${CASO.preguntas.length}`;
@@ -439,7 +439,7 @@
       detail.setAttribute('aria-labelledby', tabs[i].id);
       detail.innerHTML = `<div class="fase__what"><h3>${icon('target')}Qué hacéis</h3>${md(f.texto)}</div>`
         + `<div><h3>${icon('file')}Qué entregáis</h3><p>${mdi(f.entrega)}</p></div>`
-        + `<div><h3>${icon('clock')}Tiempo</h3><p>${f.min} minutos${f.n === 3 ? '. Es la fase central: no la recortéis.' : '.'}</p></div>`;
+        + `<div><h3>${icon('clock')}Tiempo</h3><p>${f.min} minutos${f.n === 3 ? '. Es la fase central: no la recortéis. Después, descanso de 10 minutos.' : '.'}</p></div>`;
       if (focus) tabs[i].focus();
       if (!first) swap(detail);
     };
@@ -491,22 +491,7 @@
 
   /* ═════════ 7. Descargas ═════════ */
 
-  function plantilla(withAnswers) {
-    const saved = withAnswers ? store.get(Q_KEY, {}) : {};
-    const L = [`# ${CASO.titulo} · Entrega`, '', 'Pareja:', 'Fecha:', ''];
-    L.push('## Fase 1 · Elegir las fuentes', '', '| Documento | Decisión | Justificación (autoridad, fecha, versión, privacidad) |', '|---|---|---|');
-    CASO.docs.forEach((d) => L.push(`| ${d.file} | | |`));
-    L.push('', '## Fase 2 · Crear el cuaderno', '', '- Nombre del cuaderno:', '- Fuentes añadidas:', '- ¿Se leyó bien la tabla del §2?:', '- Instrucciones de anclaje (si tu versión permite personalizarlas):', '');
-    L.push('## Fase 3 · Preguntar y verificar', '');
-    CASO.preguntas.forEach((p) => {
-      const a = saved[p.n] || {};
-      L.push(`### P${p.n}. ${p.q}`, '', `- Respuesta de la herramienta: ${a.resp || ''}`, `- Fuentes citadas: ${a.citas || ''}`, `- Veredicto: ${a.ver || ''}`, `- ¿Correcta?: ${a.ok || ''}`, `- Por qué y, si falla, respuesta correcta con su cita: ${a.porque || ''}`, '');
-    });
-    L.push('## Fase 4 · Experimento de contaminación', '', '| Pregunta | Antes | Después | Fuentes citadas después |', '|---|---|---|---|', '| P1 | | | |', '| P3 | | | |', '| P5 | | | |', '', 'Conclusión:', '');
-    L.push('## Fase 5 · Diagnóstico', '', '| Pregunta | Síntoma | Recuperación o generación | Evidencia | Arreglo |', '|---|---|---|---|---|', '| | | | | |', '');
-    L.push('## Fase 6 · Diseño para producción', '', '### Instrucciones de sistema', '', '### Metadatos y troceado', '', '### Banco de pruebas', '', '| Pregunta | Respuesta esperada | Fuente |', '|---|---|---|', '| | | |', '', '### Plan para el 1 de diciembre de 2026', '');
-    return L.join('\n');
-  }
+  const plantilla = (withAnswers) => CASO.plantilla(withAnswers ? store.get(Q_KEY, {}) : {});
   /* Piezas compartidas con la solución del docente (Solo docente/…/solucion.js) */
   window.RAG = { $, $$, esc, icon, md, mdi, swap, buildCaseList, mountPlayer, copyText, download };
 

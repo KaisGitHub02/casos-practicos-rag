@@ -12,8 +12,8 @@ Qué hay
 - Explicación: nueve conceptos, uno por diapositiva, cada uno con sus
   viñetas animadas en pixel art y «Leer la explicación completa».
 - Caso · Viajes Lunaria: contexto, notas de la reunión, los seis
-  documentos (para descargar o copiar), las ocho preguntas y el encargo.
-- Método: las seis fases, cómo verificar una cita y la entrega.
+  diez documentos (para descargar o copiar), las catorce preguntas y el encargo.
+- Método: las ocho fases (unas 4 horas, grupos de 4 con roles), cómo verificar una cita y la entrega.
 La solución está en «Solo docente/Solucion del caso».
 
 Empresa, personas y documentos son ficticios.

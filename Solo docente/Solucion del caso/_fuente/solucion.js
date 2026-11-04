@@ -16,7 +16,7 @@ window.CP_STEPS = [
 ];
 window.CP_WHO = { c1: { name: 'Solución' } };
 window.CP_LANES = [
-  { who: 'c1', stops: ['Tres fuentes', 'Ocho respuestas', 'Diagnóstico', 'Rúbrica'] }
+  { who: 'c1', stops: ['Diez fuentes', 'Catorce respuestas', 'Inyección y diagnóstico', 'Rúbrica'] }
 ];
 
 (() => {
@@ -33,7 +33,7 @@ window.CP_LANES = [
   mountPlayer($('[data-sol-px]'), S.panels);
 
   /* Fuentes: una tarjeta por documento */
-  const TONE = { ok: 'Subir', warn: 'Solo para comparar', ko: 'No subir' };
+  const TONE = { ok: 'Subir', warn: 'Solo control', ko: 'No subir' };
   set('fuentes', S.fuentes.map((f, i) => `<li class="rule sol-src sol-src--${esc(f[2])}">
       <p class="rule__top"><span class="rule__n">${String(i + 1).padStart(2, '0')}</span><b>${esc(f[0].replace(/^\d+ · /, ''))}</b></p>
       <p class="sol-src__dec"><span class="pill pill--${esc(f[2])}">${esc(TONE[f[2]] || '')}</span>${f[1].toLowerCase().startsWith((TONE[f[2]] || '').toLowerCase()) && f[1].length <= (TONE[f[2]] || '').length ? '' : esc(f[1])}</p>
@@ -74,11 +74,11 @@ window.CP_LANES = [
 
   /* Diseño para producción */
   const PIEZAS = {
-    instrucciones: { label: 'Instrucciones de sistema', short: 'Anclaje, prioridad de fuentes y «no consta»', html: () => `<pre class="sol-code">${esc(S.instrucciones)}</pre>`, text: () => S.instrucciones },
+    instrucciones: { label: 'Instrucciones de sistema', short: 'Prioridad de fuentes, «no consta» y defensa frente a inyecciones', html: () => `<pre class="sol-code">${esc(S.instrucciones)}</pre>`, text: () => S.instrucciones },
     metadatos: { label: 'Metadatos de cada fragmento', short: 'Vigencia, autoridad, ruta y permisos', html: () => `<pre class="sol-code">${esc(S.metadatos)}</pre>`, text: () => S.metadatos },
-    troceado: { label: 'Troceado de la política', short: 'Un fragmento por apartado', html: () => `<ul class="sol-list">${S.troceado.map((x) => `<li>${mdi(x)}</li>`).join('')}</ul>`, text: () => S.troceado.map((x) => '- ' + x).join('\n') },
-    banco: { label: 'Banco de pruebas', short: 'Ocho preguntas nuevas, con trampas', html: () => `<div class="sol-table"><table><thead><tr><th>Pregunta</th><th>Respuesta esperada</th><th>Fuente</th></tr></thead><tbody>${S.banco.map((b) => `<tr><td>${esc(b[0])}</td><td>${esc(b[1])}</td><td>${esc(b[2])}</td></tr>`).join('')}</tbody></table></div>`, text: () => ['| Pregunta | Respuesta esperada | Fuente |', '|---|---|---|', ...S.banco.map((b) => `| ${b.join(' | ')} |`)].join('\n') },
-    plan: { label: 'El 1 de diciembre', short: 'Qué cambia en el cuaderno', html: () => `<div class="sol-plan">${md(S.plan1dic)}</div>`, text: () => S.plan1dic }
+    troceado: { label: 'Troceado y permisos', short: 'Por tipo de documento', html: () => `<ul class="sol-list">${S.troceado.map((x) => `<li>${mdi(x)}</li>`).join('')}</ul>`, text: () => S.troceado.map((x) => '- ' + x).join('\n') },
+    banco: { label: 'Banco de pruebas', short: 'Doce preguntas, cuatro de ataque', html: () => `<div class="sol-table"><table><thead><tr><th>Pregunta</th><th>Respuesta esperada</th><th>Fuente</th></tr></thead><tbody>${S.banco.map((b) => `<tr><td>${esc(b[0])}</td><td>${esc(b[1])}</td><td>${esc(b[2])}</td></tr>`).join('')}</tbody></table></div>`, text: () => ['| Pregunta | Respuesta esperada | Fuente |', '|---|---|---|', ...S.banco.map((b) => `| ${b.join(' | ')} |`)].join('\n') },
+    plan: { label: 'Plan de mantenimiento', short: '1 de diciembre, 1 de enero y v3.1', html: () => `<div class="sol-plan">${md(S.plan1dic)}</div>`, text: () => S.plan1dic }
   };
   let pieza = null;
   const dl = $('[data-sol="diseno-lista"]');

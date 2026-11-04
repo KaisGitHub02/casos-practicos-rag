@@ -32,17 +32,17 @@ vm.runInContext(readFileSync(join(HERE, 'b4-solucion.js'), 'utf8'), ctx);
 const C = ctx.PL.practicas.b4;
 const S = C.solucion;
 
-const L = [`# Solución · ${C.titulo}`, '', '> Solo docente. Para enseñar después de que las parejas presenten. No es la única respuesta válida.', '', S.resumen, ''];
-L.push('## Fases 1 y 2 · Qué entra en el cuaderno', '', '| Documento | Decisión | Por qué |', '|---|---|---|');
+const L = [`# Solución · ${C.titulo}`, '', '> Solo docente. Para enseñar después de que los grupos presenten. No es la única respuesta válida.', '', S.resumen, ''];
+L.push('## Fases 1 y 2 · Auditoría y cuadernos', '', '| Documento | Decisión | Por qué |', '|---|---|---|');
 S.fuentes.forEach((f) => L.push(`| ${f[0]} | ${f[1]} | ${f[3]} |`));
-L.push('', '## Fase 3 · Las ocho respuestas', '');
+L.push('', `## Fase 3 · Las ${S.respuestas.length} respuestas`, '');
 S.respuestas.forEach((r) => {
   const p = C.preguntas.find((x) => x.n === r.n);
   L.push(`### P${r.n}. ${p.q}`, '', `*${p.foco}*`, '', `**Respuesta maestra.** ${r.respuesta}`, '', `- **Cálculo:** ${r.calculo}`, `- **Cita:** ${r.cita}`, `- **Trampa:** ${r.trampa}`, `- **Veredicto de ejemplo:** ${r.veredicto}`, '');
 });
-L.push('## Fase 4 · Contaminación', '', ...S.contaminacion.map((x) => `- ${x}`), '');
+L.push('## Fase 4 · Control e inyección', '', ...S.contaminacion.map((x) => `- ${x}`), '');
 L.push('## Fase 5 · Diagnóstico', '', '| Síntoma | Tipo de fallo | Arreglo |', '|---|---|---|', ...S.diagnostico.map((d) => `| ${d.join(' | ')} |`), '');
-L.push('## Fase 6 · Diseño para producción', '', '### Instrucciones de sistema', '', '```', S.instrucciones, '```', '', '### Metadatos', '', '```json', S.metadatos, '```', '', '### Troceado', '', ...S.troceado.map((x) => `- ${x}`), '', '### Banco de pruebas', '', '| Pregunta | Respuesta esperada | Fuente |', '|---|---|---|', ...S.banco.map((b) => `| ${b.join(' | ')} |`), '', '### El 1 de diciembre de 2026', '', S.plan1dic, '');
+L.push('## Fase 6 · Diseño para producción', '', '### Instrucciones de sistema', '', '```', S.instrucciones, '```', '', '### Metadatos', '', '```json', S.metadatos, '```', '', '### Troceado', '', ...S.troceado.map((x) => `- ${x}`), '', '### Banco de pruebas', '', '| Pregunta | Respuesta esperada | Fuente |', '|---|---|---|', ...S.banco.map((b) => `| ${b.join(' | ')} |`), '', '### Plan de mantenimiento', '', S.plan1dic, '');
 L.push('## Rúbrica (10 puntos)', '', '| Criterio | Pts. | Excelente | Suficiente | Insuficiente |', '|---|---|---|---|---|', ...S.rubrica.map((r) => `| ${r.join(' | ')} |`), '');
 L.push('## Errores frecuentes', '', ...S.errores.map((x) => `- ${x}`), '', '## Notas para el profesorado', '', ...S.profesorado.map((x) => `- ${x}`), '');
 writeFileSync(OUT_MD, L.join('\n'));

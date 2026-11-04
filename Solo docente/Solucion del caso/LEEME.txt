@@ -1,7 +1,7 @@
 SOLUCIÓN DEL CASO · SOLO DOCENTE
 ================================
 
-Para enseñar después de que las parejas presenten. No la compartas con
+Para enseñar después de que los grupos presenten. No la compartas con
 los alumnos antes. No es la única respuesta válida: sirve para comparar,
 comentar y corregir con la rúbrica.
 
@@ -10,8 +10,8 @@ Qué hay
 - Solucion - Viajes Lunaria.html
     Presentación con el mismo estilo y la misma navegación que la de clase.
     Doble clic para abrirla; funciona sin internet.
-    Idea de fondo y mapa de trampas, qué fuentes entran, las ocho respuestas
-    (cálculo, cita, trampa y veredicto), contaminación y diagnóstico, diseño
+    Idea de fondo y mapa de trampas, qué fuentes entran, las catorce respuestas
+    (cálculo, cita, trampa y veredicto), cuaderno de control e inyección, diagnóstico, diseño
     para producción, rúbrica, errores frecuentes y notas para la sesión.
 
 - Solucion - Viajes Lunaria.md
